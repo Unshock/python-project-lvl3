@@ -1,0 +1,31 @@
+[tool.poetry]
+name = "hexlet-code"
+version = "0.1.0"
+description = "Programm that saves web pages locally"
+authors = ["Victor Nedashkovsky <Nevial@bk.ru>"]
+repository = 'https://github.com/Unshock/python-project-lvl3'
+classifiers = [
+    "License :: Freeware",
+    "Programming Language :: Python",
+    "Topic :: Utilities"
+]
+packages = [
+    { include = "page_loader" }
+]
+    
+[tool.poetry.scripts]
+page_loader = "page_loader.scripts.page_loader:main"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pytest = "^7.1.2"
+requests = "^2.27.1"
+pook = "^1.0.2"
+requests-mock = "^1.9.3"
+
+[tool.poetry.dev-dependencies]
+flake8 = "^4.0.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
