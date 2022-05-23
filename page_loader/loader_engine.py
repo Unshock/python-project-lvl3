@@ -2,18 +2,19 @@ from page_loader import downloader
 import os
 
 
-def loader_engine(url_, path='cwd'):
-    html_path, path = downloader.download(url_, path)
+def loader_engine(page_url, download_folder='cwd'):
+    html_path, download_folder = downloader.download(page_url, download_folder)
     with open(html_path) as html:
-        files = downloader.has_pics(html.read())
-    if files:
-        dir_name = os.path.join(path, downloader.make_dir_name(url_))
+        files_sub_pages = downloader.has_files(html.read())
+    if files_sub_pages:
+        dir_name = os.path.join(download_folder,
+                                downloader.make_name(page_url, type='dir'))
         os.mkdir(dir_name)
-        for file in files:
-            downloader.download_file(url_, file, dir_name)
-        downloader.substitution(files, html_path, dir_name)
+        for sub_page in files_sub_pages:
+            downloader.download_file(page_url, sub_page, dir_name)
+        downloader.substitution(files_sub_pages, html_path, dir_name)
     return html_path
 
 
-t = loader_engine('https://page-loader.hexlet.repl.co/',
-                  '/home/victor/python/test')
+# t = loader_engine('https://page-loader.hexlet.repl.co/',
+#                   '/home/victor/python/test')

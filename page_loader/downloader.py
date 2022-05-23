@@ -2,11 +2,12 @@ import re
 import requests
 import os
 import pathlib
+from bs4 import BeautifulSoup
 
 
-def make_html_name(url_):
+def make_name(url_, type='html'):
     result = re.sub(r"^(https?:\/\/)|(\.html)$|[\W_]", '-', url_).strip('-')
-    result += '.html'
+    result += '.html' if type == 'html' else '_files'
     return result
 
 
@@ -28,15 +29,16 @@ def get_url_response(url_):
     return response.text
 
 
-def download(url_, path='cwd'):
-    if path == 'cwd':
-        path = os.getcwd()
-    file_name = make_html_name(url_)
-    text_response = get_url_response(url_)
-    file_path = pathlib.Path(path, file_name)
+def download(url_, download_folder='cwd'):
+    if download_folder == 'cwd':
+        download_folder = os.getcwd()
+    file_name = make_name(url_, type='html')
+    response = requests.get(url_)
+    beautiful_response = BeautifulSoup(response.text, 'html.parser')
+    file_path = pathlib.Path(download_folder, file_name)
     with open(file_path, 'w') as new_file:
-        new_file.write(text_response)
-    return new_file.name, path
+        new_file.write(beautiful_response.prettify())
+    return new_file.name, download_folder
 
 
 def download_file(url_, link_to_file, dir):
@@ -48,12 +50,32 @@ def download_file(url_, link_to_file, dir):
     return new_file.name
 
 
+def has_files(html):
+    list_of_checks = [
+        return_pics_or_none,
+    ]
+    result = []
+    for file in list_of_checks:
+        check_result = file(html)
+        if check_result is not None:
+            result.extend(check_result)
+    return result if len(result) > 0 else None
+
+
 def has_pics(html):
-    result = re.findall(r"(?<=img src=\")\S*(?=\")", html)
-    return result if len(result) > 0 else False
+    result = re.findall(r"(?<=img[\W\w]src=\")\S*(?=\")", html)
+    return result if len(result) > 0 else None
 
 
-def is_link_of_path(string):
+def return_pics_or_none(html):
+    soup = BeautifulSoup(html, features='html.parser')
+    result = []
+    for imgtag in soup.find_all('img'):
+        result.append(imgtag['src'])
+    return result if len(result) > 0 else None
+
+
+def is_link_of_path(string: str):
     return 'Link' if 'http'.startswith(string) else 'Path'
 
 

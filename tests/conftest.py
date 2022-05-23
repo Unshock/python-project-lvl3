@@ -9,7 +9,7 @@ URLS_FOLDER = 'fixtures/urls_and_results'
 @pytest.fixture
 def make_response_1():
     response = os.path.join(os.path.dirname(__file__),
-                            FIXTURES_FOLDER, 'hexlet_co_response.txt')
+                            FIXTURES_FOLDER, 'hexlet_co_response.html')
     return response
 
 

@@ -23,6 +23,7 @@ requests = "^2.27.1"
 pook = "^1.0.2"
 requests-mock = "^1.9.3"
 pytest-cov = "^3.0.0"
+beautifulsoup4 = "^4.11.1"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^4.0.1"
