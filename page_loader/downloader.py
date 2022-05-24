@@ -41,10 +41,10 @@ def download(url_, download_folder='cwd'):
     return new_file.name, download_folder
 
 
-def download_file(url_, link_to_file, dir):
-    file_name = make_file_name(link_to_file)
-    response = requests.get(url_ + link_to_file)
-    file_path = pathlib.Path(dir, file_name)
+def download_file(page_url, sub_page, dir_path):
+    file_name = make_file_name(sub_page)
+    response = requests.get(page_url + sub_page)
+    file_path = pathlib.Path(dir_path, file_name)
     with open(file_path, 'wb') as new_file:
         new_file.write(response.content)
     return new_file.name
