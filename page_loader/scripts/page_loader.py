@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 from page_loader import cli
-from page_loader.downloader import download
+from page_loader.loader_engine import loader_engine
 
 
 def main():
     args = cli.parse_args()
-    print(download(args.url, args.output))
+    print(loader_engine(args.url, args.output))
 
 
 if __name__ == '__main__':

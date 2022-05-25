@@ -1,5 +1,4 @@
 import os
-import shutil
 import pathlib
 from page_loader import downloader
 from page_loader import loader_engine
@@ -44,7 +43,9 @@ def test_loader_engine(requests_mock, make_url_1,
             result = open(result)
             with open(make_response_2, 'r') as result_expected:
                 directory_content = os.listdir(inner_temp_dir)
-                file_directory_content = os.listdir(os.path.join(inner_temp_dir, make_file_dir_name))
+                file_directory_content = os.listdir(os.path.join(
+                    inner_temp_dir,
+                    make_file_dir_name))
                 assert result_expected.read() == result.read()
                 assert len(os.listdir(inner_temp_dir)) == 2
                 assert make_file_dir_name in directory_content
@@ -55,12 +56,10 @@ def fake_loader(_, sub_page, dir_path):
     page_url = os.path.join(os.path.dirname(__file__), 'fixtures/page_files')
     file_name = downloader.make_file_name(sub_page)
     with open(page_url + sub_page + '/' + file_name, 'rb') as file:
-        print(file.name)
         response = file.read()
         file_path = pathlib.Path(dir_path, file_name)
         with open(file_path, 'wb') as new_file:
             new_file.write(response)
-        print('new', new_file.name)
         return new_file.name
 
 

@@ -16,7 +16,8 @@ def make_response_1():
 @pytest.fixture
 def make_response_2():
     response = os.path.join(os.path.dirname(__file__),
-                            FIXTURES_FOLDER, 'hexlet_co_response_with_files.html')
+                            FIXTURES_FOLDER,
+                            'hexlet_co_response_with_files.html')
     return response
 
 
@@ -46,11 +47,13 @@ def make_url_4():
     path = os.path.join(os.path.dirname(__file__), URLS_FOLDER, 'url4.txt')
     with open(path) as url_4:
         return url_4.read()
-    
-    
+
+
 @pytest.fixture
 def make_url_1_with_pic():
-    path = os.path.join(os.path.dirname(__file__), URLS_FOLDER, 'url1_with_pic.txt')
+    path = os.path.join(os.path.dirname(__file__),
+                        URLS_FOLDER,
+                        'url1_with_pic.txt')
     with open(path) as url_1:
         return url_1.read()
 
