@@ -30,22 +30,25 @@ def test_download_2(requests_mock, make_url_1, make_response_1):
                 assert expected == result.read()
 
 
-def test_loader_engine(requests_mock, make_url_1, make_response_1):
-    with open(make_response_1, 'r') as expected:
-        requests_mock.get(make_url_1, text=expected.read())
+def test_loader_engine(requests_mock, make_url_1,
+                       make_response_1, make_response_2,
+                       make_file_dir_name, make_pic_name):
+    with open(make_response_1, 'r') as get_expected:
+        requests_mock.get(make_url_1, text=get_expected.read())
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
         with tempfile.TemporaryDirectory(dir=temp_dir,
                                          suffix='_inner_dir') as inner_temp_dir:
-            #with tempfile.NamedTemporaryFile(
-            #        suffix='_expected_file') as temp_expected:
-            #    shutil.copyfile(expected.name, temp_expected.name)
             result = loader_engine.loader_engine(make_url_1, inner_temp_dir,
-                                                 file_loader=fake_loader)[0]
-            #    temp_expected = open(temp_expected.name, encoding='utf-8')
-            print('res', result)
+                                                 file_loader=fake_loader)
             result = open(result)
-            assert expected.read() == result.read()
+            with open(make_response_2, 'r') as result_expected:
+                directory_content = os.listdir(inner_temp_dir)
+                file_directory_content = os.listdir(os.path.join(inner_temp_dir, make_file_dir_name))
+                assert result_expected.read() == result.read()
+                assert len(os.listdir(inner_temp_dir)) == 2
+                assert make_file_dir_name in directory_content
+                assert make_pic_name in file_directory_content
 
 
 def fake_loader(_, sub_page, dir_path):

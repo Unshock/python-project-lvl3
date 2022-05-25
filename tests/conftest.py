@@ -94,4 +94,4 @@ def make_pic_name():
 
 @pytest.fixture
 def make_file_dir_name():
-    return 'hexlet_co_response_files'
+    return 'page-loader-hexlet-repl-co_files'
