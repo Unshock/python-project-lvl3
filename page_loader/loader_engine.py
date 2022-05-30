@@ -16,6 +16,8 @@ def loader_engine(page_url, download_folder='cwd',
         downloader.substitution(files_sub_pages, html_path, dir_name)
     return html_path
 
-
-# t = loader_engine('https://page-loader.hexlet.repl.co/',
-# '/home/victor/python/test')
+# g = 'https://page-loader.hexlet.repl.co/'
+# flib = 'https://flibusta.club/'
+# stak = 'https://gs-labs.ru/'
+# bio = 'https://bioline.ru/catalog'
+# t = loader_engine(g, '/home/victor/python/test')

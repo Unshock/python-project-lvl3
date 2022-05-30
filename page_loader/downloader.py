@@ -70,8 +70,12 @@ def has_pics(html):
 def return_pics_or_none(html):
     soup = BeautifulSoup(html, features='html.parser')
     result = []
+    print(soup.find_all('img'))
     for imgtag in soup.find_all('img'):
-        result.append(imgtag['src'])
+        pic = imgtag['src']
+        if not re.search(r"^(https?:)?\/\/", pic) and pic != '':
+            result.append(pic)
+    print(result)
     return result if len(result) > 0 else None
 
 
@@ -88,6 +92,7 @@ def substitution(links, html_path, dir_name):
         html.write(x)
 
 
-# t = download('https://page-loader.hexlet.repl.co/')[0]
+# t = download('https://en.wikipedia.org/wiki/Finland_me
+# n%27s_national_ice_hockey_team')[0]
 # h = has_pics(open(t).read())
 # substitution(h, t)
