@@ -92,7 +92,7 @@ def make_url_transformed_4():
 
 @pytest.fixture
 def make_pic_name():
-    return 'assets-professions-nodejs.png'
+    return 'page-loader-hexlet-repl-co-nodejs.png'
 
 
 @pytest.fixture

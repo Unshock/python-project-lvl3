@@ -13,11 +13,12 @@ def loader_engine(page_url, download_folder='cwd',
         os.mkdir(dir_path)
         for sub_page in files_sub_pages:
             file_loader(page_url, sub_page, dir_path)
-        downloader.substitution(files_sub_pages, html_path, dir_name)
+        downloader.substitution(files_sub_pages, html_path, dir_name, page_url)
     return html_path
 
-# g = 'https://page-loader.hexlet.repl.co/'
+g = 'https://page-loader.hexlet.repl.co/'
 # flib = 'https://flibusta.club/'
 # stak = 'https://gs-labs.ru/'
 # bio = 'https://bioline.ru/catalog'
-# t = loader_engine(g, '/home/victor/python/test')
+hex = 'https://ru.hexlet.io/courses'
+#t = loader_engine(g, '/home/victor/python/test')
