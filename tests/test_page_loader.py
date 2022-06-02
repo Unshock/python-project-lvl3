@@ -54,26 +54,23 @@ def test_loader_engine(requests_mock, make_url_1,
 
 
 def fake_loader(_, sub_page, dir_path):
-    print('SUB', sub_page)
+    TRUE_URL = 'https://page-loader.hexlet.repl.co/'
     page_url = os.path.join(os.path.dirname(__file__), 'fixtures/page_files')
-    file_name = downloader.make_file_name(page_url, sub_page)
+    file_name = downloader.make_file_name(TRUE_URL, sub_page)
     with open(page_url + sub_page, 'rb') as file:
         response = file.read()
         file_path = pathlib.Path(dir_path, file_name)
         with open(file_path, 'wb') as new_file:
             new_file.write(response)
-        print('FILE', file_name)
         return new_file.name
 
 
 def test_make_html_name_1(make_url_1, make_url_transformed_1):
-    assert downloader.make_name(make_url_1,
-                                type='html') == make_url_transformed_1
+    assert downloader.make_html_name(make_url_1) == make_url_transformed_1
 
 
 def test_make_html_name_2(make_url_2, make_url_transformed_2):
-    assert downloader.make_name(make_url_2,
-                                type='html') == make_url_transformed_2
+    assert downloader.make_html_name(make_url_2) == make_url_transformed_2
 
 
 def test_make_html_name_3(make_url_3, make_url_transformed_3):

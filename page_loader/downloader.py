@@ -45,7 +45,7 @@ def make_file_name(page_url, sub_page):
     #    return result
     result = re.sub(r"(\.\w*)$|[\W_]", '-', file_path).strip('-')
     result += file_extension if file_extension != '' else '.html'
-    print(result)
+    #print(result)
     return result
 
 
@@ -117,13 +117,13 @@ def return_links_or_none(html):
 def return_pics_or_none(html):
     soup = BeautifulSoup(html, features='html.parser')
     result = []
-    print(soup.find_all('img'))
+    #print(soup.find_all('img'))
     for img_tag in soup.find_all('img'):
         pic = img_tag['src']
         if re.search(r"^\/\w+", pic):
         #if not re.search(r"^(https?:)?\/\/", pic) and pic != '':
             result.append(pic)
-    print(result)
+    #print(result)
     return result if len(result) > 0 else None
 
 
@@ -132,7 +132,7 @@ def is_link_of_path(string: str):
 
 
 def substitution(links, html_path, dir_name, page_url):
-    print('LINKI', links)
+    #print('LINKI', links)
     with open(html_path, 'r') as html:
         x = html.read()
     with open(html_path, 'w') as html:
