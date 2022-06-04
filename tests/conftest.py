@@ -4,6 +4,7 @@ import os
 
 FIXTURES_FOLDER = 'fixtures'
 URLS_FOLDER = 'fixtures/urls_and_results'
+PAGE_CONTENT_FOLDER = 'fixtures/page_files'
 
 
 @pytest.fixture
@@ -103,3 +104,42 @@ def make_file_dir_name():
 @pytest.fixture
 def make_url_dir_name():
     return 'https://page-loader.hexlet.repl.co/'
+
+
+@pytest.fixture
+def make_files():
+    application_path = os.path.join(os.path.dirname(__file__),
+                                    PAGE_CONTENT_FOLDER,
+                                    'assets/application.css')
+    png_path = os.path.join(os.path.dirname(__file__),
+                            PAGE_CONTENT_FOLDER,
+                            'assets/professions/nodejs.png')
+    script_path = os.path.join(os.path.dirname(__file__),
+                               PAGE_CONTENT_FOLDER,
+                               'packs/js/script.js')
+    courses_path = os.path.join(os.path.dirname(__file__),
+                                PAGE_CONTENT_FOLDER,
+                                'courses')
+    dict_ = {}
+    with open(application_path) as application:
+        dict_['page-loader-hexlet-repl-co-assets-application.css'] =\
+            application.read()
+    with open(png_path, 'rb') as png:
+        dict_['page-loader-hexlet-repl-co-assets-professions-nodejs.png'] =\
+            png.read()
+    with open(script_path) as script:
+        dict_['page-loader-hexlet-repl-co-packs-js-script.js'] = script.read()
+    with open(courses_path) as courses:
+        dict_['page-loader-hexlet-repl-co-courses.html'] = courses.read()
+    return dict_
+
+
+@pytest.fixture
+def make_png():
+    png_path = os.path.join(os.path.dirname(__file__), PAGE_CONTENT_FOLDER,
+                            'assets/professions/nodejs.png')
+    dict_ = {}
+    with open(png_path, 'rb') as png:
+        dict_['page-loader-hexlet-repl-co-assets-professions-nodejs.png'] =\
+            png.read()
+    return dict_

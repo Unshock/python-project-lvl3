@@ -3,6 +3,7 @@ import pathlib
 from page_loader import downloader
 from page_loader import loader_engine
 import tempfile
+from urllib.parse import urlparse
 
 
 def test_download_1(requests_mock, make_url_1, make_response_1):
@@ -31,7 +32,8 @@ def test_download_2(requests_mock, make_url_1, make_response_1):
 
 def test_loader_engine(requests_mock, make_url_1,
                        make_response_1, make_response_2,
-                       make_file_dir_name, make_pic_name):
+                       make_file_dir_name, make_pic_name,
+                       make_files):
     with open(make_response_1, 'r') as get_expected:
         requests_mock.get(make_url_1, text=get_expected.read())
     with tempfile.TemporaryDirectory() as temp_dir:
@@ -51,13 +53,25 @@ def test_loader_engine(requests_mock, make_url_1,
                 assert len(os.listdir(inner_temp_dir)) == 2
                 assert make_file_dir_name in directory_content
                 assert make_pic_name in file_directory_content
+                for elem in file_directory_content:
+                    elem_path = os.path.join(inner_temp_dir,
+                                             make_file_dir_name,
+                                             elem)
+                    if elem_path.endswith('.png'):
+                        with open(elem_path, 'rb') as el:
+                            assert el.read() == make_files[elem]
+                    else:
+                        with open(elem_path, 'r') as el:
+                            print(el)
+                            assert el.read() == make_files[elem]
 
 
-def fake_loader(_, sub_page, dir_path):
-    TRUE_URL = 'https://page-loader.hexlet.repl.co/'
-    page_url = os.path.join(os.path.dirname(__file__), 'fixtures/page_files')
-    file_name = downloader.make_file_name(TRUE_URL, sub_page)
-    with open(page_url + sub_page, 'rb') as file:
+def fake_loader(true_url, file_path, dir_path):
+    fake_page_url = os.path.join(os.path.dirname(__file__),
+                                 'fixtures/page_files')
+    true_sub_page = urlparse(file_path).path
+    file_name = downloader.make_file_name(true_url, true_sub_page)
+    with open(fake_page_url + true_sub_page, 'rb') as file:
         response = file.read()
         file_path = pathlib.Path(dir_path, file_name)
         with open(file_path, 'wb') as new_file:
