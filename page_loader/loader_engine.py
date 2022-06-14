@@ -5,7 +5,8 @@ import logging
 
 def loader_engine(page_url, download_folder='cwd',
                   file_loader=downloader.download_file):
-    logging.basicConfig(filename='loader.log', level=logging.INFO,
+    logging.basicConfig(filename='loader.log',
+                        level=logging.INFO,
                         format='%(asctime)s %(levelname)s: %(message)s',
                         datefmt='%d/%m/%Y %I:%M:%S')
     logging.info('------------------------')
@@ -34,4 +35,4 @@ flib = 'https://flibusta.club/'
 gs = 'https://gs-labs.ru/'
 bio = 'https://bioline.ru/biomebel'
 # hex = 'https://ru.hexlet.io/courses'
-# t = loader_engine(gs, '/home/victor/python/test')
+# t = loader_engine(g, '/home/victor/python/test')

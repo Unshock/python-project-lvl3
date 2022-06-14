@@ -4,6 +4,10 @@ from page_loader import downloader
 from page_loader import loader_engine
 import tempfile
 from urllib.parse import urlparse
+import logging
+
+
+LOGGER = logging.getLogger(__name__)
 
 
 def test_download_1(requests_mock, make_url_1, make_response_1):

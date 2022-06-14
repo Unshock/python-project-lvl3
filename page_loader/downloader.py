@@ -34,7 +34,10 @@ def get_extension(file_path: str) -> str:
 def create_files_dir(page_url, download_folder):
     dir_name = make_dir_name(page_url)
     dir_path = os.path.join(download_folder, dir_name)
-    os.mkdir(dir_path)
+    try:
+        os.mkdir(dir_path)
+    except FileExistsError:
+        logging.error(f'directory {dir_path} already exists. Can\'t be created')
     return dir_name, dir_path
 
 
@@ -188,12 +191,11 @@ def return_files_or_none(page_url, html, tag):
 #     return result if len(result) > 0 else None
 
 
-def is_link_of_path(string: str):
-    return 'Link' if 'http'.startswith(string) else 'Path'
+# def is_link_of_path(string: str):
+#    return 'Link' if 'http'.startswith(string) else 'Path'
 
 
 def substitution(html_path, sub_page_to_replace, full_file_name):
-    # print('LINKI', links)
     with open(html_path, 'r') as html:
         x = html.read()
     with open(html_path, 'w') as html:
