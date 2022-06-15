@@ -1,5 +1,8 @@
 import pytest
 import os
+from urllib.parse import urlparse
+import pathlib
+from page_loader import downloader
 
 
 FIXTURES_FOLDER = 'fixtures'
@@ -143,3 +146,16 @@ def make_png():
         dict_['page-loader-hexlet-repl-co-assets-professions-nodejs.png'] =\
             png.read()
     return dict_
+
+
+def fake_loader(true_url, file_path, dir_path):
+    fake_page_url = os.path.join(os.path.dirname(__file__),
+                                 'fixtures/page_files')
+    true_sub_page = urlparse(file_path).path
+    file_name = downloader.make_file_name(true_url, true_sub_page)
+    with open(fake_page_url + true_sub_page, 'rb') as file:
+        response = file.read()
+        file_path = pathlib.Path(dir_path, file_name)
+        with open(file_path, 'wb') as new_file:
+            new_file.write(response)
+        return new_file.name

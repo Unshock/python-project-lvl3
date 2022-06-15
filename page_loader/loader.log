@@ -61,3 +61,259 @@
 14/06/2022 11:17:41 INFO: ------------------------
 14/06/2022 11:17:41 INFO: Finish loader_engine
 14/06/2022 11:17:41 INFO: ------------------------
+15/06/2022 08:53:04 INFO: ------------------------
+15/06/2022 08:53:04 INFO: Start loader_engine https://page-loader.hexlet.repl.co/
+15/06/2022 08:53:04 INFO: ------------------------
+15/06/2022 08:53:11 ERROR: directory /home/victor/python/test/page-loader-hexlet-repl-co_files already exists. Can't be created
+15/06/2022 08:55:16 INFO: ------------------------
+15/06/2022 08:55:16 INFO: Start loader_engine https://page-loader.hexlet.repl.co/
+15/06/2022 08:55:16 INFO: ------------------------
+15/06/2022 08:55:16 ERROR: directory /home/victor/python/test/page-loader-hexlet-repl-co_files already exists. Can't be created
+15/06/2022 09:00:23 INFO: ------------------------
+15/06/2022 09:00:23 INFO: Start loader_engine https://page-loader.hexlet.repl.co/
+15/06/2022 09:00:23 INFO: ------------------------
+15/06/2022 09:00:34 ERROR: directory /home/victor/python/test/page-loader-hexlet-repl-co_files already exists. Can't be created
+15/06/2022 09:09:44 INFO: ------------------------
+15/06/2022 09:09:44 INFO: Start loader_engine https://page-loader.hexlet.repl.co/
+15/06/2022 09:09:44 INFO: ------------------------
+15/06/2022 09:09:48 ERROR: directory /home/victor/python/test/page-loader-hexlet-repl-co_files already exists. Can't be created
+15/06/2022 09:10:10 INFO: ------------------------
+15/06/2022 09:10:10 INFO: Start loader_engine https://page-loader.hexlet.repl.co/
+15/06/2022 09:10:10 INFO: ------------------------
+15/06/2022 09:10:11 INFO: trying to download file: https://page-loader.hexlet.repl.co/assets/professions/nodejs.png with name page-loader-hexlet-repl-co-assets-professions-nodejs.png
+15/06/2022 09:10:16 INFO: file page-loader-hexlet-repl-co-assets-professions-nodejs.png downloaded in /home/victor/python/test/page-loader-hexlet-repl-co_files
+15/06/2022 09:10:16 INFO: name /assets/professions/nodejs.png replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-assets-professions-nodejs.png
+15/06/2022 09:10:16 INFO: trying to download file: https://page-loader.hexlet.repl.co/assets/application.css with name page-loader-hexlet-repl-co-assets-application.css
+15/06/2022 09:10:22 INFO: file page-loader-hexlet-repl-co-assets-application.css downloaded in /home/victor/python/test/page-loader-hexlet-repl-co_files
+15/06/2022 09:10:22 INFO: name /assets/application.css replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-assets-application.css
+15/06/2022 09:10:22 INFO: trying to download file: https://page-loader.hexlet.repl.co/courses with name page-loader-hexlet-repl-co-courses.html
+15/06/2022 09:10:23 INFO: file page-loader-hexlet-repl-co-courses.html downloaded in /home/victor/python/test/page-loader-hexlet-repl-co_files
+15/06/2022 09:10:23 INFO: name /courses replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-courses.html
+15/06/2022 09:10:23 INFO: trying to download file: https://page-loader.hexlet.repl.co/script.js with name page-loader-hexlet-repl-co-script.js
+15/06/2022 09:10:29 INFO: file page-loader-hexlet-repl-co-script.js downloaded in /home/victor/python/test/page-loader-hexlet-repl-co_files
+15/06/2022 09:10:29 INFO: name /script.js replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-script.js
+15/06/2022 09:10:29 INFO: ------------------------
+15/06/2022 09:10:29 INFO: Finish loader_engine
+15/06/2022 09:10:29 INFO: ------------------------
+15/06/2022 09:13:45 INFO: ------------------------
+15/06/2022 09:13:45 INFO: Start loader_engine https://page-loader.hexlet.repl.co/
+15/06/2022 09:13:45 INFO: ------------------------
+15/06/2022 09:13:50 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/assets/professions/nodejs.png' with name 'page-loader-hexlet-repl-co-assets-professions-nodejs.png'
+15/06/2022 09:13:51 INFO: file 'page-loader-hexlet-repl-co-assets-professions-nodejs.png' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:13:51 INFO: name /assets/professions/nodejs.png replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-assets-professions-nodejs.png
+15/06/2022 09:13:51 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/assets/application.css' with name 'page-loader-hexlet-repl-co-assets-application.css'
+15/06/2022 09:13:51 INFO: file 'page-loader-hexlet-repl-co-assets-application.css' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:13:51 INFO: name /assets/application.css replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-assets-application.css
+15/06/2022 09:13:51 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/courses' with name 'page-loader-hexlet-repl-co-courses.html'
+15/06/2022 09:14:02 INFO: file 'page-loader-hexlet-repl-co-courses.html' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:14:02 INFO: name /courses replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-courses.html
+15/06/2022 09:14:02 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/script.js' with name 'page-loader-hexlet-repl-co-script.js'
+15/06/2022 09:14:07 INFO: file 'page-loader-hexlet-repl-co-script.js' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:14:07 INFO: name /script.js replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-script.js
+15/06/2022 09:14:07 INFO: ------------------------
+15/06/2022 09:14:07 INFO: Finish loader_engine
+15/06/2022 09:14:07 INFO: ------------------------
+15/06/2022 09:14:49 INFO: 
+Start loader_engine https://page-loader.hexlet.repl.co/
+15/06/2022 09:14:49 ERROR: directory '/home/victor/python/test/page-loader-hexlet-repl-co_files' already exists. Can't be created
+15/06/2022 09:15:14 INFO: Start loader_engine https://page-loader.hexlet.repl.co/
+15/06/2022 09:15:20 ERROR: directory '/home/victor/python/test/page-loader-hexlet-repl-co_files' already exists. Can't be created
+15/06/2022 09:15:26 INFO: Start loader_engine https://page-loader.hexlet.repl.co/
+15/06/2022 09:15:26 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/assets/professions/nodejs.png' with name 'page-loader-hexlet-repl-co-assets-professions-nodejs.png'
+15/06/2022 09:15:28 INFO: file 'page-loader-hexlet-repl-co-assets-professions-nodejs.png' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:15:28 INFO: name /assets/professions/nodejs.png replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-assets-professions-nodejs.png
+15/06/2022 09:15:28 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/assets/application.css' with name 'page-loader-hexlet-repl-co-assets-application.css'
+15/06/2022 09:15:35 INFO: file 'page-loader-hexlet-repl-co-assets-application.css' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:15:35 INFO: name /assets/application.css replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-assets-application.css
+15/06/2022 09:15:35 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/courses' with name 'page-loader-hexlet-repl-co-courses.html'
+15/06/2022 09:15:37 INFO: file 'page-loader-hexlet-repl-co-courses.html' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:15:37 INFO: name /courses replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-courses.html
+15/06/2022 09:15:37 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/script.js' with name 'page-loader-hexlet-repl-co-script.js'
+15/06/2022 09:15:40 INFO: file 'page-loader-hexlet-repl-co-script.js' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:15:40 INFO: name /script.js replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-script.js
+15/06/2022 09:15:40 INFO: Finish loader_engine
+
+15/06/2022 09:15:53 INFO: Start loader_engine https://page-loader.hexlet.repl.co/
+15/06/2022 09:15:54 ERROR: directory '/home/victor/python/test/page-loader-hexlet-repl-co_files' already exists. Can't be created
+15/06/2022 09:16:36 INFO: Start loader_engine https://page-loader.hexlet.repl.co/
+15/06/2022 09:16:36 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:16:36 DEBUG: https://page-loader.hexlet.repl.co:443 "GET / HTTP/1.1" 200 594
+15/06/2022 09:16:36 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/assets/professions/nodejs.png' with name 'page-loader-hexlet-repl-co-assets-professions-nodejs.png'
+15/06/2022 09:16:36 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:16:37 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /assets/professions/nodejs.png HTTP/1.1" 200 11765
+15/06/2022 09:16:37 INFO: file 'page-loader-hexlet-repl-co-assets-professions-nodejs.png' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:16:37 INFO: name /assets/professions/nodejs.png replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-assets-professions-nodejs.png
+15/06/2022 09:16:37 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/assets/application.css' with name 'page-loader-hexlet-repl-co-assets-application.css'
+15/06/2022 09:16:37 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:16:52 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /assets/application.css HTTP/1.1" 200 28
+15/06/2022 09:16:52 INFO: file 'page-loader-hexlet-repl-co-assets-application.css' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:16:52 INFO: name /assets/application.css replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-assets-application.css
+15/06/2022 09:16:52 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/courses' with name 'page-loader-hexlet-repl-co-courses.html'
+15/06/2022 09:16:52 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:16:57 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /courses HTTP/1.1" 302 32
+15/06/2022 09:16:58 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /courses/ HTTP/1.1" 200 594
+15/06/2022 09:16:58 INFO: file 'page-loader-hexlet-repl-co-courses.html' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:16:58 INFO: name /courses replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-courses.html
+15/06/2022 09:16:58 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/script.js' with name 'page-loader-hexlet-repl-co-script.js'
+15/06/2022 09:16:58 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:16:58 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /script.js HTTP/1.1" 200 35
+15/06/2022 09:16:58 INFO: file 'page-loader-hexlet-repl-co-script.js' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:16:58 INFO: name /script.js replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-script.js
+15/06/2022 09:16:58 INFO: Finish loader_engine
+
+15/06/2022 09:17:30 INFO: Start loader_engine https://page-loader.hexlet.repl.co/
+15/06/2022 09:17:30 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:17:45 DEBUG: https://page-loader.hexlet.repl.co:443 "GET / HTTP/1.1" 200 594
+15/06/2022 09:17:45 ERROR: directory '/home/victor/python/test/page-loader-hexlet-repl-co_files' already exists. Can't be created
+15/06/2022 09:17:53 INFO: Start loader_engine https://page-loader.hexlet.repl.co/
+15/06/2022 09:17:53 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:17:59 DEBUG: https://page-loader.hexlet.repl.co:443 "GET / HTTP/1.1" 200 594
+15/06/2022 09:17:59 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/assets/professions/nodejs.png' with name 'page-loader-hexlet-repl-co-assets-professions-nodejs.png'
+15/06/2022 09:17:59 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:17:59 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /assets/professions/nodejs.png HTTP/1.1" 200 11765
+15/06/2022 09:17:59 INFO: file 'page-loader-hexlet-repl-co-assets-professions-nodejs.png' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:17:59 INFO: name /assets/professions/nodejs.png replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-assets-professions-nodejs.png
+15/06/2022 09:17:59 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/assets/application.css' with name 'page-loader-hexlet-repl-co-assets-application.css'
+15/06/2022 09:17:59 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:18:04 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /assets/application.css HTTP/1.1" 200 28
+15/06/2022 09:18:04 INFO: file 'page-loader-hexlet-repl-co-assets-application.css' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:18:04 INFO: name /assets/application.css replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-assets-application.css
+15/06/2022 09:18:04 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/courses' with name 'page-loader-hexlet-repl-co-courses.html'
+15/06/2022 09:18:04 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:18:05 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /courses HTTP/1.1" 302 32
+15/06/2022 09:18:05 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /courses/ HTTP/1.1" 200 594
+15/06/2022 09:18:05 INFO: file 'page-loader-hexlet-repl-co-courses.html' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:18:05 INFO: name /courses replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-courses.html
+15/06/2022 09:18:05 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/script.js' with name 'page-loader-hexlet-repl-co-script.js'
+15/06/2022 09:18:05 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:18:11 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /script.js HTTP/1.1" 200 35
+15/06/2022 09:18:11 INFO: file 'page-loader-hexlet-repl-co-script.js' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:18:11 INFO: name /script.js replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-script.js
+15/06/2022 09:18:11 INFO: Finish loader_engine
+
+15/06/2022 09:20:03 ERROR: directory '/home/victor/python/test/page-loader-hexlet-repl-co_files' already exists. Can't be created
+15/06/2022 09:23:10 INFO: Start loader_engine https://page-loader.hexlet.repl.co/
+15/06/2022 09:23:10 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:23:10 DEBUG: https://page-loader.hexlet.repl.co:443 "GET / HTTP/1.1" 200 594
+15/06/2022 09:23:10 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/assets/professions/nodejs.png' with name 'page-loader-hexlet-repl-co-assets-professions-nodejs.png'
+15/06/2022 09:23:10 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:23:19 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /assets/professions/nodejs.png HTTP/1.1" 200 11765
+15/06/2022 09:23:19 INFO: file 'page-loader-hexlet-repl-co-assets-professions-nodejs.png' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:23:19 INFO: name /assets/professions/nodejs.png replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-assets-professions-nodejs.png
+15/06/2022 09:23:19 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/assets/application.css' with name 'page-loader-hexlet-repl-co-assets-application.css'
+15/06/2022 09:23:19 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:23:25 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /assets/application.css HTTP/1.1" 200 28
+15/06/2022 09:23:25 INFO: file 'page-loader-hexlet-repl-co-assets-application.css' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:23:25 INFO: name /assets/application.css replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-assets-application.css
+15/06/2022 09:23:25 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/courses' with name 'page-loader-hexlet-repl-co-courses.html'
+15/06/2022 09:23:25 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:23:25 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /courses HTTP/1.1" 302 32
+15/06/2022 09:23:25 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /courses/ HTTP/1.1" 200 594
+15/06/2022 09:23:25 INFO: file 'page-loader-hexlet-repl-co-courses.html' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:23:25 INFO: name /courses replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-courses.html
+15/06/2022 09:23:25 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/script.js' with name 'page-loader-hexlet-repl-co-script.js'
+15/06/2022 09:23:25 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:23:26 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /script.js HTTP/1.1" 200 35
+15/06/2022 09:23:26 INFO: file 'page-loader-hexlet-repl-co-script.js' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:23:26 INFO: name /script.js replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-script.js
+15/06/2022 09:23:26 INFO: Finish loader_engine
+
+15/06/2022 09:24:37 INFO: Start loader_engine https://page-loader.hexlet.repl.co/
+15/06/2022 09:24:37 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:24:38 DEBUG: https://page-loader.hexlet.repl.co:443 "GET / HTTP/1.1" 200 594
+15/06/2022 09:24:38 ERROR: directory '/home/victor/python/test/page-loader-hexlet-repl-co_files' already exists. Can't be created
+
+15/06/2022 09:24:44 INFO: Start loader_engine https://page-loader.hexlet.repl.co/
+15/06/2022 09:24:44 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:24:44 DEBUG: https://page-loader.hexlet.repl.co:443 "GET / HTTP/1.1" 200 594
+15/06/2022 09:24:44 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/assets/professions/nodejs.png' with name 'page-loader-hexlet-repl-co-assets-professions-nodejs.png'
+15/06/2022 09:24:44 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:24:45 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /assets/professions/nodejs.png HTTP/1.1" 200 11765
+15/06/2022 09:24:45 INFO: file 'page-loader-hexlet-repl-co-assets-professions-nodejs.png' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:24:45 INFO: name /assets/professions/nodejs.png replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-assets-professions-nodejs.png
+15/06/2022 09:24:45 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/assets/application.css' with name 'page-loader-hexlet-repl-co-assets-application.css'
+15/06/2022 09:24:45 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:24:45 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /assets/application.css HTTP/1.1" 200 28
+15/06/2022 09:24:45 INFO: file 'page-loader-hexlet-repl-co-assets-application.css' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:24:45 INFO: name /assets/application.css replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-assets-application.css
+15/06/2022 09:24:45 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/courses' with name 'page-loader-hexlet-repl-co-courses.html'
+15/06/2022 09:24:45 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:24:46 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /courses HTTP/1.1" 302 32
+15/06/2022 09:24:46 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /courses/ HTTP/1.1" 200 594
+15/06/2022 09:24:46 INFO: file 'page-loader-hexlet-repl-co-courses.html' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:24:46 INFO: name /courses replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-courses.html
+15/06/2022 09:24:46 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/script.js' with name 'page-loader-hexlet-repl-co-script.js'
+15/06/2022 09:24:46 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:24:46 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /script.js HTTP/1.1" 200 35
+15/06/2022 09:24:46 INFO: file 'page-loader-hexlet-repl-co-script.js' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:24:46 INFO: name /script.js replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-script.js
+15/06/2022 09:24:46 INFO: Finish loader_engine
+
+15/06/2022 09:43:03 INFO: Start loader_engine https://page-loader.hexlet.repl.c8o/
+15/06/2022 09:43:03 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.c8o:443
+15/06/2022 09:48:52 INFO: Start loader_engine https://page-loader.hexlet.repl.co/
+15/06/2022 09:48:52 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:48:52 DEBUG: https://page-loader.hexlet.repl.co:443 "GET / HTTP/1.1" 200 594
+15/06/2022 09:48:52 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/assets/professions/nodejs.png' with name 'page-loader-hexlet-repl-co-assets-professions-nodejs.png'
+15/06/2022 09:48:52 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:48:53 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /assets/professions/nodejs.png HTTP/1.1" 200 11765
+15/06/2022 09:48:53 INFO: file 'page-loader-hexlet-repl-co-assets-professions-nodejs.png' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:48:53 INFO: name /assets/professions/nodejs.png replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-assets-professions-nodejs.png
+15/06/2022 09:48:53 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/assets/application.css' with name 'page-loader-hexlet-repl-co-assets-application.css'
+15/06/2022 09:48:53 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:48:53 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /assets/application.css HTTP/1.1" 200 28
+15/06/2022 09:48:53 INFO: file 'page-loader-hexlet-repl-co-assets-application.css' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:48:53 INFO: name /assets/application.css replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-assets-application.css
+15/06/2022 09:48:53 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/courses' with name 'page-loader-hexlet-repl-co-courses.html'
+15/06/2022 09:48:53 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:48:54 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /courses HTTP/1.1" 302 32
+15/06/2022 09:48:54 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /courses/ HTTP/1.1" 200 594
+15/06/2022 09:48:54 INFO: file 'page-loader-hexlet-repl-co-courses.html' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:48:54 INFO: name /courses replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-courses.html
+15/06/2022 09:48:54 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/script.js' with name 'page-loader-hexlet-repl-co-script.js'
+15/06/2022 09:48:54 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+15/06/2022 09:48:59 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /script.js HTTP/1.1" 200 35
+15/06/2022 09:48:59 INFO: file 'page-loader-hexlet-repl-co-script.js' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+15/06/2022 09:48:59 INFO: name /script.js replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-script.js
+15/06/2022 09:48:59 INFO: Finish loader_engine
+
+15/06/2022 09:49:02 INFO: Start loader_engine https://page-loader.hexlet.re1pl.co/
+15/06/2022 09:49:02 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.re1pl.co:443
+15/06/2022 09:58:37 INFO: Start loader_engine https://page-loader.hexlet.re3pl.co/
+15/06/2022 09:58:37 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.re3pl.co:443
+15/06/2022 09:58:57 ERROR: connection to 'https://page-loader.hexlet.re3pl.co/' failed
+
+15/06/2022 09:59:43 INFO: Start loader_engine https://page-loader.hexlet.re3pl.co/
+15/06/2022 09:59:43 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.re3pl.co:443
+15/06/2022 09:59:43 ERROR: connection to 'https://page-loader.hexlet.re3pl.co/' failed
+
+15/06/2022 09:59:48 INFO: Start loader_engine https://page-loader.hexlet.re3pl.co/
+15/06/2022 09:59:48 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.re3pl.co:443
+15/06/2022 09:59:54 ERROR: connection to 'https://page-loader.hexlet.re3pl.co/' failed
+
+15/06/2022 10:00:25 INFO: Start loader_engine https://page-loader.hexlet.re3pl.co/
+15/06/2022 10:00:25 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.re3pl.co:443
+15/06/2022 10:00:25 ERROR: connection to 'https://page-loader.hexlet.re3pl.co/' failed
+
+15/06/2022 10:00:27 INFO: Start loader_engine https://page-loader.hexlet.re3pl.co/
+15/06/2022 10:00:27 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.re3pl.co:443
+15/06/2022 10:00:37 ERROR: connection to 'https://page-loader.hexlet.re3pl.co/' failed
+
+15/06/2022 10:01:37 INFO: Start loader_engine https://page-loader.hexlet.re3pl.co/
+15/06/2022 10:01:37 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.re3pl.co:443
+15/06/2022 10:01:42 ERROR: Connection to 'https://page-loader.hexlet.re3pl.co/' failed. Exit.
+
+15/06/2022 10:02:39 INFO: Start loader_engine https://page-loader.hexlet.re3pl.co/
+15/06/2022 10:02:39 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.re3pl.co:443
+15/06/2022 10:03:19 INFO: Start loader_engine https://page-loader.hexlet.re3pl.co/
+15/06/2022 10:03:19 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.re3pl.co:443
+15/06/2022 10:05:56 INFO: Start loader_engine https://page-loader.hexlet.re3pl.co/
+15/06/2022 10:05:56 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.re3pl.co:443
+15/06/2022 10:06:45 INFO: Start loader_engine https://page-loader.hexlet.re3pl.co/
+15/06/2022 10:06:45 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.re3pl.co:443
+15/06/2022 10:06:51 ERROR: Connection to 'https://page-loader.hexlet.re3pl.co/' failed. Exit.
+
+15/06/2022 10:33:40 INFO: Start loader_engine https://page-loader.hexlet.re3pl.co/
+15/06/2022 10:33:40 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.re3pl.co:443
+15/06/2022 10:33:50 ERROR: Connection to 'https://page-loader.hexlet.re3pl.co/' failed. Exit.
+

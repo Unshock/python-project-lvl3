@@ -1,5 +1,6 @@
 import logging
 import re
+import sys
 import requests
 import os
 import pathlib
@@ -37,7 +38,9 @@ def create_files_dir(page_url, download_folder):
     try:
         os.mkdir(dir_path)
     except FileExistsError:
-        logging.error(f'directory {dir_path} already exists. Can\'t be created')
+        logging.error(f'directory \'{dir_path}\' already exists. Can\'t be '
+                      f'created. Exit.\n')
+        sys.exit([2])
     return dir_name, dir_path
 
 
@@ -80,11 +83,19 @@ def download(url_, download_folder='cwd'):
     if download_folder == 'cwd':
         download_folder = os.getcwd()
     file_name = make_html_name(url_)
-    response = requests.get(url_)
+    try:
+        response = requests.get(url_)
+    except requests.exceptions.ConnectionError:
+        logging.error(f'Connection to \'{url_}\' failed. Exit.\n')
+        sys.exit([3])
     beautiful_response = BeautifulSoup(response.text, 'html.parser')
     file_path = pathlib.Path(download_folder, file_name)
     with open(file_path, 'w') as new_file:
-        new_file.write(beautiful_response.prettify())
+        try:
+            new_file.write(beautiful_response.prettify())
+        except PermissionError:
+            logging.error(f'Access to \'{file_path}\' is denied. Exit.\n')
+            sys.exit([4])
     return new_file.name, download_folder
 
 
@@ -104,17 +115,19 @@ def download_file(page_url, sub_page, dir_path):
     else:
         file_link = make_file_link(scheme, page_netloc, path)
 
-    logging.info(f'trying to download file: {file_link} with name {file_name}')
+    logging.info(f'trying to download file: \'{file_link}\''
+                 f' with name \'{file_name}\'')
     try:
         response = requests.get(file_link)
+        # print(response.status_code)
     except Exception:
-        logging.error(f'file {file_link}'
+        logging.error(f'file \'{file_link}\''
                       f' can\'t be downloaded, return None!')
         return None
     file_path = pathlib.Path(dir_path, file_name)
     with open(file_path, 'wb') as new_file:
         new_file.write(response.content)
-    logging.info(f'file {file_name} downloaded in {dir_path}')
+    logging.info(f'file \'{file_name}\' downloaded in \'{dir_path}\'')
     return new_file.name
 
 

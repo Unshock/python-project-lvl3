@@ -1,10 +1,10 @@
 import os
-import pathlib
 from page_loader import downloader
 from page_loader import loader_engine
 import tempfile
-from urllib.parse import urlparse
+from tests.conftest import fake_loader
 import logging
+import pytest
 
 
 LOGGER = logging.getLogger(__name__)
@@ -52,7 +52,6 @@ def test_loader_engine(requests_mock, make_url_1,
                 file_directory_content = os.listdir(os.path.join(
                     inner_temp_dir,
                     make_file_dir_name))
-                print(file_directory_content)
                 assert result_expected.read() == result.read()
                 assert len(os.listdir(inner_temp_dir)) == 2
                 assert make_file_dir_name in directory_content
@@ -70,17 +69,14 @@ def test_loader_engine(requests_mock, make_url_1,
                             assert el.read() == make_files[elem]
 
 
-def fake_loader(true_url, file_path, dir_path):
-    fake_page_url = os.path.join(os.path.dirname(__file__),
-                                 'fixtures/page_files')
-    true_sub_page = urlparse(file_path).path
-    file_name = downloader.make_file_name(true_url, true_sub_page)
-    with open(fake_page_url + true_sub_page, 'rb') as file:
-        response = file.read()
-        file_path = pathlib.Path(dir_path, file_name)
-        with open(file_path, 'wb') as new_file:
-            new_file.write(response)
-        return new_file.name
+def test_permission_1(requests_mock, make_url_1, make_response_1):
+    with open(make_response_1, 'r') as get_expected:
+        requests_mock.get(make_url_1, text=get_expected.read())
+    with tempfile.TemporaryDirectory() as temp_dir:
+        os.chdir(temp_dir)
+        os.chmod(temp_dir, 0o111)
+        with pytest.raises(PermissionError):
+            loader_engine.loader_engine(make_url_1, file_loader=fake_loader)
 
 
 def test_make_html_name_1(make_url_1, make_url_transformed_1):
