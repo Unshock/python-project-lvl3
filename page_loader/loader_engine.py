@@ -31,9 +31,9 @@ def loader_engine(page_url, download_folder='cwd',
     return html_path
 
 
-g = 'https://page-loader.hexlet.re3pl.co/'
+g = 'https://page-loader.hexlet.repl.co/'
 flib = 'https://flibusta.club/'
 gs = 'https://gs-labs.ru/'
 bio = 'https://bioline.ru/biomebel'
 # hex = 'https://ru.hexlet.io/courses'
-# t = loader_engine(g, '/home/victor/python/test')
+t = loader_engine("https://tproger.ru/det", '/home/victor/python/test')

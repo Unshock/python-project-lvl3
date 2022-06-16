@@ -317,3 +317,134 @@ Start loader_engine https://page-loader.hexlet.repl.co/
 15/06/2022 10:33:40 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.re3pl.co:443
 15/06/2022 10:33:50 ERROR: Connection to 'https://page-loader.hexlet.re3pl.co/' failed. Exit.
 
+16/06/2022 08:15:35 INFO: Start loader_engine https://page-loader.hexlet.re3pl.co/
+16/06/2022 08:15:35 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.re3pl.co:443
+16/06/2022 08:15:36 ERROR: Connection to 'https://page-loader.hexlet.re3pl.co/' failed. Exit.
+
+16/06/2022 08:15:45 INFO: Start loader_engine https://page-loader.hexlet.repl.co/
+16/06/2022 08:15:45 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+16/06/2022 08:15:48 DEBUG: https://page-loader.hexlet.repl.co:443 "GET / HTTP/1.1" 200 594
+16/06/2022 08:15:48 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/assets/professions/nodejs.png' with name 'page-loader-hexlet-repl-co-assets-professions-nodejs.png'
+16/06/2022 08:15:48 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+16/06/2022 08:16:04 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /assets/professions/nodejs.png HTTP/1.1" 200 11765
+16/06/2022 08:16:04 INFO: file 'page-loader-hexlet-repl-co-assets-professions-nodejs.png' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+16/06/2022 08:16:04 INFO: name /assets/professions/nodejs.png replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-assets-professions-nodejs.png
+16/06/2022 08:16:04 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/assets/application.css' with name 'page-loader-hexlet-repl-co-assets-application.css'
+16/06/2022 08:16:04 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+16/06/2022 08:16:05 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /assets/application.css HTTP/1.1" 200 28
+16/06/2022 08:16:05 INFO: file 'page-loader-hexlet-repl-co-assets-application.css' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+16/06/2022 08:16:05 INFO: name /assets/application.css replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-assets-application.css
+16/06/2022 08:16:05 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/courses' with name 'page-loader-hexlet-repl-co-courses.html'
+16/06/2022 08:16:05 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+16/06/2022 08:16:11 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /courses HTTP/1.1" 302 32
+16/06/2022 08:16:11 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /courses/ HTTP/1.1" 200 594
+16/06/2022 08:16:11 INFO: file 'page-loader-hexlet-repl-co-courses.html' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+16/06/2022 08:16:11 INFO: name /courses replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-courses.html
+16/06/2022 08:16:11 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/script.js' with name 'page-loader-hexlet-repl-co-script.js'
+16/06/2022 08:16:11 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+16/06/2022 08:16:16 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /script.js HTTP/1.1" 200 35
+16/06/2022 08:16:16 INFO: file 'page-loader-hexlet-repl-co-script.js' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+16/06/2022 08:16:16 INFO: name /script.js replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-script.js
+16/06/2022 08:16:16 INFO: Finish loader_engine
+
+16/06/2022 09:33:57 INFO: Start loader_engine https://tproger.ru/det
+16/06/2022 09:33:57 DEBUG: Starting new HTTPS connection (1): tproger.ru:443
+16/06/2022 09:33:58 DEBUG: https://tproger.ru:443 "GET /det HTTP/1.1" 404 None
+16/06/2022 09:33:58 INFO: trying to download file: 'https://tproger.ru/wp-content/themes/gecko/system/assets/404/404.css' with name 'tproger-ru-wp-content-themes-gecko-system-assets-404-404.css'
+16/06/2022 09:33:58 DEBUG: Starting new HTTPS connection (1): tproger.ru:443
+16/06/2022 09:33:59 DEBUG: https://tproger.ru:443 "GET /wp-content/themes/gecko/system/assets/404/404.css HTTP/1.1" 200 None
+16/06/2022 09:33:59 INFO: file 'tproger-ru-wp-content-themes-gecko-system-assets-404-404.css' downloaded in '/home/victor/python/test/tproger-ru-det_files'
+16/06/2022 09:33:59 INFO: name https://tproger.ru/wp-content/themes/gecko/system/assets/404/404.css replaced with tproger-ru-det_files/tproger-ru-wp-content-themes-gecko-system-assets-404-404.css
+16/06/2022 09:33:59 INFO: trying to download file: 'https://tproger.ru/wp-content/themes/gecko/system/assets/404/404_RandomVideo.js' with name 'tproger-ru-wp-content-themes-gecko-system-assets-404-404-RandomVideo.js'
+16/06/2022 09:33:59 DEBUG: Starting new HTTPS connection (1): tproger.ru:443
+16/06/2022 09:33:59 DEBUG: https://tproger.ru:443 "GET /wp-content/themes/gecko/system/assets/404/404_RandomVideo.js HTTP/1.1" 200 None
+16/06/2022 09:33:59 INFO: file 'tproger-ru-wp-content-themes-gecko-system-assets-404-404-RandomVideo.js' downloaded in '/home/victor/python/test/tproger-ru-det_files'
+16/06/2022 09:33:59 INFO: name https://tproger.ru/wp-content/themes/gecko/system/assets/404/404_RandomVideo.js replaced with tproger-ru-det_files/tproger-ru-wp-content-themes-gecko-system-assets-404-404-RandomVideo.js
+16/06/2022 09:33:59 INFO: trying to download file: 'https://tproger.ru/wp-content/themes/gecko/system/assets/404/404_coub.js' with name 'tproger-ru-wp-content-themes-gecko-system-assets-404-404-coub.js'
+16/06/2022 09:33:59 DEBUG: Starting new HTTPS connection (1): tproger.ru:443
+16/06/2022 09:33:59 DEBUG: https://tproger.ru:443 "GET /wp-content/themes/gecko/system/assets/404/404_coub.js HTTP/1.1" 200 None
+16/06/2022 09:33:59 INFO: file 'tproger-ru-wp-content-themes-gecko-system-assets-404-404-coub.js' downloaded in '/home/victor/python/test/tproger-ru-det_files'
+16/06/2022 09:33:59 INFO: name https://tproger.ru/wp-content/themes/gecko/system/assets/404/404_coub.js replaced with tproger-ru-det_files/tproger-ru-wp-content-themes-gecko-system-assets-404-404-coub.js
+16/06/2022 09:33:59 INFO: trying to download file: 'https://tproger.ru/wp-content/themes/gecko/system/assets/404/404_report.js' with name 'tproger-ru-wp-content-themes-gecko-system-assets-404-404-report.js'
+16/06/2022 09:33:59 DEBUG: Starting new HTTPS connection (1): tproger.ru:443
+16/06/2022 09:33:59 DEBUG: https://tproger.ru:443 "GET /wp-content/themes/gecko/system/assets/404/404_report.js HTTP/1.1" 200 None
+16/06/2022 09:33:59 INFO: file 'tproger-ru-wp-content-themes-gecko-system-assets-404-404-report.js' downloaded in '/home/victor/python/test/tproger-ru-det_files'
+16/06/2022 09:33:59 INFO: name https://tproger.ru/wp-content/themes/gecko/system/assets/404/404_report.js replaced with tproger-ru-det_files/tproger-ru-wp-content-themes-gecko-system-assets-404-404-report.js
+16/06/2022 09:33:59 INFO: trying to download file: 'https://tproger.ru/wp-content/themes/gecko/system/assets/404/404_logo_egg.js' with name 'tproger-ru-wp-content-themes-gecko-system-assets-404-404-logo-egg.js'
+16/06/2022 09:33:59 DEBUG: Starting new HTTPS connection (1): tproger.ru:443
+16/06/2022 09:33:59 DEBUG: https://tproger.ru:443 "GET /wp-content/themes/gecko/system/assets/404/404_logo_egg.js HTTP/1.1" 200 None
+16/06/2022 09:33:59 INFO: file 'tproger-ru-wp-content-themes-gecko-system-assets-404-404-logo-egg.js' downloaded in '/home/victor/python/test/tproger-ru-det_files'
+16/06/2022 09:33:59 INFO: name https://tproger.ru/wp-content/themes/gecko/system/assets/404/404_logo_egg.js replaced with tproger-ru-det_files/tproger-ru-wp-content-themes-gecko-system-assets-404-404-logo-egg.js
+16/06/2022 09:33:59 INFO: trying to download file: 'https://tproger.ru/wp-content/themes/gecko/system/assets/404/404_vk_posts_counter.js' with name 'tproger-ru-wp-content-themes-gecko-system-assets-404-404-vk-posts-counter.js'
+16/06/2022 09:33:59 DEBUG: Starting new HTTPS connection (1): tproger.ru:443
+16/06/2022 09:33:59 DEBUG: https://tproger.ru:443 "GET /wp-content/themes/gecko/system/assets/404/404_vk_posts_counter.js HTTP/1.1" 200 None
+16/06/2022 09:33:59 INFO: file 'tproger-ru-wp-content-themes-gecko-system-assets-404-404-vk-posts-counter.js' downloaded in '/home/victor/python/test/tproger-ru-det_files'
+16/06/2022 09:33:59 INFO: name https://tproger.ru/wp-content/themes/gecko/system/assets/404/404_vk_posts_counter.js replaced with tproger-ru-det_files/tproger-ru-wp-content-themes-gecko-system-assets-404-404-vk-posts-counter.js
+16/06/2022 09:33:59 INFO: Finish loader_engine
+
+16/06/2022 10:25:02 INFO: Start loader_engine https://tproger.ru/det
+16/06/2022 10:25:02 DEBUG: Starting new HTTPS connection (1): tproger.ru:443
+16/06/2022 10:25:06 DEBUG: https://tproger.ru:443 "GET /det HTTP/1.1" 404 None
+16/06/2022 10:25:06 ERROR: Request has failed with status code=404 Client Error: Not Found for url: https://tproger.ru/det. Exit.
+
+16/06/2022 10:26:25 INFO: Start loader_engine https://tproger.ru/det
+16/06/2022 10:26:25 DEBUG: Starting new HTTPS connection (1): tproger.ru:443
+16/06/2022 10:26:25 DEBUG: https://tproger.ru:443 "GET /det HTTP/1.1" 404 None
+16/06/2022 10:26:25 ERROR: Request has failed with status code=None. Exit.
+
+16/06/2022 10:26:52 INFO: Start loader_engine https://tproger.ru/det
+16/06/2022 10:26:52 DEBUG: Starting new HTTPS connection (1): tproger.ru:443
+16/06/2022 10:26:52 DEBUG: https://tproger.ru:443 "GET /det HTTP/1.1" 404 None
+16/06/2022 10:26:52 ERROR: Request has failed with status code=<Response [404]>. Exit.
+
+16/06/2022 10:27:41 INFO: Start loader_engine https://tproger.ru/det
+16/06/2022 10:27:41 DEBUG: Starting new HTTPS connection (1): tproger.ru:443
+16/06/2022 10:27:42 DEBUG: https://tproger.ru:443 "GET /det HTTP/1.1" 404 None
+16/06/2022 10:27:42 ERROR: Request has failed with status code=None. Exit.
+
+16/06/2022 10:27:57 INFO: Start loader_engine https://tproger.ru/det
+16/06/2022 10:27:57 DEBUG: Starting new HTTPS connection (1): tproger.ru:443
+16/06/2022 10:27:57 DEBUG: https://tproger.ru:443 "GET /det HTTP/1.1" 404 None
+16/06/2022 10:27:57 ERROR: Request has failed with status code=<PreparedRequest [GET]>. Exit.
+
+16/06/2022 10:28:45 INFO: Start loader_engine https://tproger.ru/det
+16/06/2022 10:28:45 DEBUG: Starting new HTTPS connection (1): tproger.ru:443
+16/06/2022 10:28:46 DEBUG: https://tproger.ru:443 "GET /det HTTP/1.1" 404 None
+16/06/2022 10:28:46 ERROR: Request has failed with response: <Response [404]>. Exit.
+
+16/06/2022 10:29:18 INFO: Start loader_engine https://tproger.ru/det
+16/06/2022 10:29:18 DEBUG: Starting new HTTPS connection (1): tproger.ru:443
+16/06/2022 10:29:18 DEBUG: https://tproger.ru:443 "GET /det HTTP/1.1" 404 None
+16/06/2022 10:29:18 ERROR: Request has failed with response: <class 'requests.models.Response'>. Exit.
+
+16/06/2022 10:30:10 INFO: Start loader_engine https://tproger.ru/det
+16/06/2022 10:30:10 DEBUG: Starting new HTTPS connection (1): tproger.ru:443
+16/06/2022 10:30:15 DEBUG: https://tproger.ru:443 "GET /det HTTP/1.1" 404 None
+16/06/2022 10:31:18 INFO: Start loader_engine https://tproger.ru/det
+16/06/2022 10:31:18 DEBUG: Starting new HTTPS connection (1): tproger.ru:443
+16/06/2022 10:31:19 DEBUG: https://tproger.ru:443 "GET /det HTTP/1.1" 404 None
+16/06/2022 10:31:19 ERROR: Request has failed with response: 404. Exit.
+
+16/06/2022 10:31:38 INFO: Start loader_engine https://tproger.ru/det
+16/06/2022 10:31:38 DEBUG: Starting new HTTPS connection (1): tproger.ru:443
+16/06/2022 10:31:39 DEBUG: https://tproger.ru:443 "GET /det HTTP/1.1" 404 None
+16/06/2022 10:32:04 INFO: Start loader_engine https://tproger.ru/det
+16/06/2022 10:32:04 DEBUG: Starting new HTTPS connection (1): tproger.ru:443
+16/06/2022 10:32:04 DEBUG: https://tproger.ru:443 "GET /det HTTP/1.1" 404 None
+16/06/2022 10:32:04 ERROR: Request has failed with status code=404. Exit.
+
+16/06/2022 10:45:27 INFO: Start loader_engine https://tproger.ru/det
+16/06/2022 10:45:27 DEBUG: Starting new HTTPS connection (1): tproger.ru:443
+16/06/2022 10:45:27 DEBUG: https://tproger.ru:443 "GET /det HTTP/1.1" 404 None
+16/06/2022 10:45:27 ERROR: Request has failed with status code=404. Exit.
+
+16/06/2022 10:46:03 INFO: Start loader_engine https://tproger.ru/det
+16/06/2022 10:46:03 DEBUG: Starting new HTTPS connection (1): tproger.ru:443
+16/06/2022 10:46:04 DEBUG: https://tproger.ru:443 "GET /det HTTP/1.1" 404 None
+16/06/2022 10:46:04 ERROR: Request has failed with status code=404. Exit.
+
+16/06/2022 11:22:03 INFO: Start loader_engine https://tproger.ru/det
+16/06/2022 11:22:03 DEBUG: Starting new HTTPS connection (1): tproger.ru:443
+16/06/2022 11:22:04 DEBUG: https://tproger.ru:443 "GET /det HTTP/1.1" 404 None
+16/06/2022 11:22:04 ERROR: Request has failed with status code=404. Exit.
+

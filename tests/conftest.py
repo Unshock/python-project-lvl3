@@ -3,6 +3,7 @@ import os
 from urllib.parse import urlparse
 import pathlib
 from page_loader import downloader
+import requests
 
 
 FIXTURES_FOLDER = 'fixtures'

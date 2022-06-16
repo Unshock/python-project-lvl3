@@ -24,6 +24,7 @@ pook = "^1.0.2"
 requests-mock = "^1.9.3"
 pytest-cov = "^3.0.0"
 beautifulsoup4 = "^4.11.1"
+responses = "^0.21.0"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^4.0.1"

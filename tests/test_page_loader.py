@@ -5,6 +5,9 @@ import tempfile
 from tests.conftest import fake_loader
 import logging
 import pytest
+import requests
+import requests_mock
+import responses
 
 
 LOGGER = logging.getLogger(__name__)
@@ -77,6 +80,22 @@ def test_permission_1(requests_mock, make_url_1, make_response_1):
         os.chmod(temp_dir, 0o111)
         with pytest.raises(PermissionError):
             loader_engine.loader_engine(make_url_1, file_loader=fake_loader)
+
+
+@responses.activate
+def test_bad_status_code(make_url_1):
+    responses.add(responses.GET, make_url_1, status=404)
+
+    with pytest.raises(requests.exceptions.HTTPError):
+        downloader.download(make_url_1)
+
+
+@responses.activate
+def test_bad_url(bad_url='https://page-loader.hexlet.re3pl.co/'):
+
+    with pytest.raises(requests.exceptions.ConnectionError):
+        downloader.download(bad_url)
+
 
 
 def test_make_html_name_1(make_url_1, make_url_transformed_1):

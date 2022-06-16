@@ -83,11 +83,23 @@ def download(url_, download_folder='cwd'):
     if download_folder == 'cwd':
         download_folder = os.getcwd()
     file_name = make_html_name(url_)
+
     try:
         response = requests.get(url_)
+        response.raise_for_status()
     except requests.exceptions.ConnectionError:
         logging.error(f'Connection to \'{url_}\' failed. Exit.\n')
         sys.exit([3])
+    except requests.exceptions.HTTPError as trouble:
+        response = trouble.response
+        status_code = response.status_code
+        logging.error(f'Request has failed with status code={status_code}.'
+                      f' Exit.\n')
+        #raise ConnectionError
+        raise
+        #sys.exit([4])
+
+
     beautiful_response = BeautifulSoup(response.text, 'html.parser')
     file_path = pathlib.Path(download_folder, file_name)
     with open(file_path, 'w') as new_file:
@@ -120,6 +132,10 @@ def download_file(page_url, sub_page, dir_path):
     try:
         response = requests.get(file_link)
         # print(response.status_code)
+    except requests.exceptions.ConnectionError:
+        logging.error(f'file \'{file_link}\''
+                      f' can\'t be downloaded, status code: '
+                      f'{response.status_code}')
     except Exception:
         logging.error(f'file \'{file_link}\''
                       f' can\'t be downloaded, return None!')
