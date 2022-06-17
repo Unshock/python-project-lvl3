@@ -3,7 +3,7 @@ import os
 from urllib.parse import urlparse
 import pathlib
 from page_loader import downloader
-import requests
+from page_loader.downloader import get_path
 
 
 FIXTURES_FOLDER = 'fixtures'
@@ -64,6 +64,16 @@ def make_url_1_with_pic():
 
 
 @pytest.fixture
+def make_pic_path():
+    path = os.path.join(os.path.dirname(__file__),
+                        URLS_FOLDER,
+                        'url1_with_pic.txt')
+    with open(path) as url_1:
+        url = url_1.read()
+        return get_path(url)
+
+
+@pytest.fixture
 def make_url_transformed_1():
     path = os.path.join(os.path.dirname(__file__), URLS_FOLDER,
                         'url1_transform.txt')
@@ -93,6 +103,13 @@ def make_url_transformed_4():
                         'url4_transform.txt')
     with open(path) as url_4:
         return url_4.read()
+
+
+@pytest.fixture
+def make_url_1_bad():
+    path = os.path.join(os.path.dirname(__file__), URLS_FOLDER, 'url1_bad.txt')
+    with open(path) as url_1:
+        return url_1.read()
 
 
 @pytest.fixture

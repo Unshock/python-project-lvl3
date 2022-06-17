@@ -1,6 +1,5 @@
 import logging
 import re
-import sys
 import requests
 import os
 import pathlib
@@ -38,9 +37,10 @@ def create_files_dir(page_url, download_folder):
     try:
         os.mkdir(dir_path)
     except FileExistsError:
-        logging.error(f'directory \'{dir_path}\' already exists. Can\'t be '
-                      f'created. Exit.\n')
-        sys.exit([2])
+        error_message = f'directory \'{dir_path}\' already exists.' \
+                        f' Can\'t be created. Exit.\n'
+        logging.error(error_message)
+        raise SystemExit(error_message)
     return dir_name, dir_path
 
 
@@ -79,7 +79,18 @@ def get_path(page_url):
     return urlparse(page_url).path
 
 
-def download(url_, download_folder='cwd'):
+def write_in_file(file_path, content):
+    try:
+        with open(file_path, 'wb') as new_file:
+            new_file.write(content)
+    except PermissionError:
+        error_message = f'Access to \'{file_path}\' is denied. Exit.\n'
+        logging.error(error_message)
+        raise SystemExit(error_message)
+    return new_file.name
+
+
+def download(url_, download_folder='cwd'):  # noqa: C901
     if download_folder == 'cwd':
         download_folder = os.getcwd()
     file_name = make_html_name(url_)
@@ -88,61 +99,70 @@ def download(url_, download_folder='cwd'):
         response = requests.get(url_)
         response.raise_for_status()
     except requests.exceptions.ConnectionError:
-        logging.error(f'Connection to \'{url_}\' failed. Exit.\n')
-        sys.exit([3])
+        error_message = f'Connection to {url_} failed. Exit.\n'
+        logging.error(error_message)
+        raise SystemExit(error_message)
     except requests.exceptions.HTTPError as trouble:
         response = trouble.response
         status_code = response.status_code
-        logging.error(f'Request has failed with status code={status_code}.'
-                      f' Exit.\n')
-        #raise ConnectionError
-        raise
-        #sys.exit([4])
-
+        error_message = f'Request has failed with status code={status_code}.' \
+                        f' Exit.\n'
+        logging.error(error_message)
+        raise SystemExit(error_message)
 
     beautiful_response = BeautifulSoup(response.text, 'html.parser')
+
     file_path = pathlib.Path(download_folder, file_name)
     with open(file_path, 'w') as new_file:
         try:
             new_file.write(beautiful_response.prettify())
         except PermissionError:
-            logging.error(f'Access to \'{file_path}\' is denied. Exit.\n')
-            sys.exit([4])
+            error_message = f'Access to \'{file_path}\' is denied. Exit.\n'
+            logging.error(error_message)
+            raise SystemExit(error_message)
     return new_file.name, download_folder
 
 
-def make_file_link(scheme, netloc, path):
-    return f'{scheme}://{netloc}{path}'
-
-
-def download_file(page_url, sub_page, dir_path):
-    file_name = make_file_name(page_url, sub_page)
+def make_file_link(page_url, sub_page):
     scheme = urlparse(page_url).scheme
     page_netloc = get_netloc(page_url)
     sub_page_netloc = get_netloc(sub_page)
     path = urlparse(sub_page).path
 
     if page_netloc == sub_page_netloc:
-        file_link = make_file_link(scheme, sub_page_netloc, path)
-    else:
-        file_link = make_file_link(scheme, page_netloc, path)
+        return f'{scheme}://{sub_page_netloc}{path}'
+    return f'{scheme}://{page_netloc}{path}'
+
+
+def download_file(page_url, sub_page, dir_path):
+    file_name = make_file_name(page_url, sub_page)
+    file_link = make_file_link(page_url, sub_page)
 
     logging.info(f'trying to download file: \'{file_link}\''
                  f' with name \'{file_name}\'')
+
     try:
         response = requests.get(file_link)
-        # print(response.status_code)
-    except requests.exceptions.ConnectionError:
+        response.raise_for_status()
+    except (requests.exceptions.HTTPError,
+            requests.exceptions.ConnectionError) as trouble:
+        response = trouble.response
+        status_code = response.status_code
         logging.error(f'file \'{file_link}\''
                       f' can\'t be downloaded, status code: '
-                      f'{response.status_code}')
-    except Exception:
-        logging.error(f'file \'{file_link}\''
-                      f' can\'t be downloaded, return None!')
+                      f'{status_code}. Returns None.')
         return None
+
     file_path = pathlib.Path(dir_path, file_name)
-    with open(file_path, 'wb') as new_file:
-        new_file.write(response.content)
+
+    try:
+        with open(file_path, 'wb') as new_file:
+            new_file.write(response.content)
+    except PermissionError:
+        error_message = f'Access to \'{file_path}\' is denied. Exit.\n'
+        logging.error(error_message)
+        raise SystemExit(error_message)
+
     logging.info(f'file \'{file_name}\' downloaded in \'{dir_path}\'')
     return new_file.name
 

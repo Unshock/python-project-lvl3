@@ -5,8 +5,6 @@ import tempfile
 from tests.conftest import fake_loader
 import logging
 import pytest
-import requests
-import requests_mock
 import responses
 
 
@@ -84,18 +82,32 @@ def test_permission_1(requests_mock, make_url_1, make_response_1):
 
 @responses.activate
 def test_bad_status_code(make_url_1):
-    responses.add(responses.GET, make_url_1, status=404)
+    responses.add(responses.GET, make_url_1, status=400)
+    with tempfile.TemporaryDirectory() as temp_dir:
+        os.chdir(temp_dir)
+        with pytest.raises(SystemExit) as error:
+            downloader.download(make_url_1)
+        assert 'Request has failed with status code=400. Exit.\n' in\
+               str(error.value)
 
-    with pytest.raises(requests.exceptions.HTTPError):
-        downloader.download(make_url_1)
+
+def test_bad_url(make_url_1_bad):
+    with tempfile.TemporaryDirectory() as temp_dir:
+        os.chdir(temp_dir)
+        with pytest.raises(SystemExit) as error:
+            downloader.download(make_url_1_bad)
+        assert f'Connection to {make_url_1_bad} failed.' \
+               f' Exit.\n' in str(error.value)
 
 
 @responses.activate
-def test_bad_url(bad_url='https://page-loader.hexlet.re3pl.co/'):
-
-    with pytest.raises(requests.exceptions.ConnectionError):
-        downloader.download(bad_url)
-
+def test_download_file_with_bad_file_path(make_url_1, make_url_1_with_pic,
+                                          make_pic_path):
+    responses.add(responses.GET, make_url_1_with_pic, status=404)
+    with tempfile.TemporaryDirectory() as temp_dir:
+        os.chdir(temp_dir)
+        result = downloader.download_file(make_url_1, make_pic_path, temp_dir)
+        assert result is None
 
 
 def test_make_html_name_1(make_url_1, make_url_transformed_1):

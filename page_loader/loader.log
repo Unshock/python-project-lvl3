@@ -448,3 +448,248 @@ Start loader_engine https://page-loader.hexlet.repl.co/
 16/06/2022 11:22:04 DEBUG: https://tproger.ru:443 "GET /det HTTP/1.1" 404 None
 16/06/2022 11:22:04 ERROR: Request has failed with status code=404. Exit.
 
+17/06/2022 07:29:34 INFO: Start loader_engine https://tproger.ru/det
+17/06/2022 07:29:34 DEBUG: Starting new HTTPS connection (1): tproger.ru:443
+17/06/2022 07:29:34 DEBUG: https://tproger.ru:443 "GET /det HTTP/1.1" 404 None
+17/06/2022 07:29:34 ERROR: Request has failed with status code=404. Exit.
+
+17/06/2022 07:30:46 INFO: Start loader_engine https://page-loader.hexlet.repl.co/
+17/06/2022 07:30:46 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+17/06/2022 07:30:47 DEBUG: https://page-loader.hexlet.repl.co:443 "GET / HTTP/1.1" 200 594
+17/06/2022 07:30:47 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/assets/professions/nodejs.png' with name 'page-loader-hexlet-repl-co-assets-professions-nodejs.png'
+17/06/2022 07:30:47 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+17/06/2022 07:30:48 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /assets/professions/nodejs.png HTTP/1.1" 200 11765
+17/06/2022 07:30:48 INFO: file 'page-loader-hexlet-repl-co-assets-professions-nodejs.png' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+17/06/2022 07:30:48 INFO: name /assets/professions/nodejs.png replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-assets-professions-nodejs.png
+17/06/2022 07:30:48 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/assets/application.css' with name 'page-loader-hexlet-repl-co-assets-application.css'
+17/06/2022 07:30:48 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+17/06/2022 07:30:48 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /assets/application.css HTTP/1.1" 200 28
+17/06/2022 07:30:48 INFO: file 'page-loader-hexlet-repl-co-assets-application.css' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+17/06/2022 07:30:48 INFO: name /assets/application.css replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-assets-application.css
+17/06/2022 07:30:48 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/courses' with name 'page-loader-hexlet-repl-co-courses.html'
+17/06/2022 07:30:48 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+17/06/2022 07:30:49 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /courses HTTP/1.1" 302 32
+17/06/2022 07:30:49 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /courses/ HTTP/1.1" 200 594
+17/06/2022 07:30:49 INFO: file 'page-loader-hexlet-repl-co-courses.html' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+17/06/2022 07:30:49 INFO: name /courses replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-courses.html
+17/06/2022 07:30:49 INFO: trying to download file: 'https://page-loader.hexlet.repl.co/script.js' with name 'page-loader-hexlet-repl-co-script.js'
+17/06/2022 07:30:49 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+17/06/2022 07:30:49 DEBUG: https://page-loader.hexlet.repl.co:443 "GET /script.js HTTP/1.1" 200 35
+17/06/2022 07:30:49 INFO: file 'page-loader-hexlet-repl-co-script.js' downloaded in '/home/victor/python/test/page-loader-hexlet-repl-co_files'
+17/06/2022 07:30:49 INFO: name /script.js replaced with page-loader-hexlet-repl-co_files/page-loader-hexlet-repl-co-script.js
+17/06/2022 07:30:49 INFO: Finish loader_engine
+
+17/06/2022 07:30:58 INFO: Start loader_engine https://page-loader.hexlet.re3pl.co/
+17/06/2022 07:30:58 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.re3pl.co:443
+17/06/2022 07:30:58 ERROR: Connection to 'https://page-loader.hexlet.re3pl.co/' failed. Exit.
+
+17/06/2022 07:31:27 INFO: Start loader_engine https://page-loader.hexlet.re3pl.co/
+17/06/2022 07:31:27 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.re3pl.co:443
+17/06/2022 07:31:27 ERROR: Connection to https://page-loader.hexlet.re3pl.co/ failed. Exit.
+
+17/06/2022 07:32:31 INFO: Start loader_engine https://page-loader.hexlet.repl.co/
+17/06/2022 07:32:31 DEBUG: Starting new HTTPS connection (1): page-loader.hexlet.repl.co:443
+17/06/2022 07:32:37 DEBUG: https://page-loader.hexlet.repl.co:443 "GET / HTTP/1.1" 200 594
+17/06/2022 07:32:37 ERROR: directory '/home/victor/python/test/page-loader-hexlet-repl-co_files' already exists. Can't be created. Exit.
+
+17/06/2022 08:31:04 INFO: Start loader_engine https://gs-labs.ru/
+17/06/2022 08:31:04 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:09 DEBUG: https://gs-labs.ru:443 "GET / HTTP/1.1" 200 None
+17/06/2022 08:31:09 WARNING: file js/lib.js?v=436122746 is not valid and won't be downloaded
+17/06/2022 08:31:09 INFO: trying to download file: 'https://gs-labs.ru/upload/iblock/f76/f769a15eb362b1132713a66e1e5823b5.png' with name 'gs-labs-ru-upload-iblock-f76-f769a15eb362b1132713a66e1e5823b5.png'
+17/06/2022 08:31:09 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:09 DEBUG: https://gs-labs.ru:443 "GET /upload/iblock/f76/f769a15eb362b1132713a66e1e5823b5.png HTTP/1.1" 200 81761
+17/06/2022 08:31:09 INFO: file 'gs-labs-ru-upload-iblock-f76-f769a15eb362b1132713a66e1e5823b5.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:09 INFO: name /upload/iblock/f76/f769a15eb362b1132713a66e1e5823b5.png replaced with gs-labs-ru_files/gs-labs-ru-upload-iblock-f76-f769a15eb362b1132713a66e1e5823b5.png
+17/06/2022 08:31:09 INFO: trying to download file: 'https://gs-labs.ru/upload/iblock/900/9002693607cca7f73b48614a56b24a4e.png' with name 'gs-labs-ru-upload-iblock-900-9002693607cca7f73b48614a56b24a4e.png'
+17/06/2022 08:31:09 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:09 DEBUG: https://gs-labs.ru:443 "GET /upload/iblock/900/9002693607cca7f73b48614a56b24a4e.png HTTP/1.1" 200 194252
+17/06/2022 08:31:09 INFO: file 'gs-labs-ru-upload-iblock-900-9002693607cca7f73b48614a56b24a4e.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:09 INFO: name /upload/iblock/900/9002693607cca7f73b48614a56b24a4e.png replaced with gs-labs-ru_files/gs-labs-ru-upload-iblock-900-9002693607cca7f73b48614a56b24a4e.png
+17/06/2022 08:31:09 INFO: trying to download file: 'https://gs-labs.ru/upload/iblock/755/755918272d8cbf0ffbe20dc21af5291f.png' with name 'gs-labs-ru-upload-iblock-755-755918272d8cbf0ffbe20dc21af5291f.png'
+17/06/2022 08:31:09 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:09 DEBUG: https://gs-labs.ru:443 "GET /upload/iblock/755/755918272d8cbf0ffbe20dc21af5291f.png HTTP/1.1" 200 13316
+17/06/2022 08:31:09 INFO: file 'gs-labs-ru-upload-iblock-755-755918272d8cbf0ffbe20dc21af5291f.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:09 INFO: name /upload/iblock/755/755918272d8cbf0ffbe20dc21af5291f.png replaced with gs-labs-ru_files/gs-labs-ru-upload-iblock-755-755918272d8cbf0ffbe20dc21af5291f.png
+17/06/2022 08:31:09 INFO: trying to download file: 'https://gs-labs.ru/upload/iblock/172/172d9e15e8c9b5858f7d4c799d9674c0.png' with name 'gs-labs-ru-upload-iblock-172-172d9e15e8c9b5858f7d4c799d9674c0.png'
+17/06/2022 08:31:09 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:09 DEBUG: https://gs-labs.ru:443 "GET /upload/iblock/172/172d9e15e8c9b5858f7d4c799d9674c0.png HTTP/1.1" 200 15409
+17/06/2022 08:31:09 INFO: file 'gs-labs-ru-upload-iblock-172-172d9e15e8c9b5858f7d4c799d9674c0.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:09 INFO: name /upload/iblock/172/172d9e15e8c9b5858f7d4c799d9674c0.png replaced with gs-labs-ru_files/gs-labs-ru-upload-iblock-172-172d9e15e8c9b5858f7d4c799d9674c0.png
+17/06/2022 08:31:09 INFO: trying to download file: 'https://gs-labs.ru/upload/iblock/98e/98e656ffe9cd8be113743250b8584317.png' with name 'gs-labs-ru-upload-iblock-98e-98e656ffe9cd8be113743250b8584317.png'
+17/06/2022 08:31:09 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:10 DEBUG: https://gs-labs.ru:443 "GET /upload/iblock/98e/98e656ffe9cd8be113743250b8584317.png HTTP/1.1" 200 14644
+17/06/2022 08:31:10 INFO: file 'gs-labs-ru-upload-iblock-98e-98e656ffe9cd8be113743250b8584317.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:10 INFO: name /upload/iblock/98e/98e656ffe9cd8be113743250b8584317.png replaced with gs-labs-ru_files/gs-labs-ru-upload-iblock-98e-98e656ffe9cd8be113743250b8584317.png
+17/06/2022 08:31:10 INFO: trying to download file: 'https://gs-labs.ru/static/images/advantages1.png' with name 'gs-labs-ru-static-images-advantages1.png'
+17/06/2022 08:31:10 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:10 DEBUG: https://gs-labs.ru:443 "GET /static/images/advantages1.png HTTP/1.1" 200 18685
+17/06/2022 08:31:10 INFO: file 'gs-labs-ru-static-images-advantages1.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:10 INFO: name /static/images/advantages1.png replaced with gs-labs-ru_files/gs-labs-ru-static-images-advantages1.png
+17/06/2022 08:31:10 INFO: trying to download file: 'https://gs-labs.ru/static/images/advantages2.png' with name 'gs-labs-ru-static-images-advantages2.png'
+17/06/2022 08:31:10 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:10 DEBUG: https://gs-labs.ru:443 "GET /static/images/advantages2.png HTTP/1.1" 200 17419
+17/06/2022 08:31:10 INFO: file 'gs-labs-ru-static-images-advantages2.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:10 INFO: name /static/images/advantages2.png replaced with gs-labs-ru_files/gs-labs-ru-static-images-advantages2.png
+17/06/2022 08:31:10 INFO: trying to download file: 'https://gs-labs.ru/static/images/advantages3.png' with name 'gs-labs-ru-static-images-advantages3.png'
+17/06/2022 08:31:10 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:10 DEBUG: https://gs-labs.ru:443 "GET /static/images/advantages3.png HTTP/1.1" 200 23023
+17/06/2022 08:31:10 INFO: file 'gs-labs-ru-static-images-advantages3.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:10 INFO: name /static/images/advantages3.png replaced with gs-labs-ru_files/gs-labs-ru-static-images-advantages3.png
+17/06/2022 08:31:10 INFO: trying to download file: 'https://gs-labs.ru/static/images/advantages4.png' with name 'gs-labs-ru-static-images-advantages4.png'
+17/06/2022 08:31:10 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:10 DEBUG: https://gs-labs.ru:443 "GET /static/images/advantages4.png HTTP/1.1" 200 17472
+17/06/2022 08:31:10 INFO: file 'gs-labs-ru-static-images-advantages4.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:10 INFO: name /static/images/advantages4.png replaced with gs-labs-ru_files/gs-labs-ru-static-images-advantages4.png
+17/06/2022 08:31:10 INFO: trying to download file: 'https://gs-labs.ru/static/images/advantages5.png' with name 'gs-labs-ru-static-images-advantages5.png'
+17/06/2022 08:31:10 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:10 DEBUG: https://gs-labs.ru:443 "GET /static/images/advantages5.png HTTP/1.1" 200 17150
+17/06/2022 08:31:10 INFO: file 'gs-labs-ru-static-images-advantages5.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:10 INFO: name /static/images/advantages5.png replaced with gs-labs-ru_files/gs-labs-ru-static-images-advantages5.png
+17/06/2022 08:31:10 INFO: trying to download file: 'https://gs-labs.ru/static/images/advantages6.png' with name 'gs-labs-ru-static-images-advantages6.png'
+17/06/2022 08:31:10 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:15 DEBUG: https://gs-labs.ru:443 "GET /static/images/advantages6.png HTTP/1.1" 200 16606
+17/06/2022 08:31:15 INFO: file 'gs-labs-ru-static-images-advantages6.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:15 INFO: name /static/images/advantages6.png replaced with gs-labs-ru_files/gs-labs-ru-static-images-advantages6.png
+17/06/2022 08:31:15 INFO: trying to download file: 'https://gs-labs.ru/static/images/tricolorCompany.png' with name 'gs-labs-ru-static-images-tricolorCompany.png'
+17/06/2022 08:31:15 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:15 DEBUG: https://gs-labs.ru:443 "GET /static/images/tricolorCompany.png HTTP/1.1" 200 4716
+17/06/2022 08:31:15 INFO: file 'gs-labs-ru-static-images-tricolorCompany.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:15 INFO: name /static/images/tricolorCompany.png replaced with gs-labs-ru_files/gs-labs-ru-static-images-tricolorCompany.png
+17/06/2022 08:31:15 INFO: trying to download file: 'https://gs-labs.ru/static/images/rostelecomCompany.png' with name 'gs-labs-ru-static-images-rostelecomCompany.png'
+17/06/2022 08:31:15 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:20 DEBUG: https://gs-labs.ru:443 "GET /static/images/rostelecomCompany.png HTTP/1.1" 200 5402
+17/06/2022 08:31:20 INFO: file 'gs-labs-ru-static-images-rostelecomCompany.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:20 INFO: name /static/images/rostelecomCompany.png replaced with gs-labs-ru_files/gs-labs-ru-static-images-rostelecomCompany.png
+17/06/2022 08:31:20 INFO: trying to download file: 'https://gs-labs.ru/static/images/belintersatCompany.png' with name 'gs-labs-ru-static-images-belintersatCompany.png'
+17/06/2022 08:31:20 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:20 DEBUG: https://gs-labs.ru:443 "GET /static/images/belintersatCompany.png HTTP/1.1" 200 14613
+17/06/2022 08:31:20 INFO: file 'gs-labs-ru-static-images-belintersatCompany.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:20 INFO: name /static/images/belintersatCompany.png replaced with gs-labs-ru_files/gs-labs-ru-static-images-belintersatCompany.png
+17/06/2022 08:31:20 INFO: trying to download file: 'https://gs-labs.ru/static/images/etelecom.jpg' with name 'gs-labs-ru-static-images-etelecom.jpg'
+17/06/2022 08:31:20 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:21 DEBUG: https://gs-labs.ru:443 "GET /static/images/etelecom.jpg HTTP/1.1" 200 21708
+17/06/2022 08:31:21 INFO: file 'gs-labs-ru-static-images-etelecom.jpg' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:21 INFO: name /static/images/etelecom.jpg replaced with gs-labs-ru_files/gs-labs-ru-static-images-etelecom.jpg
+17/06/2022 08:31:21 INFO: trying to download file: 'https://gs-labs.ru/static/images/ugmk.jpg' with name 'gs-labs-ru-static-images-ugmk.jpg'
+17/06/2022 08:31:21 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:21 DEBUG: https://gs-labs.ru:443 "GET /static/images/ugmk.jpg HTTP/1.1" 200 14901
+17/06/2022 08:31:21 INFO: file 'gs-labs-ru-static-images-ugmk.jpg' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:21 INFO: name /static/images/ugmk.jpg replaced with gs-labs-ru_files/gs-labs-ru-static-images-ugmk.jpg
+17/06/2022 08:31:21 INFO: trying to download file: 'https://gs-labs.ru/static/images/gazpromCompany.png' with name 'gs-labs-ru-static-images-gazpromCompany.png'
+17/06/2022 08:31:21 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:26 DEBUG: https://gs-labs.ru:443 "GET /static/images/gazpromCompany.png HTTP/1.1" 200 15077
+17/06/2022 08:31:26 INFO: file 'gs-labs-ru-static-images-gazpromCompany.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:26 INFO: name /static/images/gazpromCompany.png replaced with gs-labs-ru_files/gs-labs-ru-static-images-gazpromCompany.png
+17/06/2022 08:31:26 INFO: trying to download file: 'https://gs-labs.ru/static/images/rtrsCompany.png' with name 'gs-labs-ru-static-images-rtrsCompany.png'
+17/06/2022 08:31:26 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:26 DEBUG: https://gs-labs.ru:443 "GET /static/images/rtrsCompany.png HTTP/1.1" 200 32443
+17/06/2022 08:31:26 INFO: file 'gs-labs-ru-static-images-rtrsCompany.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:26 INFO: name /static/images/rtrsCompany.png replaced with gs-labs-ru_files/gs-labs-ru-static-images-rtrsCompany.png
+17/06/2022 08:31:26 INFO: trying to download file: 'https://gs-labs.ru/static/images/trueIPLogo.jpg' with name 'gs-labs-ru-static-images-trueIPLogo.jpg'
+17/06/2022 08:31:26 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:31 DEBUG: https://gs-labs.ru:443 "GET /static/images/trueIPLogo.jpg HTTP/1.1" 200 25094
+17/06/2022 08:31:31 INFO: file 'gs-labs-ru-static-images-trueIPLogo.jpg' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:31 INFO: name /static/images/trueIPLogo.jpg replaced with gs-labs-ru_files/gs-labs-ru-static-images-trueIPLogo.jpg
+17/06/2022 08:31:31 INFO: trying to download file: 'https://gs-labs.ru/static/images/neotion.jpg' with name 'gs-labs-ru-static-images-neotion.jpg'
+17/06/2022 08:31:31 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:31 DEBUG: https://gs-labs.ru:443 "GET /static/images/neotion.jpg HTTP/1.1" 200 20926
+17/06/2022 08:31:31 INFO: file 'gs-labs-ru-static-images-neotion.jpg' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:31 INFO: name /static/images/neotion.jpg replaced with gs-labs-ru_files/gs-labs-ru-static-images-neotion.jpg
+17/06/2022 08:31:31 INFO: trying to download file: 'https://gs-labs.ru/static/images/features1.png' with name 'gs-labs-ru-static-images-features1.png'
+17/06/2022 08:31:31 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:31 DEBUG: https://gs-labs.ru:443 "GET /static/images/features1.png HTTP/1.1" 200 18795
+17/06/2022 08:31:31 INFO: file 'gs-labs-ru-static-images-features1.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:31 INFO: name /static/images/features1.png replaced with gs-labs-ru_files/gs-labs-ru-static-images-features1.png
+17/06/2022 08:31:31 INFO: trying to download file: 'https://gs-labs.ru/static/images/features2.png' with name 'gs-labs-ru-static-images-features2.png'
+17/06/2022 08:31:31 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:31 DEBUG: https://gs-labs.ru:443 "GET /static/images/features2.png HTTP/1.1" 200 17428
+17/06/2022 08:31:31 INFO: file 'gs-labs-ru-static-images-features2.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:31 INFO: name /static/images/features2.png replaced with gs-labs-ru_files/gs-labs-ru-static-images-features2.png
+17/06/2022 08:31:31 INFO: trying to download file: 'https://gs-labs.ru/static/images/features3.png' with name 'gs-labs-ru-static-images-features3.png'
+17/06/2022 08:31:31 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:31 DEBUG: https://gs-labs.ru:443 "GET /static/images/features3.png HTTP/1.1" 200 15813
+17/06/2022 08:31:31 INFO: file 'gs-labs-ru-static-images-features3.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:31 INFO: name /static/images/features3.png replaced with gs-labs-ru_files/gs-labs-ru-static-images-features3.png
+17/06/2022 08:31:31 INFO: trying to download file: 'https://gs-labs.ru/static/images/features4.png' with name 'gs-labs-ru-static-images-features4.png'
+17/06/2022 08:31:31 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:31 DEBUG: https://gs-labs.ru:443 "GET /static/images/features4.png HTTP/1.1" 200 14054
+17/06/2022 08:31:31 INFO: file 'gs-labs-ru-static-images-features4.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:31 INFO: name /static/images/features4.png replaced with gs-labs-ru_files/gs-labs-ru-static-images-features4.png
+17/06/2022 08:31:31 INFO: trying to download file: 'https://gs-labs.ru/upload/iblock/5f2/5f2be638fae2bc3bdc9f280fddce8f83.png' with name 'gs-labs-ru-upload-iblock-5f2-5f2be638fae2bc3bdc9f280fddce8f83.png'
+17/06/2022 08:31:31 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:31 DEBUG: https://gs-labs.ru:443 "GET /upload/iblock/5f2/5f2be638fae2bc3bdc9f280fddce8f83.png HTTP/1.1" 200 582708
+17/06/2022 08:31:32 INFO: file 'gs-labs-ru-upload-iblock-5f2-5f2be638fae2bc3bdc9f280fddce8f83.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:32 INFO: name /upload/iblock/5f2/5f2be638fae2bc3bdc9f280fddce8f83.png replaced with gs-labs-ru_files/gs-labs-ru-upload-iblock-5f2-5f2be638fae2bc3bdc9f280fddce8f83.png
+17/06/2022 08:31:32 INFO: trying to download file: 'https://gs-labs.ru/upload/iblock/bfc/bfcee042004772cd682ef1a31db1d63b.png' with name 'gs-labs-ru-upload-iblock-bfc-bfcee042004772cd682ef1a31db1d63b.png'
+17/06/2022 08:31:32 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:32 DEBUG: https://gs-labs.ru:443 "GET /upload/iblock/bfc/bfcee042004772cd682ef1a31db1d63b.png HTTP/1.1" 200 2108754
+17/06/2022 08:31:32 INFO: file 'gs-labs-ru-upload-iblock-bfc-bfcee042004772cd682ef1a31db1d63b.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:32 INFO: name /upload/iblock/bfc/bfcee042004772cd682ef1a31db1d63b.png replaced with gs-labs-ru_files/gs-labs-ru-upload-iblock-bfc-bfcee042004772cd682ef1a31db1d63b.png
+17/06/2022 08:31:32 INFO: trying to download file: 'https://gs-labs.ru/upload/iblock/efa/efa7815fa19b66850ad891d26ac1243f.jpg' with name 'gs-labs-ru-upload-iblock-efa-efa7815fa19b66850ad891d26ac1243f.jpg'
+17/06/2022 08:31:32 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:32 DEBUG: https://gs-labs.ru:443 "GET /upload/iblock/efa/efa7815fa19b66850ad891d26ac1243f.jpg HTTP/1.1" 200 30249285
+17/06/2022 08:31:35 INFO: file 'gs-labs-ru-upload-iblock-efa-efa7815fa19b66850ad891d26ac1243f.jpg' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:35 INFO: name /upload/iblock/efa/efa7815fa19b66850ad891d26ac1243f.jpg replaced with gs-labs-ru_files/gs-labs-ru-upload-iblock-efa-efa7815fa19b66850ad891d26ac1243f.jpg
+17/06/2022 08:31:35 INFO: trying to download file: 'https://gs-labs.ru/upload/iblock/ae2/ae26b2436d81b8f6a24698b40f2149ad.jpg' with name 'gs-labs-ru-upload-iblock-ae2-ae26b2436d81b8f6a24698b40f2149ad.jpg'
+17/06/2022 08:31:35 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:35 DEBUG: https://gs-labs.ru:443 "GET /upload/iblock/ae2/ae26b2436d81b8f6a24698b40f2149ad.jpg HTTP/1.1" 200 132286
+17/06/2022 08:31:35 INFO: file 'gs-labs-ru-upload-iblock-ae2-ae26b2436d81b8f6a24698b40f2149ad.jpg' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:35 INFO: name /upload/iblock/ae2/ae26b2436d81b8f6a24698b40f2149ad.jpg replaced with gs-labs-ru_files/gs-labs-ru-upload-iblock-ae2-ae26b2436d81b8f6a24698b40f2149ad.jpg
+17/06/2022 08:31:35 INFO: trying to download file: 'https://gs-labs.ru/upload/iblock/147/14777429b0c557d829ec0c2d4abade83.jpg' with name 'gs-labs-ru-upload-iblock-147-14777429b0c557d829ec0c2d4abade83.jpg'
+17/06/2022 08:31:35 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:35 DEBUG: https://gs-labs.ru:443 "GET /upload/iblock/147/14777429b0c557d829ec0c2d4abade83.jpg HTTP/1.1" 200 45123
+17/06/2022 08:31:35 INFO: file 'gs-labs-ru-upload-iblock-147-14777429b0c557d829ec0c2d4abade83.jpg' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:35 INFO: name /upload/iblock/147/14777429b0c557d829ec0c2d4abade83.jpg replaced with gs-labs-ru_files/gs-labs-ru-upload-iblock-147-14777429b0c557d829ec0c2d4abade83.jpg
+17/06/2022 08:31:35 INFO: trying to download file: 'https://gs-labs.ru/static/images/close.png' with name 'gs-labs-ru-static-images-close.png'
+17/06/2022 08:31:35 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:35 DEBUG: https://gs-labs.ru:443 "GET /static/images/close.png HTTP/1.1" 200 193
+17/06/2022 08:31:35 INFO: file 'gs-labs-ru-static-images-close.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:35 INFO: name /static/images/close.png replaced with gs-labs-ru_files/gs-labs-ru-static-images-close.png
+17/06/2022 08:31:35 INFO: trying to download file: 'https://gs-labs.ru/static/images/close.png' with name 'gs-labs-ru-static-images-close.png'
+17/06/2022 08:31:35 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:40 DEBUG: https://gs-labs.ru:443 "GET /static/images/close.png HTTP/1.1" 200 193
+17/06/2022 08:31:40 INFO: file 'gs-labs-ru-static-images-close.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:40 INFO: name /static/images/close.png replaced with gs-labs-ru_files/gs-labs-ru-static-images-close.png
+17/06/2022 08:31:40 INFO: trying to download file: 'https://gs-labs.ru/static/images/svg/success-icon.svg' with name 'gs-labs-ru-static-images-svg-success-icon.svg'
+17/06/2022 08:31:40 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:40 DEBUG: https://gs-labs.ru:443 "GET /static/images/svg/success-icon.svg HTTP/1.1" 200 774
+17/06/2022 08:31:40 INFO: file 'gs-labs-ru-static-images-svg-success-icon.svg' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:40 INFO: name /static/images/svg/success-icon.svg replaced with gs-labs-ru_files/gs-labs-ru-static-images-svg-success-icon.svg
+17/06/2022 08:31:40 INFO: trying to download file: 'https://gs-labs.ru/static/images/svg/success-icon.svg' with name 'gs-labs-ru-static-images-svg-success-icon.svg'
+17/06/2022 08:31:40 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:40 DEBUG: https://gs-labs.ru:443 "GET /static/images/svg/success-icon.svg HTTP/1.1" 200 774
+17/06/2022 08:31:40 INFO: file 'gs-labs-ru-static-images-svg-success-icon.svg' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:40 INFO: name /static/images/svg/success-icon.svg replaced with gs-labs-ru_files/gs-labs-ru-static-images-svg-success-icon.svg
+17/06/2022 08:31:40 INFO: trying to download file: 'https://gs-labs.ru/static/images/close.png' with name 'gs-labs-ru-static-images-close.png'
+17/06/2022 08:31:40 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:40 DEBUG: https://gs-labs.ru:443 "GET /static/images/close.png HTTP/1.1" 200 193
+17/06/2022 08:31:40 INFO: file 'gs-labs-ru-static-images-close.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:40 INFO: name /static/images/close.png replaced with gs-labs-ru_files/gs-labs-ru-static-images-close.png
+17/06/2022 08:31:40 INFO: trying to download file: 'https://gs-labs.ru/static/images/close.png' with name 'gs-labs-ru-static-images-close.png'
+17/06/2022 08:31:40 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:40 DEBUG: https://gs-labs.ru:443 "GET /static/images/close.png HTTP/1.1" 200 193
+17/06/2022 08:31:40 INFO: file 'gs-labs-ru-static-images-close.png' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:40 INFO: name /static/images/close.png replaced with gs-labs-ru_files/gs-labs-ru-static-images-close.png
+17/06/2022 08:31:40 INFO: trying to download file: 'https://gs-labs.ru/static/images/favicon.ico' with name 'gs-labs-ru-static-images-favicon.ico'
+17/06/2022 08:31:40 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:40 DEBUG: https://gs-labs.ru:443 "GET /static/images/favicon.ico HTTP/1.1" 200 1150
+17/06/2022 08:31:40 INFO: file 'gs-labs-ru-static-images-favicon.ico' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:40 INFO: name /static/images/favicon.ico replaced with gs-labs-ru_files/gs-labs-ru-static-images-favicon.ico
+17/06/2022 08:31:40 INFO: trying to download file: 'https://gs-labs.ru/bitrix/cache/css/s1/gslabs-2020-inner/template_da90e7ec5ac03c27e49bc9ae378124f7/template_da90e7ec5ac03c27e49bc9ae378124f7_v1.css' with name 'gs-labs-ru-bitrix-cache-css-s1-gslabs-2020-inner-template-da90e7ec5ac03c27e49bc9ae378124f7-template-da90e7ec5ac03c27e49bc9ae378124f7-v1.css'
+17/06/2022 08:31:40 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:40 DEBUG: https://gs-labs.ru:443 "GET /bitrix/cache/css/s1/gslabs-2020-inner/template_da90e7ec5ac03c27e49bc9ae378124f7/template_da90e7ec5ac03c27e49bc9ae378124f7_v1.css HTTP/1.1" 200 333264
+17/06/2022 08:31:41 INFO: file 'gs-labs-ru-bitrix-cache-css-s1-gslabs-2020-inner-template-da90e7ec5ac03c27e49bc9ae378124f7-template-da90e7ec5ac03c27e49bc9ae378124f7-v1.css' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:41 INFO: name /bitrix/cache/css/s1/gslabs-2020-inner/template_da90e7ec5ac03c27e49bc9ae378124f7/template_da90e7ec5ac03c27e49bc9ae378124f7_v1.css?1651825474333264 replaced with gs-labs-ru_files/gs-labs-ru-bitrix-cache-css-s1-gslabs-2020-inner-template-da90e7ec5ac03c27e49bc9ae378124f7-template-da90e7ec5ac03c27e49bc9ae378124f7-v1.css
+17/06/2022 08:31:41 INFO: trying to download file: 'https://gs-labs.ru/js/gtm_compiled__ru.js' with name 'gs-labs-ru-js-gtm-compiled--ru.js'
+17/06/2022 08:31:41 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:41 DEBUG: https://gs-labs.ru:443 "GET /js/gtm_compiled__ru.js HTTP/1.1" 404 None
+17/06/2022 08:31:41 ERROR: file 'https://gs-labs.ru/js/gtm_compiled__ru.js' can't be downloaded, status code: 404
+17/06/2022 08:31:41 INFO: name /js/gtm_compiled__ru.js?v=436122746 replaced with gs-labs-ru_files/gs-labs-ru-js-gtm-compiled--ru.js
+17/06/2022 08:31:41 INFO: trying to download file: 'https://gs-labs.ru/bitrix/cache/js/s1/gslabs-2020-inner/template_95e12b1d272e7871131a021c6dd43905/template_95e12b1d272e7871131a021c6dd43905_v1.js' with name 'gs-labs-ru-bitrix-cache-js-s1-gslabs-2020-inner-template-95e12b1d272e7871131a021c6dd43905-template-95e12b1d272e7871131a021c6dd43905-v1.js'
+17/06/2022 08:31:41 DEBUG: Starting new HTTPS connection (1): gs-labs.ru:443
+17/06/2022 08:31:41 DEBUG: https://gs-labs.ru:443 "GET /bitrix/cache/js/s1/gslabs-2020-inner/template_95e12b1d272e7871131a021c6dd43905/template_95e12b1d272e7871131a021c6dd43905_v1.js HTTP/1.1" 200 246847
+17/06/2022 08:31:41 INFO: file 'gs-labs-ru-bitrix-cache-js-s1-gslabs-2020-inner-template-95e12b1d272e7871131a021c6dd43905-template-95e12b1d272e7871131a021c6dd43905-v1.js' downloaded in '/home/victor/python/test/gs-labs-ru_files'
+17/06/2022 08:31:41 INFO: name /bitrix/cache/js/s1/gslabs-2020-inner/template_95e12b1d272e7871131a021c6dd43905/template_95e12b1d272e7871131a021c6dd43905_v1.js?1651825474246847 replaced with gs-labs-ru_files/gs-labs-ru-bitrix-cache-js-s1-gslabs-2020-inner-template-95e12b1d272e7871131a021c6dd43905-template-95e12b1d272e7871131a021c6dd43905-v1.js
+17/06/2022 08:31:41 INFO: Finish loader_engine
+
