@@ -9,7 +9,7 @@ console_out.setLevel(logging.INFO)
 
 
 def loader_engine(page_url, download_folder='cwd',
-                  file_loader=downloader.download_file):
+                  file_loader=downloader.download_file_alt):
     logging.basicConfig(handlers=(file_log, console_out),
                         level=logging.DEBUG,
                         format='%(asctime)s %(levelname)s: %(message)s',
@@ -17,16 +17,15 @@ def loader_engine(page_url, download_folder='cwd',
     logging.info(f'Start loader_engine {page_url}')
     html_path, download_folder = downloader.download(page_url, download_folder)
     with open(html_path) as html:
-        files_sub_pages = downloader.has_files(page_url, html.read())
+        files_sub_pages = downloader.make_list_of_files(page_url, html.read())
     if files_sub_pages:
         dir_name, dir_path = downloader.create_files_dir(page_url,
                                                          download_folder)
         for sub_page in files_sub_pages:
-            full_file_name = os.path.join(dir_name,
-                                          downloader.make_file_name(page_url,
-                                                                    sub_page))
-            file_loader(page_url, sub_page, dir_path)
-            downloader.substitution(html_path, sub_page, full_file_name)
+            if file_loader(sub_page['link'], sub_page['name'], dir_path):
+                html_file_path = os.path.join(dir_name, sub_page['name'])
+                downloader.substitution(html_path, sub_page['attribute_value'],
+                                        html_file_path)
     logging.info('Finish loader_engine\n')
     return html_path
 
@@ -35,7 +34,9 @@ g = 'https://page-loader.hexlet.repl.co/'
 flib = 'https://flibusta.club/'
 gs = 'https://gs-labs.ru/'
 bio = 'https://bioline.ru/biomebel'
+bio2 = 'https://bioline.ru/catalog/mikroskopy-i-cifrovaya-patologiya/' +\
+       'cifrovye-kamery-dlya-mikroskopov/videokamera-leica-dfc-9000-gt'
 hexlet = 'https://ru.hexlet.io/courses'
 bad404 = "https://tproger.ru/det"
 bad = 'https://page-loader.hexlet.re3pl.co/'
-# t = loader_engine(gs, '/home/victor/python/test')
+# t = loader_engine('https://ghgprotocol.org/', '/home/victor/python/test')

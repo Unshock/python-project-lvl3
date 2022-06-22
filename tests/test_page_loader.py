@@ -2,7 +2,7 @@ import os
 from page_loader import downloader
 from page_loader import loader_engine
 import tempfile
-from tests.conftest import fake_loader
+from tests.conftest import fake_loader, fake_loader_alt
 import logging
 import pytest
 import responses
@@ -46,7 +46,7 @@ def test_loader_engine(requests_mock, make_url_1,
         with tempfile.TemporaryDirectory(dir=temp_dir,
                                          suffix='_inner_dir') as inner_temp_dir:
             result = loader_engine.loader_engine(make_url_1, inner_temp_dir,
-                                                 file_loader=fake_loader)
+                                                 file_loader=fake_loader_alt)
             result = open(result)
             with open(make_response_2, 'r') as result_expected:
                 directory_content = os.listdir(inner_temp_dir)
@@ -66,7 +66,6 @@ def test_loader_engine(requests_mock, make_url_1,
                             assert el.read() == make_files[elem]
                     else:
                         with open(elem_path, 'r') as el:
-                            print(el)
                             assert el.read() == make_files[elem]
 
 

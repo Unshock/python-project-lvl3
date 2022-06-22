@@ -138,6 +138,9 @@ def make_files():
     script_path = os.path.join(os.path.dirname(__file__),
                                PAGE_CONTENT_FOLDER,
                                'packs/js/script.js')
+    script_path2 = os.path.join(os.path.dirname(__file__),
+                                PAGE_CONTENT_FOLDER,
+                                'packs/js/script2.js')
     courses_path = os.path.join(os.path.dirname(__file__),
                                 PAGE_CONTENT_FOLDER,
                                 'courses')
@@ -150,6 +153,8 @@ def make_files():
             png.read()
     with open(script_path) as script:
         dict_['page-loader-hexlet-repl-co-packs-js-script.js'] = script.read()
+    with open(script_path2) as script2:
+        dict_['page-loader-hexlet-repl-co-packs-js-script2.js'] = script2.read()
     with open(courses_path) as courses:
         dict_['page-loader-hexlet-repl-co-courses.html'] = courses.read()
     return dict_
@@ -171,6 +176,18 @@ def fake_loader(true_url, file_path, dir_path):
                                  'fixtures/page_files')
     true_sub_page = urlparse(file_path).path
     file_name = downloader.make_file_name(true_url, true_sub_page)
+    with open(fake_page_url + true_sub_page, 'rb') as file:
+        response = file.read()
+        file_path = pathlib.Path(dir_path, file_name)
+        with open(file_path, 'wb') as new_file:
+            new_file.write(response)
+        return new_file.name
+
+
+def fake_loader_alt(true_file_url, file_name, dir_path):
+    fake_page_url = os.path.join(os.path.dirname(__file__),
+                                 'fixtures/page_files')
+    true_sub_page = urlparse(true_file_url).path
     with open(fake_page_url + true_sub_page, 'rb') as file:
         response = file.read()
         file_path = pathlib.Path(dir_path, file_name)
