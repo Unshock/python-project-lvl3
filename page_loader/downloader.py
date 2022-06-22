@@ -44,26 +44,7 @@ def create_files_dir(page_url, download_folder):
     return dir_name, dir_path
 
 
-def make_file_name(page_url, sub_page):
-    file_url = page_url.strip('/') + sub_page
-    print('fileurl', file_url)
-    if get_netloc(sub_page) == '':
-        file_path = get_netloc(file_url) + get_path(file_url)
-    else:
-        file_path = get_netloc(sub_page) + get_path(sub_page)
-    print('filepath', file_path)
-    file_extension = get_extension(file_path)
-    result = re.sub(r"(\.\w*)$|[\W_]", '-', file_path).strip('-')
-    result += file_extension if file_extension != '' else '.html'
-    return result
-
-
-def make_file_name2(download_link):
-    # file_url = page_url.strip('/') + sub_page
-    # if get_netloc(sub_page) == '':
-    #     file_path = get_netloc(file_url) + get_path(file_url)
-    # else:
-    #     file_path = get_netloc(sub_page) + get_path(sub_page)
+def make_file_name(download_link):
     file_path = get_netloc(download_link) + get_path(download_link)
     file_extension = get_extension(file_path)
     result = re.sub(r"(\.\w*)$|[\W_]", '-', file_path).strip('-')
@@ -145,17 +126,6 @@ def make_file_link(page_url, sub_page):
     scheme = urlparse(page_url).scheme
     page_netloc = get_netloc(page_url)
     sub_page_netloc = get_netloc(sub_page)
-    path = urlparse(sub_page).path
-
-    if page_netloc == sub_page_netloc:
-        return f'{scheme}://{sub_page_netloc}{path}'
-    return f'{scheme}://{page_netloc}{path}'
-
-
-def make_file_link2(page_url, sub_page):
-    scheme = urlparse(page_url).scheme
-    page_netloc = get_netloc(page_url)
-    sub_page_netloc = get_netloc(sub_page)
     page_path = urlparse(page_url).path
     sub_page_path = urlparse(sub_page).path
 
@@ -168,9 +138,7 @@ def make_file_link2(page_url, sub_page):
     raise ValueError('ERROR')
 
 
-def download_file(page_url, sub_page, dir_path):
-    file_name = make_file_name(page_url, sub_page)
-    file_link = make_file_link(page_url, sub_page)
+def download_file(file_link, file_name, dir_path):
 
     logging.info(f'trying to download file: \'{file_link}\''
                  f' with name \'{file_name}\'')
@@ -199,98 +167,12 @@ def download_file(page_url, sub_page, dir_path):
 
     logging.info(f'file \'{file_name}\' downloaded in \'{dir_path}\'')
     return new_file.name
-
-
-def download_file_alt(file_link, file_name, dir_path):
-
-    logging.info(f'trying to download file: \'{file_link}\''
-                 f' with name \'{file_name}\'')
-
-    try:
-        response = requests.get(file_link)
-        response.raise_for_status()
-    except (requests.exceptions.HTTPError,
-            requests.exceptions.ConnectionError) as trouble:
-        response = trouble.response
-        status_code = response.status_code
-        logging.error(f'file \'{file_link}\''
-                      f' can\'t be downloaded, status code: '
-                      f'{status_code}. Returns None.')
-        return None
-
-    file_path = pathlib.Path(dir_path, file_name)
-
-    try:
-        with open(file_path, 'wb') as new_file:
-            new_file.write(response.content)
-    except PermissionError:
-        error_message = f'Access to \'{file_path}\' is denied. Exit.\n'
-        logging.error(error_message)
-        raise SystemExit(error_message)
-
-    logging.info(f'file \'{file_name}\' downloaded in \'{dir_path}\'')
-    return new_file.name
-
-
-def has_files(page_url, html):
-    tags = ['img', 'link', 'script']
-    result = []
-    for tag in tags:
-        check_result = return_files_or_none(page_url, html, tag)
-        if check_result is not None:
-            result.extend(check_result)
-    return result if len(result) > 0 else None
-
-
-def return_files_or_none(page_url, html, tag):
-    attributes_dict = {
-        'link': 'href',
-        'img': 'src',
-        'script': 'src'
-    }
-    soup = BeautifulSoup(html, features='html.parser')
-    result = []
-    for link_tag in soup.find_all(tag):
-        link = link_tag.get(attributes_dict[tag])
-        if link is None:
-            continue
-        if is_valid_file_path(page_url, link):
-            result.append(link)
-    return result if len(result) > 0 else None
-
-
-def is_valid_file_path(page_url, file_path):
-    if get_netloc(page_url) == get_netloc(file_path):
-        return True
-    if not get_netloc(file_path):
-        if str(get_path(file_path)).startswith('/'):
-            return True
-        else:
-            logging.warning(
-                f'file {file_path} is not valid and won\'t be downloaded')
-            return False
-    return False
 
 
 def is_valid_file_path2(page_url, link):
     if get_netloc(link) != '':
         return False if get_netloc(page_url) != get_netloc(link) else True
     return False if link == '' else True
-
-
-def has_files2(html):
-    tags_and_attributes = {
-        'link': 'href',
-        'img': 'src',
-        'script': 'src'
-    }
-    soup = BeautifulSoup(html, features='html.parser')
-    result = []
-    for tag in tags_and_attributes.keys():
-        for attribute_value in soup.find_all(tag):
-            if attribute_value:
-                pass
-    return result if len(result) > 0 else None
 
 
 def make_list_of_files(page_url, html):
@@ -306,8 +188,8 @@ def make_list_of_files(page_url, html):
             link = link_tag.get(tags_and_attributes[tag])
             if link is None or not is_valid_file_path2(page_url, link):
                 continue
-            download_link = make_file_link2(page_url, link)
-            file_name = make_file_name2(download_link)
+            download_link = make_file_link(page_url, link)
+            file_name = make_file_name(download_link)
             result.append(
                 {
                     'attribute_value': link,

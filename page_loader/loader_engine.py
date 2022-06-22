@@ -9,7 +9,7 @@ console_out.setLevel(logging.INFO)
 
 
 def loader_engine(page_url, download_folder='cwd',
-                  file_loader=downloader.download_file_alt):
+                  file_loader=downloader.download_file):
     logging.basicConfig(handlers=(file_log, console_out),
                         level=logging.DEBUG,
                         format='%(asctime)s %(levelname)s: %(message)s',

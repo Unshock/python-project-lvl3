@@ -100,12 +100,13 @@ def test_bad_url(make_url_1_bad):
 
 
 @responses.activate
-def test_download_file_with_bad_file_path(make_url_1, make_url_1_with_pic,
-                                          make_pic_path):
+def test_download_file_with_bad_file_path(make_url_1_with_pic,
+                                          make_pic_name):
     responses.add(responses.GET, make_url_1_with_pic, status=404)
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
-        result = downloader.download_file(make_url_1, make_pic_path, temp_dir)
+        result = downloader.download_file(make_url_1_with_pic,
+                                          make_pic_name, temp_dir)
         assert result is None
 
 
