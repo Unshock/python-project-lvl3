@@ -1,5 +1,7 @@
 import logging
 import re
+import urllib.parse
+
 import requests
 import os
 import pathlib
@@ -37,7 +39,7 @@ def create_files_dir(page_url, download_folder):
     try:
         os.mkdir(dir_path)
     except FileExistsError:
-        error_message = f'directory \'{dir_path}\' already exists.' \
+        error_message = f'Directory \'{dir_path}\' already exists.' \
                         f' Can\'t be created. Exit.\n'
         logging.error(error_message)
         raise SystemExit(error_message)
@@ -76,7 +78,19 @@ def write_in_file(file_path, content):
     return new_file.name
 
 
-def download(url_, download_folder='cwd'):  # noqa: C901
+def normalize_download_folder(download_folder):
+    if download_folder == 'cwd':
+        download_folder = os.getcwd()
+    path = pathlib.Path(download_folder)
+    if not path.exists():
+        error_message = f'The folder with name \"{download_folder}\"'\
+                        f' does not exists. Exit.\n'
+        logging.error(error_message)
+        raise SystemExit(error_message)
+    return download_folder
+
+
+def download(url_, download_folder):  # noqa: C901
     if download_folder == 'cwd':
         download_folder = os.getcwd()
     file_name = make_html_name(url_)
@@ -131,16 +145,19 @@ def make_file_link(page_url, sub_page):
 
     if page_netloc == sub_page_netloc:
         return f'{scheme}://{sub_page_netloc}{sub_page_path}'
-    if sub_page[0] == '/':
+    if sub_page.startswith('/'):
         return f'{scheme}://{page_netloc}{sub_page_path}'
-    if sub_page[0] != '/':
+    if sub_page.startswith('../'):
+        return urllib.parse.urljoin(page_url, sub_page)
+    try:
         return f'{scheme}://{page_netloc}{page_path}{sub_page}'
-    raise ValueError('ERROR')
+    except Exception:
+        raise
 
 
 def download_file(file_link, file_name, dir_path):
 
-    logging.info(f'trying to download file: \'{file_link}\''
+    logging.info(f'Trying to download file: \'{file_link}\''
                  f' with name \'{file_name}\'')
 
     try:
@@ -150,7 +167,7 @@ def download_file(file_link, file_name, dir_path):
             requests.exceptions.ConnectionError) as trouble:
         response = trouble.response
         status_code = response.status_code
-        logging.error(f'file \'{file_link}\''
+        logging.error(f'File \'{file_link}\''
                       f' can\'t be downloaded, status code: '
                       f'{status_code}. Returns None.')
         return None
@@ -165,7 +182,7 @@ def download_file(file_link, file_name, dir_path):
         logging.error(error_message)
         raise SystemExit(error_message)
 
-    logging.info(f'file \'{file_name}\' downloaded in \'{dir_path}\'')
+    logging.info(f'File \'{file_name}\' downloaded in \'{dir_path}\'')
     return new_file.name
 
 
@@ -242,7 +259,7 @@ def substitution(html_path, sub_page_to_replace, full_file_name):
     with open(html_path, 'w') as html:
         x = x.replace(f'"{sub_page_to_replace}"', f'"{full_file_name}"')
         html.write(x)
-    logging.info(f'name {sub_page_to_replace} replaced with {full_file_name}')
+    logging.info(f'Name {sub_page_to_replace} replaced with {full_file_name}')
 
 
 # t = download('https://en.wikipedia.org/wiki/Finland_me

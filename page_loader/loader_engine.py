@@ -5,7 +5,7 @@ import logging
 file_log = logging.FileHandler('loader.log')
 file_log.setLevel(logging.DEBUG)
 console_out = logging.StreamHandler()
-console_out.setLevel(logging.INFO)
+console_out.setLevel(logging.WARNING)
 
 
 def loader_engine(page_url, download_folder='cwd',
@@ -15,6 +15,7 @@ def loader_engine(page_url, download_folder='cwd',
                         format='%(asctime)s %(levelname)s: %(message)s',
                         datefmt='%d/%m/%Y %I:%M:%S')
     logging.info(f'Start loader_engine {page_url}')
+    download_folder = downloader.normalize_download_folder(download_folder)
     html_path, download_folder = downloader.download(page_url, download_folder)
     with open(html_path) as html:
         files_sub_pages = downloader.make_list_of_files(page_url, html.read())
@@ -39,4 +40,5 @@ bio2 = 'https://bioline.ru/catalog/mikroskopy-i-cifrovaya-patologiya/' +\
 hexlet = 'https://ru.hexlet.io/courses'
 bad404 = "https://tproger.ru/det"
 bad = 'https://page-loader.hexlet.re3pl.co/'
-# t = loader_engine('https://ghgprotocol.org/', '/home/victor/python/test')
+t = loader_engine(gs, '/home/victor/python/test')
+# downloader.download(bio2, '/home/victor/python/test')

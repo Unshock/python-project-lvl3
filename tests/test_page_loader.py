@@ -17,7 +17,7 @@ def test_download_1(requests_mock, make_url_1, make_response_1):
     requests_mock.get(make_url_1, text=expected)
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
-        result = downloader.download(make_url_1)[0]
+        result = downloader.download(make_url_1, temp_dir)[0]
         with open(result, 'r') as result:
             assert expected == result.read()
 
@@ -85,7 +85,7 @@ def test_bad_status_code(make_url_1):
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
         with pytest.raises(SystemExit) as error:
-            downloader.download(make_url_1)
+            downloader.download(make_url_1, temp_dir)
         assert 'Request has failed with status code=400. Exit.\n' in\
                str(error.value)
 
@@ -94,7 +94,7 @@ def test_bad_url(make_url_1_bad):
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
         with pytest.raises(SystemExit) as error:
-            downloader.download(make_url_1_bad)
+            downloader.download(make_url_1_bad, temp_dir)
         assert f'Connection to {make_url_1_bad} failed.' \
                f' Exit.\n' in str(error.value)
 
