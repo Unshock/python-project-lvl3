@@ -60,7 +60,8 @@ def get_url_response(url_):
 
 
 def get_netloc(page_url):
-    return urlparse(page_url).netloc
+    netloc = urlparse(page_url).netloc
+    return netloc[4:] if netloc.startswith('www.') else netloc
 
 
 def get_path(page_url):
@@ -96,9 +97,11 @@ def download(url_, download_folder):  # noqa: C901
     file_name = make_html_name(url_)
 
     try:
-        response = requests.get(url_)
+        print(url_)
+        response = requests.get(url_, timeout=20)
         response.raise_for_status()
-    except requests.exceptions.ConnectionError:
+    except (requests.exceptions.ConnectionError,
+            requests.exceptions.ReadTimeout):
         error_message = f'Connection to {url_} failed. Exit.\n'
         logging.error(error_message)
         raise SystemExit(error_message)
@@ -136,7 +139,7 @@ def download(url_, download_folder):  # noqa: C901
     return new_file.name, download_folder
 
 
-def make_file_link(page_url, sub_page):
+def make_file_link(page_url, sub_page):  # noqa: C901
     scheme = urlparse(page_url).scheme
     page_netloc = get_netloc(page_url)
     sub_page_netloc = get_netloc(sub_page)
@@ -149,6 +152,8 @@ def make_file_link(page_url, sub_page):
         return f'{scheme}://{page_netloc}{sub_page_path}'
     if sub_page.startswith('../'):
         return urllib.parse.urljoin(page_url, sub_page)
+    if not page_path:
+        page_path = '/'
     try:
         return f'{scheme}://{page_netloc}{page_path}{sub_page}'
     except Exception:
@@ -161,10 +166,11 @@ def download_file(file_link, file_name, dir_path):
                  f' with name \'{file_name}\'')
 
     try:
-        response = requests.get(file_link)
+        response = requests.get(file_link, timeout=20)
         response.raise_for_status()
     except (requests.exceptions.HTTPError,
-            requests.exceptions.ConnectionError) as trouble:
+            requests.exceptions.ConnectionError,
+            requests.exceptions.ReadTimeout) as trouble:
         response = trouble.response
         status_code = response.status_code
         logging.error(f'File \'{file_link}\''
@@ -186,9 +192,12 @@ def download_file(file_link, file_name, dir_path):
     return new_file.name
 
 
-def is_valid_file_path2(page_url, link):
-    if get_netloc(link) != '':
-        return False if get_netloc(page_url) != get_netloc(link) else True
+def is_valid_file_path(page_url, link):
+    page_url_netloc = get_netloc(page_url)
+    link_netloc = get_netloc(link)
+
+    if link_netloc != '':
+        return False if page_url_netloc != link_netloc else True
     return False if link == '' else True
 
 
@@ -203,7 +212,7 @@ def make_list_of_files(page_url, html):
     for tag in tags_and_attributes.keys():
         for link_tag in soup.find_all(tag):
             link = link_tag.get(tags_and_attributes[tag])
-            if link is None or not is_valid_file_path2(page_url, link):
+            if link is None or not is_valid_file_path(page_url, link):
                 continue
             download_link = make_file_link(page_url, link)
             file_name = make_file_name(download_link)
@@ -212,9 +221,7 @@ def make_list_of_files(page_url, html):
                     'attribute_value': link,
                     'name': file_name,
                     'link': download_link
-                }
-            )
-    print(result)
+                })
     return result if len(result) > 0 else None
 
 

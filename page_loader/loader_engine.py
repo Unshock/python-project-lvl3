@@ -28,6 +28,7 @@ def loader_engine(page_url, download_folder='cwd',
                 downloader.substitution(html_path, sub_page['attribute_value'],
                                         html_file_path)
     logging.info('Finish loader_engine\n')
+    print(html_path)
     return html_path
 
 
@@ -40,5 +41,5 @@ bio2 = 'https://bioline.ru/catalog/mikroskopy-i-cifrovaya-patologiya/' +\
 hexlet = 'https://ru.hexlet.io/courses'
 bad404 = "https://tproger.ru/det"
 bad = 'https://page-loader.hexlet.re3pl.co/'
-t = loader_engine(gs, '/home/victor/python/test')
-# downloader.download(bio2, '/home/victor/python/test')
+# t = loader_engine('https://mozilla.org', '/home/victor/python/test')
+# downloader.download(, '/home/victor/python/test')
