@@ -242,4 +242,3 @@ def substitution(html_path, sub_page_to_replace, full_file_name):
         x = x.replace(f'"{sub_page_to_replace}"', f'"{full_file_name}"')
         html.write(x)
     logging.info(f'Name {sub_page_to_replace} replaced with {full_file_name}')
-
