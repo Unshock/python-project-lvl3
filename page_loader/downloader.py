@@ -83,7 +83,8 @@ def download(url_, download_folder):  # noqa: C901
             requests.exceptions.ReadTimeout):
         error_message = f'Connection to {url_} failed. Exit.\n'
         logging.error(error_message)
-        raise SystemExit(error_message)
+        #raise SystemExit(error_message)
+        raise MyException
     except requests.exceptions.HTTPError as trouble:
         response = trouble.response
         status_code = response.status_code
