@@ -17,7 +17,7 @@ def test_download_1(requests_mock, make_url_1, make_response_1):
     requests_mock.get(make_url_1, text=expected)
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
-        result = downloader.download(make_url_1, temp_dir)[0]
+        result = downloader.download(make_url_1, temp_dir)
         with open(result, 'r') as result:
             assert expected == result.read()
 
@@ -30,7 +30,7 @@ def test_download_2(requests_mock, make_url_1, make_response_1):
         os.chdir(temp_dir)
         with tempfile.TemporaryDirectory(dir=temp_dir,
                                          suffix='_inner_dir') as inner_temp_dir:
-            result = downloader.download(make_url_1, inner_temp_dir)[0]
+            result = downloader.download(make_url_1, inner_temp_dir)
             with open(result, 'r') as result:
                 assert expected == result.read()
 

@@ -92,8 +92,7 @@ def normalize_download_folder(download_folder):
 
 
 def download(url_, download_folder):  # noqa: C901
-    if download_folder == 'cwd':
-        download_folder = os.getcwd()
+
     file_name = make_html_name(url_)
 
     try:
@@ -135,7 +134,7 @@ def download(url_, download_folder):  # noqa: C901
         logging.error(error_message)
         raise SystemExit(error_message)
 
-    return new_file.name, download_folder
+    return new_file.name
 
 
 def make_file_link(page_url, sub_page):  # noqa: C901
