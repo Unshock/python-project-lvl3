@@ -14,7 +14,9 @@ def main():
     try:
         print(loader_engine(args.url, args.output))
     except MyException():
+
         sys.exit(1)
+
 
 if __name__ == '__main__':
     main()

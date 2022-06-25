@@ -72,6 +72,15 @@ class MyException(Exception):
     pass
 
 
+class ValidationError(Exception):
+    def __init__(self, message, errors):
+        # Call the base class constructor with the parameters it needs
+        super().__init__(message)
+
+        # Now for your custom code...
+        self.errors = errors
+
+
 def download(url_, download_folder):  # noqa: C901
 
     file_name = make_html_name(url_)
@@ -83,16 +92,16 @@ def download(url_, download_folder):  # noqa: C901
             requests.exceptions.ReadTimeout):
         error_message = f'Connection to {url_} failed. Exit.\n'
         logging.error(error_message)
-        #raise SystemExit(error_message)
-        raise MyException
+        # raise SystemExit(error_message)
+        raise MyException(error_message)
     except requests.exceptions.HTTPError as trouble:
         response = trouble.response
         status_code = response.status_code
         error_message = f'Request has failed with status code={status_code}.' \
                         f' Exit.\n'
         logging.error(error_message)
-        #raise SystemExit(error_message)
-        raise MyException
+        # raise SystemExit(error_message)
+        raise MyException(error_message)
 
     beautiful_response = BeautifulSoup(response.text, 'html.parser')
     file_path = pathlib.Path(download_folder, file_name)

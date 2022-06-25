@@ -6,6 +6,7 @@ from tests.conftest import fake_loader, fake_loader_alt
 import logging
 import pytest
 import responses
+from page_loader.downloader import MyException
 
 
 LOGGER = logging.getLogger(__name__)
@@ -84,7 +85,7 @@ def test_bad_status_code(make_url_1):
     responses.add(responses.GET, make_url_1, status=400)
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
-        with pytest.raises(SystemExit) as error:
+        with pytest.raises(MyException) as error:
             downloader.download(make_url_1, temp_dir)
         assert 'Request has failed with status code=400. Exit.\n' in\
                str(error.value)
@@ -93,7 +94,7 @@ def test_bad_status_code(make_url_1):
 def test_bad_url(make_url_1_bad):
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
-        with pytest.raises(SystemExit) as error:
+        with pytest.raises(MyException) as error:
             downloader.download(make_url_1_bad, temp_dir)
         assert f'Connection to {make_url_1_bad} failed.' \
                f' Exit.\n' in str(error.value)
