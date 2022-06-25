@@ -1,18 +1,11 @@
 import logging
 import re
 import urllib.parse
-
 import requests
 import os
 import pathlib
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup
-
-
-def make_name(url_, type='html'):
-    result = re.sub(r"^(https?:\/\/)|(\.html)$|[\W_]", '-', url_).strip('-')
-    result += '.html' if type == 'html' else '_files'
-    return result
 
 
 def make_html_name(url_):
@@ -54,29 +47,13 @@ def make_file_name(download_link):
     return result
 
 
-def get_url_response(url_):
-    response = requests.get(url_)
-    return response.text
-
-
 def get_netloc(page_url):
     netloc = urlparse(page_url).netloc
-    return netloc[4:] if netloc.startswith('www.') else netloc
+    return netloc
 
 
 def get_path(page_url):
     return urlparse(page_url).path
-
-
-def write_in_file(file_path, content):
-    try:
-        with open(file_path, 'wb') as new_file:
-            new_file.write(content)
-    except PermissionError:
-        error_message = f'Access to \'{file_path}\' is denied. Exit.\n'
-        logging.error(error_message)
-        raise SystemExit(error_message)
-    return new_file.name
 
 
 def normalize_download_folder(download_folder):
@@ -134,7 +111,7 @@ def download(url_, download_folder):  # noqa: C901
         logging.error(error_message)
         raise SystemExit(error_message)
 
-    return new_file.name
+    return os.path.abspath(new_file.name)
 
 
 def make_file_link(page_url, sub_page):  # noqa: C901
@@ -171,9 +148,9 @@ def download_file(file_link, file_name, dir_path):
             requests.exceptions.ReadTimeout) as trouble:
         response = trouble.response
         status_code = response.status_code
-        logging.error(f'File \'{file_link}\''
-                      f' can\'t be downloaded, status code: '
-                      f'{status_code}. Returns None.')
+        logging.warning(f'File \'{file_link}\''
+                        f' can\'t be downloaded, status code: '
+                        f'{status_code}. Skipped.\n')
         return None
 
     file_path = pathlib.Path(dir_path, file_name)

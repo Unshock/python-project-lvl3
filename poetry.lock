@@ -180,6 +180,14 @@ python-versions = ">=3.6"
 pyparsing = ">=2.0.2,<3.0.5 || >3.0.5"
 
 [[package]]
+name = "pbr"
+version = "5.9.0"
+description = "Python Build Reasonableness"
+category = "dev"
+optional = false
+python-versions = ">=2.6"
+
+[[package]]
 name = "pluggy"
 version = "1.0.0"
 description = "plugin and hook calling mechanisms for python"
@@ -203,6 +211,14 @@ python-versions = "*"
 furl = ">=0.5.6"
 jsonschema = ">=2.5.1"
 xmltodict = ">=0.11.0"
+
+[[package]]
+name = "progress"
+version = "1.6"
+description = "Easy to use progress bars"
+category = "main"
+optional = false
+python-versions = "*"
 
 [[package]]
 name = "py"
@@ -349,6 +365,20 @@ optional = false
 python-versions = ">=3.6"
 
 [[package]]
+name = "testresources"
+version = "2.0.1"
+description = "Testresources, a pyunit extension for managing expensive test resources"
+category = "dev"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+pbr = ">=1.8"
+
+[package.extras]
+test = ["docutils", "fixtures", "testtools"]
+
+[[package]]
 name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
@@ -392,7 +422,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "ee481894160de891d9c18a023c7862277c278c0ecd391fc03957e56ef80d20ed"
+content-hash = "6da19263a0d912f61fe865d17ae307dc89cc96a0aa03bb8987be6794c1d1eb05"
 
 [metadata.files]
 atomicwrites = [
@@ -498,6 +528,10 @@ packaging = [
     {file = "packaging-21.3-py3-none-any.whl", hash = "sha256:ef103e05f519cdc783ae24ea4e2e0f508a9c99b2d4969652eed6a2e1ea5bd522"},
     {file = "packaging-21.3.tar.gz", hash = "sha256:dd47c42927d89ab911e606518907cc2d3a1f38bbd026385970643f9c5b8ecfeb"},
 ]
+pbr = [
+    {file = "pbr-5.9.0-py2.py3-none-any.whl", hash = "sha256:e547125940bcc052856ded43be8e101f63828c2d94239ffbe2b327ba3d5ccf0a"},
+    {file = "pbr-5.9.0.tar.gz", hash = "sha256:e8dca2f4b43560edef58813969f52a56cef023146cbb8931626db80e6c1c4308"},
+]
 pluggy = [
     {file = "pluggy-1.0.0-py2.py3-none-any.whl", hash = "sha256:74134bbf457f031a36d68416e1509f34bd5ccc019f0bcc952c7b909d06b37bd3"},
     {file = "pluggy-1.0.0.tar.gz", hash = "sha256:4224373bacce55f955a878bf9cfa763c1e360858e330072059e10bad68531159"},
@@ -506,6 +540,9 @@ pook = [
     {file = "pook-1.0.2-py2-none-any.whl", hash = "sha256:cd3cbfe280d544e672f41a5b9482883841ba247f865858b57fd59f729e37616a"},
     {file = "pook-1.0.2-py3-none-any.whl", hash = "sha256:2e16d231ec9fe071c14cad7fe41261f65b401f6cb30935a169cf6fc229bd0a1d"},
     {file = "pook-1.0.2.tar.gz", hash = "sha256:f28112db062d17db245b351c80f2bb5bf1e56ebfa93d3d75cc44f500c15c40eb"},
+]
+progress = [
+    {file = "progress-1.6.tar.gz", hash = "sha256:c9c86e98b5c03fa1fe11e3b67c1feda4788b8d0fe7336c2ff7d5644ccfba34cd"},
 ]
 py = [
     {file = "py-1.11.0-py2.py3-none-any.whl", hash = "sha256:607c53218732647dff4acdfcd50cb62615cedf612e72d1724fb1a0cc6405b378"},
@@ -573,6 +610,10 @@ six = [
 soupsieve = [
     {file = "soupsieve-2.3.2.post1-py3-none-any.whl", hash = "sha256:3b2503d3c7084a42b1ebd08116e5f81aadfaea95863628c80a3b774a11b7c759"},
     {file = "soupsieve-2.3.2.post1.tar.gz", hash = "sha256:fc53893b3da2c33de295667a0e19f078c14bf86544af307354de5fcf12a3f30d"},
+]
+testresources = [
+    {file = "testresources-2.0.1-py2.py3-none-any.whl", hash = "sha256:67a361c3a2412231963b91ab04192209aa91a1aa052f0ab87245dbea889d1282"},
+    {file = "testresources-2.0.1.tar.gz", hash = "sha256:ee9d1982154a1e212d4e4bac6b610800bfb558e4fb853572a827bc14a96e4417"},
 ]
 tomli = [
     {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
