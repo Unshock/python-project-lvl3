@@ -68,6 +68,10 @@ def normalize_download_folder(download_folder):
     return download_folder
 
 
+class MyException(Exception):
+    pass
+
+
 def download(url_, download_folder):  # noqa: C901
 
     file_name = make_html_name(url_)
@@ -86,7 +90,8 @@ def download(url_, download_folder):  # noqa: C901
         error_message = f'Request has failed with status code={status_code}.' \
                         f' Exit.\n'
         logging.error(error_message)
-        raise SystemExit(error_message)
+        #raise SystemExit(error_message)
+        raise MyException
 
     beautiful_response = BeautifulSoup(response.text, 'html.parser')
     file_path = pathlib.Path(download_folder, file_name)
