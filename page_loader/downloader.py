@@ -243,8 +243,3 @@ def substitution(html_path, sub_page_to_replace, full_file_name):
         html.write(x)
     logging.info(f'Name {sub_page_to_replace} replaced with {full_file_name}')
 
-
-# t = download('https://en.wikipedia.org/wiki/Finland_me
-# n%27s_national_ice_hockey_team')[0]
-# h = has_pics(open(t).read())
-# substitution(h, t)
