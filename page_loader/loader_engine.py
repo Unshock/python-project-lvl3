@@ -24,7 +24,7 @@ def loader_engine(page_url, download_folder='cwd',
     html_path = downloader.download(page_url, download_folder)
     with open(html_path) as html:
         files_sub_pages = downloader.make_list_of_files(page_url, html.read())
-    #if files_sub_pages:
+    # if files_sub_pages:
     dir_name, dir_path = downloader.create_files_dir(page_url,
                                                      download_folder)
     with Bar('Downloading local files', max=len(files_sub_pages)) as bar:

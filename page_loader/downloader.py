@@ -35,7 +35,8 @@ def create_files_dir(page_url, download_folder):
         error_message = f'Directory \'{dir_path}\' already exists.' \
                         f' Can\'t be created. Exit.\n'
         logging.error(error_message)
-        raise SystemExit(error_message)
+        raise MyException(error_message)
+        # raise SystemExit(error_message)
     return dir_name, dir_path
 
 
