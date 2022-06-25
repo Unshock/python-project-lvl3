@@ -24,17 +24,17 @@ def loader_engine(page_url, download_folder='cwd',
     html_path = downloader.download(page_url, download_folder)
     with open(html_path) as html:
         files_sub_pages = downloader.make_list_of_files(page_url, html.read())
-    if files_sub_pages:
-        dir_name, dir_path = downloader.create_files_dir(page_url,
-                                                         download_folder)
-        with Bar('Downloading local files', max=len(files_sub_pages)) as bar:
-            for sub_page in files_sub_pages:
-                if file_loader(sub_page['link'], sub_page['name'], dir_path):
-                    html_file_path = os.path.join(dir_name, sub_page['name'])
-                    downloader.substitution(html_path,
-                                            sub_page['attribute_value'],
-                                            html_file_path)
+    #if files_sub_pages:
+    dir_name, dir_path = downloader.create_files_dir(page_url,
+                                                     download_folder)
+    with Bar('Downloading local files', max=len(files_sub_pages)) as bar:
+        for sub_page in files_sub_pages:
+            if file_loader(sub_page['link'], sub_page['name'], dir_path):
+                html_file_path = os.path.join(dir_name, sub_page['name'])
+                downloader.substitution(html_path,
+                                        sub_page['attribute_value'],
+                                        html_file_path)
 
-                bar.next()
+            bar.next()
     logging.info('Finish loader_engine\n')
     return html_path
