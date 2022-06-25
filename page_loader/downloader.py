@@ -97,7 +97,6 @@ def download(url_, download_folder):  # noqa: C901
     file_name = make_html_name(url_)
 
     try:
-        print(url_)
         response = requests.get(url_, timeout=20)
         response.raise_for_status()
     except (requests.exceptions.ConnectionError,

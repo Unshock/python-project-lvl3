@@ -110,6 +110,24 @@ def test_download_file_with_bad_file_path(make_url_1_with_pic,
         assert result is None
 
 
+def test_make_directory():
+    with tempfile.TemporaryDirectory() as temp_dir:
+        os.chdir(temp_dir)
+        dir_for_html = downloader.normalize_download_folder('cwd')
+        assert isinstance(dir_for_html, str)
+        assert dir_for_html == temp_dir
+
+
+def test_no_such_directory():
+    with tempfile.TemporaryDirectory() as temp_dir:
+        os.chdir(temp_dir)
+        with pytest.raises(SystemExit) as error:
+            unexisting_dir = temp_dir + '/no_such'
+            downloader.normalize_download_folder(unexisting_dir)
+        assert f'The folder with name \"{unexisting_dir}\"'\
+               f' does not exists. Exit.\n' in str(error.value)
+
+
 def test_make_html_name_1(make_url_1, make_url_transformed_1):
     assert downloader.make_html_name(make_url_1) == make_url_transformed_1
 
