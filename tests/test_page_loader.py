@@ -2,7 +2,7 @@ import os
 from page_loader import downloader
 from page_loader import loader_engine
 import tempfile
-from tests.conftest import fake_loader, fake_loader_alt
+from tests.conftest import fake_loader, fake_loader2
 import logging
 import pytest
 import responses
@@ -12,8 +12,8 @@ from page_loader.downloader import MyException
 LOGGER = logging.getLogger(__name__)
 
 
-def test_download_1(requests_mock, make_url_1, make_response_1):
-    with open(make_response_1, 'r') as expected:
+def test_download_1(requests_mock, make_url_1, make_html_response):
+    with open(make_html_response, 'r') as expected:
         expected = expected.read()
     requests_mock.get(make_url_1, text=expected)
     with tempfile.TemporaryDirectory() as temp_dir:
@@ -23,8 +23,8 @@ def test_download_1(requests_mock, make_url_1, make_response_1):
             assert expected == result.read()
 
 
-def test_download_2(requests_mock, make_url_1, make_response_1):
-    with open(make_response_1, 'r') as expected:
+def test_download_2(requests_mock, make_url_1, make_html_response):
+    with open(make_html_response, 'r') as expected:
         expected = expected.read()
     requests_mock.get(make_url_1, text=expected)
     with tempfile.TemporaryDirectory() as temp_dir:
@@ -37,19 +37,19 @@ def test_download_2(requests_mock, make_url_1, make_response_1):
 
 
 def test_loader_engine(requests_mock, make_url_1,
-                       make_response_1, make_response_2,
+                       make_html_response, make_expected_html,
                        make_file_dir_name, make_pic_name,
                        make_files):
-    with open(make_response_1, 'r') as get_expected:
+    with open(make_html_response, 'r') as get_expected:
         requests_mock.get(make_url_1, text=get_expected.read())
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
         with tempfile.TemporaryDirectory(dir=temp_dir,
                                          suffix='_inner_dir') as inner_temp_dir:
             result = loader_engine.loader_engine(make_url_1, inner_temp_dir,
-                                                 file_loader=fake_loader_alt)
+                                                 file_loader=fake_loader)
             result = open(result)
-            with open(make_response_2, 'r') as result_expected:
+            with open(make_expected_html, 'r') as result_expected:
                 directory_content = os.listdir(inner_temp_dir)
                 file_directory_content = os.listdir(os.path.join(
                     inner_temp_dir,
@@ -70,8 +70,27 @@ def test_loader_engine(requests_mock, make_url_1,
                             assert el.read() == make_files[elem]
 
 
-def test_permission_1(requests_mock, make_url_1, make_response_1):
-    with open(make_response_1, 'r') as get_expected:
+def test_loader_engine2(requests_mock, make_url_1,
+                        make_response_3, make_response_4,
+                        make_file_dir_name, make_pic_name,
+                        make_files):
+    with open(make_response_3, 'r') as get_expected:
+        requests_mock.get(make_url_1, text=get_expected.read())
+    with tempfile.TemporaryDirectory() as temp_dir:
+        os.chdir(temp_dir)
+        with tempfile.TemporaryDirectory(dir=temp_dir,
+                                         suffix='_inner_dir') as inner_temp_dir:
+            result = loader_engine.loader_engine(make_url_1, inner_temp_dir,
+                                                 file_loader=fake_loader2)
+            result = open(result)
+            with open(make_response_4, 'r'):
+                # assert result_expected.read() == result.read()
+                print(os.listdir(inner_temp_dir))
+                assert len(os.listdir(inner_temp_dir)) == 2
+
+
+def test_permission_1(requests_mock, make_url_1, make_html_response):
+    with open(make_html_response, 'r') as get_expected:
         requests_mock.get(make_url_1, text=get_expected.read())
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)

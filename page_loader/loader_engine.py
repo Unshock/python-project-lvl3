@@ -21,7 +21,7 @@ def loader_engine(page_url, download_folder='cwd',
 
     logging.info(f'Start loader_engine {page_url}')
     download_folder = downloader.normalize_download_folder(download_folder)
-    html_path = downloader.download(page_url, download_folder)
+    html_path = downloader.download1(page_url, download_folder)
     with open(html_path) as html:
         files_sub_pages = downloader.make_list_of_files(page_url, html.read())
     # if files_sub_pages:

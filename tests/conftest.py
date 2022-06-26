@@ -2,27 +2,42 @@ import pytest
 import os
 from urllib.parse import urlparse
 import pathlib
-from page_loader import downloader
 from page_loader.downloader import get_path
 
 
 FIXTURES_FOLDER = 'fixtures'
+EXPECTED_FOLDER = 'fixtures/expected'
 URLS_FOLDER = 'fixtures/urls_and_results'
 PAGE_CONTENT_FOLDER = 'fixtures/page_files'
 
 
 @pytest.fixture
-def make_response_1():
+def make_html_response():
+    response_path = os.path.join(os.path.dirname(__file__),
+                                 FIXTURES_FOLDER, 'hexlet_co_response.html')
+    return response_path
+
+
+@pytest.fixture
+def make_expected_html():
+    response_path = os.path.join(os.path.dirname(__file__),
+                                 EXPECTED_FOLDER,
+                                 'hexlet_co_response_with_files.html')
+    return response_path
+
+
+@pytest.fixture
+def make_response_3():
     response = os.path.join(os.path.dirname(__file__),
-                            FIXTURES_FOLDER, 'hexlet_co_response.html')
+                            FIXTURES_FOLDER, 'site-com-blog-about.html')
     return response
 
 
 @pytest.fixture
-def make_response_2():
+def make_response_4():
     response = os.path.join(os.path.dirname(__file__),
                             FIXTURES_FOLDER,
-                            'hexlet_co_response_with_files.html')
+                            'site-com-blog-about2.html')
     return response
 
 
@@ -171,20 +186,7 @@ def make_png():
     return dict_
 
 
-def fake_loader(true_url, file_path, dir_path):
-    fake_page_url = os.path.join(os.path.dirname(__file__),
-                                 'fixtures/page_files')
-    true_sub_page = urlparse(file_path).path
-    file_name = downloader.make_file_name(true_url, true_sub_page)
-    with open(fake_page_url + true_sub_page, 'rb') as file:
-        response = file.read()
-        file_path = pathlib.Path(dir_path, file_name)
-        with open(file_path, 'wb') as new_file:
-            new_file.write(response)
-        return new_file.name
-
-
-def fake_loader_alt(true_file_url, file_name, dir_path):
+def fake_loader(true_file_url, file_name, dir_path):
     fake_page_url = os.path.join(os.path.dirname(__file__),
                                  'fixtures/page_files')
     true_sub_page = urlparse(true_file_url).path
@@ -194,3 +196,7 @@ def fake_loader_alt(true_file_url, file_name, dir_path):
         with open(file_path, 'wb') as new_file:
             new_file.write(response)
         return new_file.name
+
+
+def fake_loader2(true_file_url, file_name, dir_path):
+    return []

@@ -82,6 +82,54 @@ class ValidationError(Exception):
         self.errors = errors
 
 
+def download1(url_, download_folder):  # noqa: C901
+
+    file_name = make_html_name(url_)
+
+    try:
+        response = requests.get(url_, timeout=20)
+        response.raise_for_status()
+    except (requests.exceptions.ConnectionError,
+            requests.exceptions.ReadTimeout):
+        error_message = f'Connection to {url_} failed. Exit.\n'
+        logging.error(error_message)
+        # raise SystemExit(error_message)
+        raise MyException(error_message)
+    except requests.exceptions.HTTPError as trouble:
+        response = trouble.response
+        status_code = response.status_code
+        error_message = f'Request has failed with status code={status_code}.' \
+                        f' Exit.\n'
+        logging.error(error_message)
+        # raise SystemExit(error_message)
+        raise MyException(error_message)
+
+    beautiful_response = BeautifulSoup(response.text, 'html.parser')
+    file_path = pathlib.Path(download_folder, file_name)
+
+    try:
+        file_path.touch(exist_ok=False)
+    except FileExistsError:
+        error_message = f'File \'{file_path}\' already exists. Exit.\n'
+        logging.error(error_message)
+        raise SystemExit(error_message)
+
+    try:
+        with open(file_path, 'w') as new_file:
+            try:
+                new_file.write(beautiful_response.prettify())
+            except PermissionError:
+                error_message = f'Access to \'{file_path}\' is denied. Exit.\n'
+                logging.error(error_message)
+                raise SystemExit(error_message)
+    except FileNotFoundError:
+        error_message = f'Directory {download_folder} is not found. Exit.\n'
+        logging.error(error_message)
+        raise SystemExit(error_message)
+
+    return os.path.abspath(new_file.name)
+
+
 def download(url_, download_folder):  # noqa: C901
 
     file_name = make_html_name(url_)
