@@ -16,6 +16,12 @@ if __name__ == '__main__':
                         datefmt='%d/%m/%Y %I:%M:%S')
 
 
+def download(page_url, download_folder='cwd',
+             file_loader=downloader.download_file):
+    return loader_engine(page_url, download_folder=download_folder,
+                         file_loader=file_loader)
+
+
 def loader_engine(page_url, download_folder='cwd',
                   file_loader=downloader.download_file):
 
