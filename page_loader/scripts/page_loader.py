@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import sys
-from page_loader.cli import parse_args, MyException
+from page_loader.cli import parse_args, FatalError
 
 import logging
 import page_loader.loader_engine as le
@@ -13,7 +13,7 @@ def main():
     args = parse_args()
     try:
         print(le.loader_engine(args.url, args.output))
-    except MyException as e:
+    except FatalError as e:
         logging.error(e)
         sys.exit(1)
     sys.exit(0)

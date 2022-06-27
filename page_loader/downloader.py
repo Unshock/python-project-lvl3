@@ -6,7 +6,7 @@ import os
 import pathlib
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup
-from page_loader.cli import MyException
+from page_loader.cli import FatalError
 
 
 def make_html_name(url_):
@@ -35,9 +35,7 @@ def create_files_dir(page_url, download_folder):
     except FileExistsError:
         error_message = f'Directory \'{dir_path}\' already exists.' \
                         f' Can\'t be created. Exit.\n'
-        # logging.error(error_message)
-        raise MyException(error_message)
-        # raise SystemExit(error_message)
+        raise FatalError(error_message)
     return dir_name, dir_path
 
 
@@ -65,9 +63,7 @@ def normalize_download_folder(download_folder):
     if not path.exists():
         error_message = f'The folder with name \"{download_folder}\"'\
                         f' does not exists. Exit.\n'
-        # logging.error(error_message)
-        # raise SystemExit(error_message)
-        raise MyException(error_message)
+        raise FatalError(error_message)
     return download_folder
 
 
@@ -81,17 +77,13 @@ def download(url_, download_folder):  # noqa: C901
     except (requests.exceptions.ConnectionError,
             requests.exceptions.ReadTimeout):
         error_message = f'Connection to {url_} failed. Exit.\n'
-        # logging.error(error_message)
-        # raise SystemExit(error_message)
-        raise MyException(error_message)
+        raise FatalError(error_message)
     except requests.exceptions.HTTPError as trouble:
         response = trouble.response
         status_code = response.status_code
         error_message = f'Request has failed with status code={status_code}.' \
                         f' Exit.\n'
-        # logging.error(error_message)
-        # raise SystemExit(error_message)
-        raise MyException(error_message)
+        raise FatalError(error_message)
 
     beautiful_response = BeautifulSoup(response.text, 'html.parser')
     file_path = pathlib.Path(download_folder, file_name)
@@ -100,9 +92,7 @@ def download(url_, download_folder):  # noqa: C901
         file_path.touch(exist_ok=False)
     except FileExistsError:
         error_message = f'File \'{file_path}\' already exists. Exit.\n'
-        # logging.error(error_message)
-        # raise SystemExit(error_message)
-        raise MyException(error_message)
+        raise FatalError(error_message)
 
     try:
         with open(file_path, 'w') as new_file:
@@ -110,14 +100,10 @@ def download(url_, download_folder):  # noqa: C901
                 new_file.write(beautiful_response.prettify())
             except PermissionError:
                 error_message = f'Access to \'{file_path}\' is denied. Exit.\n'
-                # logging.error(error_message)
-                # raise SystemExit(error_message)
-                raise MyException(error_message)
+                raise FatalError(error_message)
     except FileNotFoundError:
         error_message = f'Directory {download_folder} is not found. Exit.\n'
-        # logging.error(error_message)
-        # raise SystemExit(error_message)
-        raise MyException(error_message)
+        raise FatalError(error_message)
 
     return os.path.abspath(new_file.name)
 
@@ -168,9 +154,7 @@ def download_file(file_link, file_name, dir_path):
             new_file.write(response.content)
     except PermissionError:
         error_message = f'Access to \'{file_path}\' is denied. Exit.\n'
-        logging.error(error_message)
-        # raise SystemExit(error_message)
-        raise MyException(error_message)
+        raise FatalError(error_message)
 
     logging.info(f'File \'{file_name}\' downloaded in \'{dir_path}\'')
     return new_file.name
@@ -207,41 +191,6 @@ def make_list_of_files(page_url, html):
                     'link': download_link
                 })
     return result if len(result) > 0 else None
-
-
-# def return_links_or_none(page_url, html):
-#     soup = BeautifulSoup(html, features='html.parser')
-#     result = []
-#     for link_tag in soup.find_all('link'):
-#         link = link_tag.get('href')
-#         if is_valid_file_path(page_url, link) is True:
-#             result.append(link)
-#     return result if len(result) > 0 else None
-#
-#
-# def return_pics_or_none(page_url, html):
-#     soup = BeautifulSoup(html, features='html.parser')
-#     result = []
-#     for img_tag in soup.find_all('img'):
-#         pic = img_tag.get('src')
-#         if is_valid_file_path(page_url, pic) is True:
-#             result.append(pic)
-#     return result if len(result) > 0 else None
-#
-#
-# def return_scripts_or_none(page_url, html):
-#     soup = BeautifulSoup(html, features='html.parser')
-#     result = []
-#     for script_tag in soup.find_all('script'):
-#         script = script_tag.get('src')
-#         #print(script)
-#         if is_valid_file_path(page_url, script) is True:
-#             result.append(script)
-#     return result if len(result) > 0 else None
-
-
-# def is_link_of_path(string: str):
-#    return 'Link' if 'http'.startswith(string) else 'Path'
 
 
 def substitution(html_path, sub_page_to_replace, full_file_name):

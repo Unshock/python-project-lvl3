@@ -9,5 +9,5 @@ def parse_args():
     return parser.parse_args()
 
 
-class MyException(Exception):
+class FatalError(Exception):
     pass

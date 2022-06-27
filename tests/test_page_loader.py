@@ -6,7 +6,7 @@ from tests.conftest import fake_loader, fake_loader2
 import logging
 import pytest
 import responses
-from page_loader.downloader import MyException
+from page_loader.downloader import FatalError
 
 
 LOGGER = logging.getLogger(__name__)
@@ -104,7 +104,7 @@ def test_bad_status_code(make_url_1):
     responses.add(responses.GET, make_url_1, status=400)
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
-        with pytest.raises(MyException) as error:
+        with pytest.raises(FatalError) as error:
             downloader.download(make_url_1, temp_dir)
         assert 'Request has failed with status code=400. Exit.\n' in\
                str(error.value)
@@ -141,7 +141,7 @@ def test_make_directory():
 def test_no_such_directory():
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
-        with pytest.raises(MyException) as error:
+        with pytest.raises(FatalError) as error:
             unexisting_dir = temp_dir + '/no_such'
             downloader.normalize_download_folder(unexisting_dir)
         assert f'The folder with name \"{unexisting_dir}\"'\
