@@ -65,8 +65,9 @@ def normalize_download_folder(download_folder):
     if not path.exists():
         error_message = f'The folder with name \"{download_folder}\"'\
                         f' does not exists. Exit.\n'
-        logging.error(error_message)
-        raise SystemExit(error_message)
+        # logging.error(error_message)
+        # raise SystemExit(error_message)
+        raise MyException(error_message)
     return download_folder
 
 
@@ -80,7 +81,7 @@ def download(url_, download_folder):  # noqa: C901
     except (requests.exceptions.ConnectionError,
             requests.exceptions.ReadTimeout):
         error_message = f'Connection to {url_} failed. Exit.\n'
-        #logging.error(error_message)
+        # logging.error(error_message)
         # raise SystemExit(error_message)
         raise MyException(error_message)
     except requests.exceptions.HTTPError as trouble:

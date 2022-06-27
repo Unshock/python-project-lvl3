@@ -141,7 +141,7 @@ def test_make_directory():
 def test_no_such_directory():
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
-        with pytest.raises(SystemExit) as error:
+        with pytest.raises(MyException) as error:
             unexisting_dir = temp_dir + '/no_such'
             downloader.normalize_download_folder(unexisting_dir)
         assert f'The folder with name \"{unexisting_dir}\"'\
