@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 import sys
-from page_loader.cli import parse_args
-from page_loader.loader_engine import loader_engine
+from page_loader.cli import parse_args, MyException
+
 import logging
-from page_loader.downloader import MyException
+import page_loader.loader_engine as le
 
 
 def main():
@@ -12,8 +12,9 @@ def main():
                         datefmt='%d/%m/%Y %I:%M:%S')
     args = parse_args()
     try:
-        print(loader_engine(args.url, args.output))
-    except MyException():
+        print(le.loader_engine(args.url, args.output))
+    except MyException as e:
+        logging.error(e)
         sys.exit(1)
 
 

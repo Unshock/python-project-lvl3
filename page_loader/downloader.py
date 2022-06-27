@@ -6,6 +6,7 @@ import os
 import pathlib
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup
+from page_loader.cli import MyException
 
 
 def make_html_name(url_):
@@ -34,7 +35,7 @@ def create_files_dir(page_url, download_folder):
     except FileExistsError:
         error_message = f'Directory \'{dir_path}\' already exists.' \
                         f' Can\'t be created. Exit.\n'
-        logging.error(error_message)
+        # logging.error(error_message)
         raise MyException(error_message)
         # raise SystemExit(error_message)
     return dir_name, dir_path
@@ -69,67 +70,6 @@ def normalize_download_folder(download_folder):
     return download_folder
 
 
-class MyException(Exception):
-    pass
-
-
-class ValidationError(Exception):
-    def __init__(self, message, errors):
-        # Call the base class constructor with the parameters it needs
-        super().__init__(message)
-
-        # Now for your custom code...
-        self.errors = errors
-
-
-def download1(url_, download_folder):  # noqa: C901
-
-    file_name = make_html_name(url_)
-
-    try:
-        response = requests.get(url_, timeout=20)
-        response.raise_for_status()
-    except (requests.exceptions.ConnectionError,
-            requests.exceptions.ReadTimeout):
-        error_message = f'Connection to {url_} failed. Exit.\n'
-        logging.error(error_message)
-        # raise SystemExit(error_message)
-        raise MyException(error_message)
-    except requests.exceptions.HTTPError as trouble:
-        response = trouble.response
-        status_code = response.status_code
-        error_message = f'Request has failed with status code={status_code}.' \
-                        f' Exit.\n'
-        logging.error(error_message)
-        # raise SystemExit(error_message)
-        raise MyException(error_message)
-
-    beautiful_response = BeautifulSoup(response.text, 'html.parser')
-    file_path = pathlib.Path(download_folder, file_name)
-
-    try:
-        file_path.touch(exist_ok=False)
-    except FileExistsError:
-        error_message = f'File \'{file_path}\' already exists. Exit.\n'
-        logging.error(error_message)
-        raise SystemExit(error_message)
-
-    try:
-        with open(file_path, 'w') as new_file:
-            try:
-                new_file.write(beautiful_response.prettify())
-            except PermissionError:
-                error_message = f'Access to \'{file_path}\' is denied. Exit.\n'
-                logging.error(error_message)
-                raise SystemExit(error_message)
-    except FileNotFoundError:
-        error_message = f'Directory {download_folder} is not found. Exit.\n'
-        logging.error(error_message)
-        raise SystemExit(error_message)
-
-    return os.path.abspath(new_file.name)
-
-
 def download(url_, download_folder):  # noqa: C901
 
     file_name = make_html_name(url_)
@@ -140,7 +80,7 @@ def download(url_, download_folder):  # noqa: C901
     except (requests.exceptions.ConnectionError,
             requests.exceptions.ReadTimeout):
         error_message = f'Connection to {url_} failed. Exit.\n'
-        logging.error(error_message)
+        # logging.error(error_message)
         # raise SystemExit(error_message)
         raise MyException(error_message)
     except requests.exceptions.HTTPError as trouble:
@@ -148,7 +88,7 @@ def download(url_, download_folder):  # noqa: C901
         status_code = response.status_code
         error_message = f'Request has failed with status code={status_code}.' \
                         f' Exit.\n'
-        logging.error(error_message)
+        # logging.error(error_message)
         # raise SystemExit(error_message)
         raise MyException(error_message)
 
@@ -159,8 +99,9 @@ def download(url_, download_folder):  # noqa: C901
         file_path.touch(exist_ok=False)
     except FileExistsError:
         error_message = f'File \'{file_path}\' already exists. Exit.\n'
-        logging.error(error_message)
-        raise SystemExit(error_message)
+        # logging.error(error_message)
+        # raise SystemExit(error_message)
+        raise MyException(error_message)
 
     try:
         with open(file_path, 'w') as new_file:
@@ -168,12 +109,14 @@ def download(url_, download_folder):  # noqa: C901
                 new_file.write(beautiful_response.prettify())
             except PermissionError:
                 error_message = f'Access to \'{file_path}\' is denied. Exit.\n'
-                logging.error(error_message)
-                raise SystemExit(error_message)
+                # logging.error(error_message)
+                # raise SystemExit(error_message)
+                raise MyException(error_message)
     except FileNotFoundError:
         error_message = f'Directory {download_folder} is not found. Exit.\n'
-        logging.error(error_message)
-        raise SystemExit(error_message)
+        # logging.error(error_message)
+        # raise SystemExit(error_message)
+        raise MyException(error_message)
 
     return os.path.abspath(new_file.name)
 
@@ -225,7 +168,8 @@ def download_file(file_link, file_name, dir_path):
     except PermissionError:
         error_message = f'Access to \'{file_path}\' is denied. Exit.\n'
         logging.error(error_message)
-        raise SystemExit(error_message)
+        # raise SystemExit(error_message)
+        raise MyException(error_message)
 
     logging.info(f'File \'{file_name}\' downloaded in \'{dir_path}\'')
     return new_file.name
