@@ -113,7 +113,7 @@ def test_bad_status_code(make_url_1):
 def test_bad_url(make_url_1_bad):
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
-        with pytest.raises(MyException) as error:
+        with pytest.raises(Exception) as error:
             downloader.download(make_url_1_bad, temp_dir)
         assert f'Connection to {make_url_1_bad} failed.' \
                f' Exit.\n' in str(error.value)

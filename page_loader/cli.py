@@ -9,5 +9,5 @@ def parse_args():
     return parser.parse_args()
 
 
-class MyException(BaseException):
+class MyException(Exception):
     pass
