@@ -108,25 +108,10 @@ def download(url_, download_folder):  # noqa: C901
     return os.path.abspath(new_file.name)
 
 
-def make_file_link(page_url, sub_page):  # noqa: C901
-    scheme = urlparse(page_url).scheme
-    page_netloc = get_netloc(page_url)
-    sub_page_netloc = get_netloc(sub_page)
-    page_path = urlparse(page_url).path
-    sub_page_path = urlparse(sub_page).path
-
-    if page_netloc == sub_page_netloc:
-        return f'{scheme}://{sub_page_netloc}{sub_page_path}'
-    if sub_page.startswith('/'):
-        return f'{scheme}://{page_netloc}{sub_page_path}'
-    if sub_page.startswith('../'):
-        return urllib.parse.urljoin(page_url, sub_page)
-    if not page_path:
-        page_path = '/'
-    try:
-        return f'{scheme}://{page_netloc}{page_path}{sub_page}'
-    except Exception:
-        raise
+def make_file_link(page_url, sub_page):
+    if get_netloc(page_url) == get_netloc(sub_page):
+        return sub_page
+    return urllib.parse.urljoin(page_url, sub_page)
 
 
 def download_file(file_link, file_name, dir_path):

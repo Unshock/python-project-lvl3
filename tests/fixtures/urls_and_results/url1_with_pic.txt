@@ -1,1 +1,1 @@
-https://page-loader.hexlet.repl.co/assets/professions/nodejs.png
+https://page-loader.hexlet.repl.co/page/assets/professions/nodejs.png

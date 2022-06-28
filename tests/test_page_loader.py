@@ -2,7 +2,7 @@ import os
 from page_loader import downloader
 from page_loader import loader_engine
 import tempfile
-from tests.conftest import fake_loader, fake_loader2
+from tests.conftest import fake_loader
 import logging
 import pytest
 import responses
@@ -21,19 +21,6 @@ def test_download_1(requests_mock, make_url_1, make_html_response):
         result = downloader.download(make_url_1, temp_dir)
         with open(result, 'r') as result:
             assert expected == result.read()
-
-
-def test_download_2(requests_mock, make_url_1, make_html_response):
-    with open(make_html_response, 'r') as expected:
-        expected = expected.read()
-    requests_mock.get(make_url_1, text=expected)
-    with tempfile.TemporaryDirectory() as temp_dir:
-        os.chdir(temp_dir)
-        with tempfile.TemporaryDirectory(dir=temp_dir,
-                                         suffix='_inner_dir') as inner_temp_dir:
-            result = downloader.download(make_url_1, inner_temp_dir)
-            with open(result, 'r') as result:
-                assert expected == result.read()
 
 
 def test_loader_engine(requests_mock, make_url_1,
@@ -68,25 +55,6 @@ def test_loader_engine(requests_mock, make_url_1,
                     else:
                         with open(elem_path, 'r') as el:
                             assert el.read() == make_files[elem]
-
-
-def test_loader_engine2(requests_mock, make_url_1,
-                        make_response_3, make_response_4,
-                        make_file_dir_name, make_pic_name,
-                        make_files):
-    with open(make_response_3, 'r') as get_expected:
-        requests_mock.get(make_url_1, text=get_expected.read())
-    with tempfile.TemporaryDirectory() as temp_dir:
-        os.chdir(temp_dir)
-        with tempfile.TemporaryDirectory(dir=temp_dir,
-                                         suffix='_inner_dir') as inner_temp_dir:
-            result = loader_engine.loader_engine(make_url_1, inner_temp_dir,
-                                                 file_loader=fake_loader2)
-            result = open(result)
-            with open(make_response_4, 'r'):
-                # assert result_expected.read() == result.read()
-                print(os.listdir(inner_temp_dir))
-                assert len(os.listdir(inner_temp_dir)) == 2
 
 
 def test_permission_1(requests_mock, make_url_1, make_html_response):
@@ -148,17 +116,28 @@ def test_no_such_directory():
                f' does not exists. Exit.\n' in str(error.value)
 
 
-def test_make_html_name_1(make_url_1, make_url_transformed_1):
-    assert downloader.make_html_name(make_url_1) == make_url_transformed_1
+def test_directory_already_exists(make_url_1, make_file_dir_name):
+    with tempfile.TemporaryDirectory() as temp_dir:
+        os.chdir(temp_dir)
+        files_dir_name = os.path.join(temp_dir, make_file_dir_name)
+        os.mkdir(files_dir_name)
+        with pytest.raises(FatalError) as error:
+            downloader.create_files_dir(make_url_1, temp_dir)
+        assert f'Directory \'{files_dir_name}\' already exists.' \
+               f' Can\'t be created. Exit.\n' in str(error.value)
 
 
-def test_make_html_name_2(make_url_2, make_url_transformed_2):
-    assert downloader.make_html_name(make_url_2) == make_url_transformed_2
+def test_make_html_name_1(make_url_1, make_url_expected_1):
+    assert downloader.make_html_name(make_url_1) == make_url_expected_1
 
 
-def test_make_html_name_3(make_url_3, make_url_transformed_3):
-    assert downloader.make_html_name(make_url_3) == make_url_transformed_3
+def test_make_html_name_2(make_url_2, make_url_expected_2):
+    assert downloader.make_html_name(make_url_2) == make_url_expected_2
 
 
-def test_make_html_name_4(make_url_4, make_url_transformed_4):
-    assert downloader.make_html_name(make_url_4) == make_url_transformed_4
+def test_make_html_name_3(make_url_3, make_url_expected_3):
+    assert downloader.make_html_name(make_url_3) == make_url_expected_3
+
+
+def test_make_html_name_4(make_url_4, make_url_expected_4):
+    assert downloader.make_html_name(make_url_4) == make_url_expected_4
