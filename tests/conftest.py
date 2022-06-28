@@ -116,6 +116,11 @@ def make_file_dir_name():
 
 
 @pytest.fixture
+def make_html_name():
+    return 'page-loader-hexlet-repl-co-page.html'
+
+
+@pytest.fixture
 def make_files():
     application_name = 'page-loader-hexlet-repl-co-page-assets-application.css'
     png_name = 'page-loader-hexlet-repl-co-page-assets-professions-nodejs.png'

@@ -7,6 +7,7 @@ import logging
 import pytest
 import responses
 from page_loader.downloader import FatalError
+import pathlib
 
 
 LOGGER = logging.getLogger(__name__)
@@ -21,6 +22,21 @@ def test_download_1(requests_mock, make_url_1, make_html_response):
         result = downloader.download(make_url_1, temp_dir)
         with open(result, 'r') as result:
             assert expected == result.read()
+
+
+def test_html_file_already_exists(requests_mock, make_url_1,
+                                  make_html_name, make_html_response):
+    with open(make_html_response, 'r') as expected:
+        expected = expected.read()
+    requests_mock.get(make_url_1, text=expected)
+    with tempfile.TemporaryDirectory() as temp_dir:
+        os.chdir(temp_dir)
+        file_path = pathlib.Path(temp_dir, make_html_name)
+        file_path.touch()
+        with pytest.raises(FatalError) as error:
+            downloader.download(make_url_1, temp_dir)
+        assert f'File \'{file_path}\' already exists. Exit.\n'\
+               in str(error.value)
 
 
 def test_loader_engine(requests_mock, make_url_1,

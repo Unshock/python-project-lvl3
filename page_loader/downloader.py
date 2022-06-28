@@ -149,9 +149,9 @@ def is_valid_file_path(page_url, link):
     page_url_netloc = get_netloc(page_url)
     link_netloc = get_netloc(link)
 
-    if link_netloc != '':
-        return False if page_url_netloc != link_netloc else True
-    return False if link == '' else True
+    if link_netloc:
+        return True if page_url_netloc == link_netloc else False
+    return True if link else False
 
 
 def make_list_of_files(page_url, html):
