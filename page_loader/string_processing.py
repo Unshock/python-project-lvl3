@@ -45,6 +45,6 @@ def make_file_name(download_link):
 
 
 def make_file_link(page_url, sub_page):
-    if urlparse(page_url).path == urlparse(sub_page).path:
+    if urlparse(page_url).netloc == urlparse(sub_page).netloc:
         return sub_page
     return urljoin(page_url, sub_page)
