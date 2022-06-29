@@ -1,34 +1,15 @@
 import logging
-import re
-import urllib.parse
 import requests
 import os
 import pathlib
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup
-from page_loader.cli import FatalError
+from page_loader.custom_exception import FatalError
+from page_loader import string_processing
 
 
-def make_html_name(url_):
-    netloc_with_path = get_netloc(url_) + get_path(url_)
-    result = re.sub(r"(\.html)$|[\W_]", '-',
-                    netloc_with_path).strip('-') + '.html'
-    return result
-
-
-def make_dir_name(url_):
-    netloc_with_path = get_netloc(url_) + get_path(url_)
-    result = re.sub(r"[\W_]", '-', netloc_with_path).strip('-') + '_files'
-    return result
-
-
-def get_extension(file_path: str) -> str:
-    _, extension = os.path.splitext(file_path)
-    return extension.lower()
-
-
-def create_files_dir(page_url, download_folder):
-    dir_name = make_dir_name(page_url)
+def create_local_files_dir(page_url, download_folder):
+    dir_name = string_processing.make_dir_name(page_url)
     dir_path = os.path.join(download_folder, dir_name)
     try:
         os.mkdir(dir_path)
@@ -37,14 +18,6 @@ def create_files_dir(page_url, download_folder):
                         f' Can\'t be created. Exit.\n'
         raise FatalError(error_message)
     return dir_name, dir_path
-
-
-def make_file_name(download_link):
-    file_path = get_netloc(download_link) + get_path(download_link)
-    file_extension = get_extension(file_path)
-    result = re.sub(r"(\.\w*)$|[\W_]", '-', file_path).strip('-')
-    result += file_extension if file_extension != '' else '.html'
-    return result
 
 
 def get_netloc(page_url):
@@ -56,20 +29,9 @@ def get_path(page_url):
     return urlparse(page_url).path
 
 
-def normalize_download_folder(download_folder):
-    if download_folder == 'cwd':
-        download_folder = os.getcwd()
-    path = pathlib.Path(download_folder)
-    if not path.exists():
-        error_message = f'The folder with name \"{download_folder}\"'\
-                        f' does not exists. Exit.\n'
-        raise FatalError(error_message)
-    return download_folder
-
-
-def download(url_, download_folder):  # noqa: C901
-
-    file_name = make_html_name(url_)
+def download_html(url_, download_folder):  # noqa: C901
+    print(url_, download_folder)
+    file_name = string_processing.make_html_name(url_)
 
     try:
         response = requests.get(url_, timeout=20)
@@ -104,14 +66,7 @@ def download(url_, download_folder):  # noqa: C901
     except FileNotFoundError:
         error_message = f'Directory {download_folder} is not found. Exit.\n'
         raise FatalError(error_message)
-
     return os.path.abspath(new_file.name)
-
-
-def make_file_link(page_url, sub_page):
-    if get_netloc(page_url) == get_netloc(sub_page):
-        return sub_page
-    return urllib.parse.urljoin(page_url, sub_page)
 
 
 def download_file(file_link, file_name, dir_path):
@@ -167,21 +122,11 @@ def make_list_of_files(page_url, html):
             link = link_tag.get(tags_and_attributes[tag])
             if link is None or not is_valid_file_path(page_url, link):
                 continue
-            download_link = make_file_link(page_url, link)
-            file_name = make_file_name(download_link)
-            result.append(
-                {
-                    'attribute_value': link,
-                    'name': file_name,
-                    'link': download_link
-                })
+            download_link = string_processing.make_file_link(page_url, link)
+            file_name = string_processing.make_file_name(download_link)
+            result.append({
+                'attribute_value': link,
+                'name': file_name,
+                'link': download_link
+            })
     return result if len(result) > 0 else None
-
-
-def substitution(html_path, sub_page_to_replace, full_file_name):
-    with open(html_path, 'r') as html:
-        x = html.read()
-    with open(html_path, 'w') as html:
-        x = x.replace(f'"{sub_page_to_replace}"', f'"{full_file_name}"')
-        html.write(x)
-    logging.info(f'Name {sub_page_to_replace} replaced with {full_file_name}')

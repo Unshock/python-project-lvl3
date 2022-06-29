@@ -7,7 +7,3 @@ def parse_args():
     parser.add_argument('--output', '-o', metavar='OUTPUT',
                         default='cwd', help='set output directory')
     return parser.parse_args()
-
-
-class FatalError(Exception):
-    pass

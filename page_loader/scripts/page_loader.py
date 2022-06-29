@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 import sys
-from page_loader.cli import parse_args, FatalError
+from page_loader.cli import parse_args
+from page_loader.custom_exception import FatalError
 
 import logging
-import page_loader.loader_engine as le
+import page_loader.page_loader_engine as le
 
 
 def main():
@@ -12,7 +13,7 @@ def main():
                         datefmt='%d/%m/%Y %I:%M:%S')
     args = parse_args()
     try:
-        print(le.loader_engine(args.url, args.output))
+        print(le.page_loader_engine(args.url, args.output))
     except FatalError as e:
         logging.error(e)
         sys.exit(1)

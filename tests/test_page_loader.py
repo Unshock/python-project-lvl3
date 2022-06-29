@@ -1,6 +1,7 @@
 import os
 from page_loader import downloader
-from page_loader import loader_engine
+from page_loader import page_loader_engine
+from page_loader import string_processing
 import tempfile
 from tests.conftest import fake_loader
 import logging
@@ -19,7 +20,7 @@ def test_download_1(requests_mock, make_url_1, make_html_response):
     requests_mock.get(make_url_1, text=expected)
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
-        result = downloader.download(make_url_1, temp_dir)
+        result = downloader.download_html(make_url_1, temp_dir)
         with open(result, 'r') as result:
             assert expected == result.read()
 
@@ -34,7 +35,7 @@ def test_html_file_already_exists(requests_mock, make_url_1,
         file_path = pathlib.Path(temp_dir, make_html_name)
         file_path.touch()
         with pytest.raises(FatalError) as error:
-            downloader.download(make_url_1, temp_dir)
+            downloader.download_html(make_url_1, temp_dir)
         assert f'File \'{file_path}\' already exists. Exit.\n'\
                in str(error.value)
 
@@ -49,7 +50,8 @@ def test_loader_engine(requests_mock, make_url_1,
         os.chdir(temp_dir)
         with tempfile.TemporaryDirectory(dir=temp_dir,
                                          suffix='_inner_dir') as inner_temp_dir:
-            result = loader_engine.loader_engine(make_url_1, inner_temp_dir,
+            result = page_loader_engine.download(make_url_1,
+                                                 inner_temp_dir,
                                                  file_loader=fake_loader)
             result = open(result)
             with open(make_expected_html, 'r') as result_expected:
@@ -80,7 +82,8 @@ def test_permission_1(requests_mock, make_url_1, make_html_response):
         os.chdir(temp_dir)
         os.chmod(temp_dir, 0o111)
         with pytest.raises(PermissionError):
-            loader_engine.loader_engine(make_url_1, file_loader=fake_loader)
+            page_loader_engine.download(make_url_1,
+                                        file_loader=fake_loader)
 
 
 @responses.activate
@@ -89,7 +92,7 @@ def test_bad_status_code(make_url_1):
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
         with pytest.raises(FatalError) as error:
-            downloader.download(make_url_1, temp_dir)
+            downloader.download_html(make_url_1, temp_dir)
         assert 'Request has failed with status code=400. Exit.\n' in\
                str(error.value)
 
@@ -98,7 +101,7 @@ def test_bad_url(make_url_1_bad):
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
         with pytest.raises(Exception) as error:
-            downloader.download(make_url_1_bad, temp_dir)
+            downloader.download_html(make_url_1_bad, temp_dir)
         assert f'Connection to {make_url_1_bad} failed.' \
                f' Exit.\n' in str(error.value)
 
@@ -117,7 +120,7 @@ def test_download_file_with_bad_file_path(make_url_1_with_pic,
 def test_make_directory():
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
-        dir_for_html = downloader.normalize_download_folder('cwd')
+        dir_for_html = string_processing.normalize_download_folder('cwd')
         assert isinstance(dir_for_html, str)
         assert dir_for_html == temp_dir
 
@@ -127,7 +130,7 @@ def test_no_such_directory():
         os.chdir(temp_dir)
         with pytest.raises(FatalError) as error:
             unexisting_dir = temp_dir + '/no_such'
-            downloader.normalize_download_folder(unexisting_dir)
+            string_processing.normalize_download_folder(unexisting_dir)
         assert f'The folder with name \"{unexisting_dir}\"'\
                f' does not exists. Exit.\n' in str(error.value)
 
@@ -138,22 +141,22 @@ def test_directory_already_exists(make_url_1, make_file_dir_name):
         files_dir_name = os.path.join(temp_dir, make_file_dir_name)
         os.mkdir(files_dir_name)
         with pytest.raises(FatalError) as error:
-            downloader.create_files_dir(make_url_1, temp_dir)
+            downloader.create_local_files_dir(make_url_1, temp_dir)
         assert f'Directory \'{files_dir_name}\' already exists.' \
                f' Can\'t be created. Exit.\n' in str(error.value)
 
 
 def test_make_html_name_1(make_url_1, make_url_expected_1):
-    assert downloader.make_html_name(make_url_1) == make_url_expected_1
+    assert string_processing.make_html_name(make_url_1) == make_url_expected_1
 
 
 def test_make_html_name_2(make_url_2, make_url_expected_2):
-    assert downloader.make_html_name(make_url_2) == make_url_expected_2
+    assert string_processing.make_html_name(make_url_2) == make_url_expected_2
 
 
 def test_make_html_name_3(make_url_3, make_url_expected_3):
-    assert downloader.make_html_name(make_url_3) == make_url_expected_3
+    assert string_processing.make_html_name(make_url_3) == make_url_expected_3
 
 
 def test_make_html_name_4(make_url_4, make_url_expected_4):
-    assert downloader.make_html_name(make_url_4) == make_url_expected_4
+    assert string_processing.make_html_name(make_url_4) == make_url_expected_4
