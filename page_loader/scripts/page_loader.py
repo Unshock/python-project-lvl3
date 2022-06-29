@@ -13,7 +13,7 @@ def main():
                         datefmt='%d/%m/%Y %I:%M:%S')
     args = parse_args()
     try:
-        print(le.page_loader_engine(args.url, args.output))
+        print(le.download(args.url, args.output))
     except FatalError as e:
         logging.error(e)
         sys.exit(1)
