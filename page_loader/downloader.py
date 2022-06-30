@@ -5,11 +5,13 @@ import pathlib
 from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 from page_loader.custom_exception import FatalError
-from page_loader import string_processing
+from page_loader import processing
+
+logger = logging.getLogger(__name__)
 
 
 def create_local_files_dir(page_url, download_folder):
-    dir_name = string_processing.make_dir_name(page_url)
+    dir_name = processing.make_dir_name(page_url)
     dir_path = os.path.join(download_folder, dir_name)
     try:
         os.mkdir(dir_path)
@@ -30,8 +32,8 @@ def get_path(page_url):
 
 
 def download_html(url_, download_folder):  # noqa: C901
-    print(url_, download_folder)
-    file_name = string_processing.make_html_name(url_)
+
+    file_name = processing.make_html_name(url_)
 
     try:
         response = requests.get(url_, timeout=20)
@@ -71,7 +73,7 @@ def download_html(url_, download_folder):  # noqa: C901
 
 def download_file(file_link, file_name, dir_path):
 
-    logging.info(f'Trying to download file: \'{file_link}\''
+    logger.info(f'Trying to download file: \'{file_link}\''
                  f' with name \'{file_name}\'')
 
     try:
@@ -82,7 +84,7 @@ def download_file(file_link, file_name, dir_path):
             requests.exceptions.ReadTimeout) as trouble:
         response = trouble.response
         status_code = response.status_code
-        logging.warning(f'File \'{file_link}\''
+        logger.warning(f'File \'{file_link}\''
                         f' can\'t be downloaded, status code: '
                         f'{status_code}. Skipped.\n')
         return None
@@ -96,7 +98,7 @@ def download_file(file_link, file_name, dir_path):
         error_message = f'Access to \'{file_path}\' is denied. Exit.\n'
         raise FatalError(error_message)
 
-    logging.info(f'File \'{file_name}\' downloaded in \'{dir_path}\'')
+    logger.info(f'File \'{file_name}\' downloaded in \'{dir_path}\'')
     return new_file.name
 
 
@@ -122,8 +124,8 @@ def make_list_of_files(page_url, html):
             link = link_tag.get(tags_and_attributes[tag])
             if link is None or not is_valid_file_path(page_url, link):
                 continue
-            download_link = string_processing.make_file_link(page_url, link)
-            file_name = string_processing.make_file_name(download_link)
+            download_link = processing.make_file_link(page_url, link)
+            file_name = processing.make_file_name(download_link)
             result.append({
                 'attribute_value': link,
                 'name': file_name,

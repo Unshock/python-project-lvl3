@@ -1,7 +1,7 @@
 import os
 from page_loader import downloader
 from page_loader import page_loader_engine
-from page_loader import string_processing
+from page_loader import processing
 import tempfile
 from tests.conftest import fake_loader
 import logging
@@ -120,7 +120,7 @@ def test_download_file_with_bad_file_path(make_url_1_with_pic,
 def test_make_directory():
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
-        dir_for_html = string_processing.normalize_download_folder('cwd')
+        dir_for_html = processing.normalize_download_folder('cwd')
         assert isinstance(dir_for_html, str)
         assert dir_for_html == temp_dir
 
@@ -130,7 +130,7 @@ def test_no_such_directory():
         os.chdir(temp_dir)
         with pytest.raises(FatalError) as error:
             unexisting_dir = temp_dir + '/no_such'
-            string_processing.normalize_download_folder(unexisting_dir)
+            processing.normalize_download_folder(unexisting_dir)
         assert f'The folder with name \"{unexisting_dir}\"'\
                f' does not exists. Exit.\n' in str(error.value)
 
@@ -147,16 +147,16 @@ def test_directory_already_exists(make_url_1, make_file_dir_name):
 
 
 def test_make_html_name_1(make_url_1, make_url_expected_1):
-    assert string_processing.make_html_name(make_url_1) == make_url_expected_1
+    assert processing.make_html_name(make_url_1) == make_url_expected_1
 
 
 def test_make_html_name_2(make_url_2, make_url_expected_2):
-    assert string_processing.make_html_name(make_url_2) == make_url_expected_2
+    assert processing.make_html_name(make_url_2) == make_url_expected_2
 
 
 def test_make_html_name_3(make_url_3, make_url_expected_3):
-    assert string_processing.make_html_name(make_url_3) == make_url_expected_3
+    assert processing.make_html_name(make_url_3) == make_url_expected_3
 
 
 def test_make_html_name_4(make_url_4, make_url_expected_4):
-    assert string_processing.make_html_name(make_url_4) == make_url_expected_4
+    assert processing.make_html_name(make_url_4) == make_url_expected_4

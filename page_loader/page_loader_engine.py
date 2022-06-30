@@ -2,28 +2,34 @@ import os
 import logging
 from progress.bar import Bar
 from page_loader import downloader
-from page_loader.string_processing import normalize_download_folder
+from page_loader.processing import normalize_download_folder
 from page_loader.substitution import substitute
+import logging.config
 
 
-# if __name__ == '__main__':
+#file_log = logging.FileHandler(os.path.join('loader.log'))
+#file_log.setLevel(logging.DEBUG)
+#console_out = logging.StreamHandler()
+#console_out.setLevel(logging.INFO)
 
-file_log = logging.FileHandler('loader.log')
-file_log.setLevel(logging.DEBUG)
-console_out = logging.StreamHandler()
-console_out.setLevel(logging.WARNING)
+#logging.basicConfig(handlers=(file_log, console_out),
+#                    level=logging.DEBUG,
+#                    format='%(asctime)s %(levelname)s: %(message)s',
+#                    datefmt='%d/%m/%Y %I:%M:%S')
 
-logging.basicConfig(handlers=(file_log, console_out),
-                    level=logging.DEBUG,
-                    format='%(asctime)s %(levelname)s: %(message)s',
-                    datefmt='%d/%m/%Y %I:%M:%S')
+#if __name__ == '__main__':
+
+logger = logging.getLogger(__name__)
 
 
 def download(page_url, download_folder='cwd',
              file_loader=downloader.download_file):
-
-    logging.info(f'Start loader_engine {page_url}')
     download_folder = normalize_download_folder(download_folder)
+    #logging.config.fileConfig(fname='page_loader/b.conf',
+    #                          disable_existing_loggers=False)
+
+    logger.info(f'Start loader_engine {page_url}')
+
     html_path = downloader.download_html(page_url, download_folder)
     with open(html_path) as html:
         files_sub_pages = downloader.make_list_of_files(page_url, html.read())
@@ -43,8 +49,8 @@ def download(page_url, download_folder='cwd',
                     substitute(html_path, html_attribute_value, local_file_path)
 
                 bar.next()
-    logging.info('Finish loader_engine\n')
+    logger.info('Finish loader_engine\n')
     return html_path
 
 # print('imya:', __name__)
-# g = download('https://page-loader.hexlet.repl.co', '/home/victor/python/test')
+#g = download('https://page-loader.hexlet.repl.co', '/home/victor/python/test')
