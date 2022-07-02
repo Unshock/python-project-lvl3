@@ -2,15 +2,19 @@ import logging
 import requests
 import os
 import pathlib
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urljoin
 from bs4 import BeautifulSoup
 from page_loader.custom_exception import FatalError
 from page_loader import processing
 
-# logger = logging.getLogger(__name__)
 
-
-def create_local_files_dir(page_url, download_folder):
+def create_local_files_dir(page_url: str, download_folder: str) -> tuple:
+    """
+    :param page_url: the url of the original page needed to be downloaded
+    :param download_folder: path where HTML file should be downloaded
+    :return: created directory for local files and returns a tuple of the name
+        of that directory and absolute path to the directory
+    """
     dir_name = processing.make_dir_name(page_url)
     dir_path = os.path.join(download_folder, dir_name)
     try:
@@ -22,25 +26,22 @@ def create_local_files_dir(page_url, download_folder):
     return dir_name, dir_path
 
 
-def get_netloc(page_url):
-    netloc = urlparse(page_url).netloc
-    return netloc
-
-
-def get_path(page_url):
-    return urlparse(page_url).path
-
-
-def download_html(url_, download_folder):  # noqa: C901
-
-    file_name = processing.make_html_name(url_)
+def download_html(page_url: str, download_folder: str) -> str:
+    """
+    :param page_url: the url of the original page needed to be downloaded
+    :param download_folder: path where HTML file should be downloaded
+    :return: downloads the HTML page of the specified page URL and saves it to
+        file with special_name.html in the specified folder. Returns the
+        absolute path to the downloaded HTML file.
+    """
+    html_file_name = processing.make_html_name(page_url)
 
     try:
-        response = requests.get(url_, timeout=20)
+        response = requests.get(page_url, timeout=20)
         response.raise_for_status()
     except (requests.exceptions.ConnectionError,
             requests.exceptions.ReadTimeout):
-        error_message = f'Connection to {url_} failed. Exit.\n'
+        error_message = f'Connection to {page_url} failed. Exit.\n'
         raise FatalError(error_message)
     except requests.exceptions.HTTPError as trouble:
         response = trouble.response
@@ -50,7 +51,7 @@ def download_html(url_, download_folder):  # noqa: C901
         raise FatalError(error_message)
 
     beautiful_response = BeautifulSoup(response.text, 'html.parser')
-    file_path = pathlib.Path(download_folder, file_name)
+    file_path = pathlib.Path(download_folder, html_file_name)
 
     try:
         file_path.touch(exist_ok=False)
@@ -58,20 +59,23 @@ def download_html(url_, download_folder):  # noqa: C901
         error_message = f'File \'{file_path}\' already exists. Exit.\n'
         raise FatalError(error_message)
 
-    try:
-        with open(file_path, 'w') as new_file:
-            try:
-                new_file.write(beautiful_response.prettify())
-            except PermissionError:
-                error_message = f'Access to \'{file_path}\' is denied. Exit.\n'
-                raise FatalError(error_message)
-    except FileNotFoundError:
-        error_message = f'Directory {download_folder} is not found. Exit.\n'
-        raise FatalError(error_message)
+    with open(file_path, 'w') as new_file:
+        new_file.write(beautiful_response.prettify())
+
     return os.path.abspath(new_file.name)
 
 
-def download_file(file_link, file_name, dir_path):
+def download_file(file_link: str, file_name: str, dir_path: str):
+    """
+    :param file_link: web link to the file that should be downloaded
+    :param file_name: the name of the file that should be used for saved file
+    :param dir_path: path where file should be downloaded (directory with
+        local files)
+    :return: downloads file from the given URL, saves it with given name in the
+        directory where local files should be in. Returns the relative path to
+        the downloaded file from the HTML file. If response can't be got -
+        returns None.
+    """
 
     logging.info(f'Trying to download file: \'{file_link}\''
                  f' with name \'{file_name}\'')
@@ -91,27 +95,39 @@ def download_file(file_link, file_name, dir_path):
 
     file_path = pathlib.Path(dir_path, file_name)
 
-    try:
-        with open(file_path, 'wb') as new_file:
-            new_file.write(response.content)
-    except PermissionError:
-        error_message = f'Access to \'{file_path}\' is denied. Exit.\n'
-        raise FatalError(error_message)
+    with open(file_path, 'wb') as new_file:
+        new_file.write(response.content)
 
     logging.info(f'File \'{file_name}\' downloaded in \'{dir_path}\'')
     return new_file.name
 
 
-def is_valid_file_path(page_url, link):
-    page_url_netloc = get_netloc(page_url)
-    link_netloc = get_netloc(link)
+def is_valid_file_path(page_url: str, attribute_value: str) -> bool:
+    """
+    :param page_url: the url of the original page needed to be downloaded
+    :param attribute_value: value of the attribute that can have file path
+        (link) in one of considered tags ('img', 'link', 'script')
+    :return: True if attribute value is not None and file link is local -
+        domain and subdomain should be similar in page_url and attribute_value
+    """
+    page_url_netloc = urlparse(page_url).netloc
+    attribute_value_netloc = urlparse(attribute_value).netloc
 
-    if link_netloc:
-        return True if page_url_netloc == link_netloc else False
-    return True if link else False
+    if attribute_value_netloc:
+        return True if page_url_netloc == attribute_value_netloc else False
+    return True if attribute_value else False
 
 
-def make_list_of_files(page_url, html):
+def make_list_of_files(page_url: str, html: str) -> list or None:
+    """
+    :param page_url: the url of the original page needed to be downloaded
+    :param html: data of the downloaded html file
+    :return: checks for all considered tags in downloaded html ('img', 'link',
+        'script') and their attributes that can have file paths. Return the list
+        of the dictionaries for the found local file paths or None if there is
+        no local files. That dictionary has original attribute value, web-link,
+        and file name.
+    """
     tags_and_attributes = {
         'link': 'href',
         'img': 'src',
@@ -120,15 +136,17 @@ def make_list_of_files(page_url, html):
     soup = BeautifulSoup(html, features='html.parser')
     result = []
     for tag in tags_and_attributes.keys():
-        for link_tag in soup.find_all(tag):
-            link = link_tag.get(tags_and_attributes[tag])
-            if link is None or not is_valid_file_path(page_url, link):
+        for tag_value in soup.find_all(tag):
+            attribute_value = tag_value.get(tags_and_attributes[tag])
+            if not is_valid_file_path(page_url, attribute_value):
                 continue
-            download_link = processing.make_file_link(page_url, link)
+
+            download_link = urljoin(page_url, attribute_value)
             file_name = processing.make_file_name(download_link)
             result.append({
-                'attribute_value': link,
+                'attribute_value': attribute_value,
                 'name': file_name,
                 'link': download_link
             })
+
     return result if len(result) > 0 else None
