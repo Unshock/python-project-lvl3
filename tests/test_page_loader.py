@@ -4,17 +4,13 @@ from page_loader import page_loader_engine
 from page_loader import processing
 import tempfile
 from tests.conftest import fake_loader
-import logging
 import pytest
 import responses
 from page_loader.downloader import FatalError
 import pathlib
 
 
-LOGGER = logging.getLogger(__name__)
-
-
-def test_download_1(requests_mock, make_url_1, make_html_response):
+def test_download_html(requests_mock, make_url_1, make_html_response):
     with open(make_html_response, 'r') as expected:
         expected = expected.read()
     requests_mock.get(make_url_1, text=expected)
@@ -43,7 +39,7 @@ def test_html_file_already_exists(requests_mock, make_url_1,
 def test_loader_engine(requests_mock, make_url_1,
                        make_html_response, make_expected_html,
                        make_file_dir_name, make_pic_name,
-                       make_files):
+                       make_files, make_html_name):
     with open(make_html_response, 'r') as get_expected:
         requests_mock.get(make_url_1, text=get_expected.read())
     with tempfile.TemporaryDirectory() as temp_dir:
@@ -59,9 +55,12 @@ def test_loader_engine(requests_mock, make_url_1,
                 file_directory_content = os.listdir(os.path.join(
                     inner_temp_dir,
                     make_file_dir_name))
+
                 assert result_expected.read() == result.read()
-                assert len(os.listdir(inner_temp_dir)) == 2
+                assert len(directory_content) == 2
+                assert len(file_directory_content) == 6
                 assert make_file_dir_name in directory_content
+                assert make_html_name in directory_content
                 assert make_pic_name in file_directory_content
                 for elem in file_directory_content:
                     elem_path = os.path.join(inner_temp_dir,
@@ -75,7 +74,7 @@ def test_loader_engine(requests_mock, make_url_1,
                             assert el.read() == make_files[elem]
 
 
-def test_permission_1(requests_mock, make_url_1, make_html_response):
+def test_no_permission(requests_mock, make_url_1, make_html_response):
     with open(make_html_response, 'r') as get_expected:
         requests_mock.get(make_url_1, text=get_expected.read())
     with tempfile.TemporaryDirectory() as temp_dir:

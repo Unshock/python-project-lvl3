@@ -2,7 +2,6 @@ import pytest
 import os
 from urllib.parse import urlparse
 import pathlib
-import urllib
 
 
 FIXTURES_FOLDER = 'fixtures'
@@ -182,7 +181,6 @@ def fake_loader(true_file_url, file_name, dir_path):
     fake_page_url = os.path.join(os.path.dirname(__file__),
                                  PAGE_CONTENT_FOLDER)
     true_sub_page = urlparse(true_file_url).path
-    path = urllib.parse.urljoin(fake_page_url, true_sub_page)
     if true_sub_page[0] == '/':
         path = fake_page_url + true_sub_page
     else:
