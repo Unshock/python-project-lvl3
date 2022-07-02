@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 from page_loader.custom_exception import FatalError
 from page_loader import processing
 
-logger = logging.getLogger(__name__)
+# logger = logging.getLogger(__name__)
 
 
 def create_local_files_dir(page_url, download_folder):
@@ -73,7 +73,7 @@ def download_html(url_, download_folder):  # noqa: C901
 
 def download_file(file_link, file_name, dir_path):
 
-    logger.info(f'Trying to download file: \'{file_link}\''
+    logging.info(f'Trying to download file: \'{file_link}\''
                  f' with name \'{file_name}\'')
 
     try:
@@ -84,7 +84,7 @@ def download_file(file_link, file_name, dir_path):
             requests.exceptions.ReadTimeout) as trouble:
         response = trouble.response
         status_code = response.status_code
-        logger.warning(f'File \'{file_link}\''
+        logging.warning(f'File \'{file_link}\''
                         f' can\'t be downloaded, status code: '
                         f'{status_code}. Skipped.\n')
         return None
@@ -98,7 +98,7 @@ def download_file(file_link, file_name, dir_path):
         error_message = f'Access to \'{file_path}\' is denied. Exit.\n'
         raise FatalError(error_message)
 
-    logger.info(f'File \'{file_name}\' downloaded in \'{dir_path}\'')
+    logging.info(f'File \'{file_name}\' downloaded in \'{dir_path}\'')
     return new_file.name
 
 

@@ -4,22 +4,23 @@ from page_loader.cli import parse_args
 from page_loader.custom_exception import FatalError
 import logging
 import logging.config
-import page_loader.page_loader_engine as le
+import page_loader.page_loader_engine as engine
 
 
 def main():
-    #logging.basicConfig(level=logging.WARNING,
-    #                    format='%(asctime)s %(levelname)s: %(message)s',
-    #                    datefmt='%d/%m/%Y %I:%M:%S')
-    logging.config.fileConfig(fname='page_loader/a.conf',
-                              disable_existing_loggers=False)
-    logger = logging.getLogger(__name__)
+    logging.basicConfig(level=logging.WARNING,
+                        format='%(asctime)s %(levelname)s: %(message)s',
+                        datefmt='%d/%m/%Y %I:%M:%S')
+    # logging.config.fileConfig(fname='page_loader/a.conf',
+    #                          disable_existing_loggers=False)
+    # logger = logging.getLogger(__name__)
 
     args = parse_args()
     try:
-        print(le.download(args.url, args.output))
+        print(f'HTML has been downloaded in '
+              f'{engine.download(args.url, args.output)}')
     except FatalError as e:
-        logger.error(e)
+        logging.error(e)
         sys.exit(1)
     sys.exit(0)
 
