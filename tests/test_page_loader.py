@@ -1,13 +1,25 @@
 import os
+import tempfile
+import pytest
+import responses
+import pathlib
+from page_loader.downloader import FatalError
+from page_loader.scripts import page_loader
 from page_loader import downloader
 from page_loader import page_loader_engine
 from page_loader import processing
-import tempfile
 from tests.conftest import fake_loader
-import pytest
-import responses
-from page_loader.downloader import FatalError
-import pathlib
+
+
+def test_parsed_downloader(requests_mock, make_url_1,
+                           make_html_response, make_html_name):
+    with open(make_html_response, 'r') as get_expected:
+        requests_mock.get(make_url_1, text=get_expected.read())
+    with tempfile.TemporaryDirectory() as temp_dir:
+        os.chdir(temp_dir)
+        _ = open(make_html_name, "w")
+        with pytest.raises(SystemExit):
+            page_loader.main([make_url_1])
 
 
 def test_download_html(requests_mock, make_url_1, make_html_response):
