@@ -1,2 +1,6 @@
-class FatalError(Exception):
+class CustomFileExistsError(Exception):
+    pass
+
+
+class CustomConnectionError(Exception):
     pass

@@ -4,7 +4,8 @@ import os
 import pathlib
 from urllib.parse import urlparse, urljoin
 from bs4 import BeautifulSoup
-from page_loader.custom_exception import FatalError
+from page_loader.custom_exception import CustomFileExistsError
+from page_loader.custom_exception import CustomConnectionError
 from page_loader import processing
 
 
@@ -22,7 +23,7 @@ def create_local_files_dir(page_url: str, download_folder: str) -> tuple:
     except FileExistsError:
         error_message = f'Directory \'{dir_path}\' already exists.' \
                         f' Can\'t be created. Exit.\n'
-        raise FatalError(error_message)
+        raise CustomFileExistsError(error_message)
     return dir_name, dir_path
 
 
@@ -42,13 +43,13 @@ def download_html(page_url: str, download_folder: str) -> str:
     except (requests.exceptions.ConnectionError,
             requests.exceptions.ReadTimeout):
         error_message = f'Connection to {page_url} failed. Exit.\n'
-        raise FatalError(error_message)
+        raise CustomConnectionError(error_message)
     except requests.exceptions.HTTPError as trouble:
         response = trouble.response
         status_code = response.status_code
         error_message = f'Request has failed with status code={status_code}.' \
                         f' Exit.\n'
-        raise FatalError(error_message)
+        raise CustomConnectionError(error_message)
 
     beautiful_response = BeautifulSoup(response.text, 'html.parser')
     file_path = pathlib.Path(download_folder, html_file_name)
@@ -57,7 +58,7 @@ def download_html(page_url: str, download_folder: str) -> str:
         file_path.touch(exist_ok=False)
     except FileExistsError:
         error_message = f'File \'{file_path}\' already exists. Exit.\n'
-        raise FatalError(error_message)
+        raise CustomFileExistsError(error_message)
 
     with open(file_path, 'w') as new_file:
         new_file.write(beautiful_response.prettify())
@@ -114,7 +115,7 @@ def is_valid_file_path(page_url: str, attribute_value: str) -> bool:
     attribute_value_netloc = urlparse(attribute_value).netloc
 
     if attribute_value_netloc:
-        return True if page_url_netloc == attribute_value_netloc else False
+        return page_url_netloc == attribute_value_netloc
     return True if attribute_value else False
 
 
@@ -128,25 +129,23 @@ def make_list_of_files(page_url: str, html: str) -> list or None:
         no local files. That dictionary has original attribute value, web-link,
         and file name.
     """
-    tags_and_attributes = {
-        'link': 'href',
-        'img': 'src',
-        'script': 'src'
-    }
-    soup = BeautifulSoup(html, features='html.parser')
-    result = []
-    for tag in tags_and_attributes.keys():
-        for tag_value in soup.find_all(tag):
-            attribute_value = tag_value.get(tags_and_attributes[tag])
-            if not is_valid_file_path(page_url, attribute_value):
-                continue
 
-            download_link = urljoin(page_url, attribute_value)
-            file_name = processing.make_file_name(download_link)
-            result.append({
-                'attribute_value': attribute_value,
-                'name': file_name,
-                'link': download_link
-            })
+    soup = BeautifulSoup(html, features='html.parser')
+    tags = [*soup('script'), *soup('link'), *soup('img')]
+    result = []
+
+    for tag in tags:
+        attribute_value = tag.get('href') or tag.get('src')
+
+        if not is_valid_file_path(page_url, attribute_value):
+            continue
+
+        download_link = urljoin(page_url, attribute_value)
+        file_name = processing.make_file_name(download_link)
+        result.append({
+            'attribute_value': attribute_value,
+            'name': file_name,
+            'link': download_link
+        })
 
     return result if len(result) > 0 else None

@@ -39,7 +39,7 @@ def normalize_download_folder(download_folder: str) -> str:
     if not path.exists():
         error_message = f'The folder with name \"{download_folder}\"'\
                         f' does not exists. Exit.\n'
-        raise custom_exception.FatalError(error_message)
+        raise custom_exception.CustomFileExistsError(error_message)
     return download_folder
 
 

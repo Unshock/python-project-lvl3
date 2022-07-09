@@ -4,7 +4,7 @@ import logging
 def substitute(html_path: str, attribute_value: str, local_file_path: str):
     """
     :param html_path: path to downloaded web page html file
-    :param attribute_value: next attribute value in html file that has
+    :param attribute_value: attribute value in html file that has
         been downloaded locally and should have new path to local file
     :param local_file_path: relative path to local file that is
         html_files/file-name and should be put in HTML file
