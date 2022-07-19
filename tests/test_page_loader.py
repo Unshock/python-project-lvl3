@@ -3,8 +3,7 @@ import tempfile
 import pytest
 import responses
 import pathlib
-from page_loader.custom_exception import CustomFileExistsError
-from page_loader.custom_exception import CustomConnectionError
+from page_loader.exception import CustomConnectionError
 from page_loader import downloader
 from page_loader import page_loader_engine
 from page_loader import processing
@@ -22,17 +21,19 @@ from tests.conftest import fake_loader
 #             page_loader.main([make_url_1])
 
 
-def test_download_html(requests_mock, make_url_1, make_html_response):
-    with open(make_html_response, 'r') as expected:
-        expected = expected.read()
-    requests_mock.get(make_url_1, text=expected)
-    with tempfile.TemporaryDirectory() as temp_dir:
-        os.chdir(temp_dir)
-        result = downloader.download_html(make_url_1, temp_dir)
-        with open(result, 'r') as result:
-            assert expected == result.read()
+#   Дублирует тестирование движка - на удаление
+# def test_download_html(requests_mock, make_url_1, make_html_response):
+#     with open(make_html_response, 'r') as expected:
+#         expected = expected.read()
+#     requests_mock.get(make_url_1, text=expected)
+#     with tempfile.TemporaryDirectory() as temp_dir:
+#         os.chdir(temp_dir)
+#         result = downloader.download_html(make_url_1, temp_dir)
+#         with open(result, 'r') as result:
+#             assert expected == result.read()
 
 
+# Тестирование через основную функцию download
 def test_html_file_already_exists(requests_mock, make_url_1,
                                   make_html_name, make_html_response):
     with open(make_html_response, 'r') as expected:
@@ -42,12 +43,13 @@ def test_html_file_already_exists(requests_mock, make_url_1,
         os.chdir(temp_dir)
         file_path = pathlib.Path(temp_dir, make_html_name)
         file_path.touch()
-        with pytest.raises(CustomFileExistsError) as error:
-            downloader.download_html(make_url_1, temp_dir)
+        with pytest.raises(FileExistsError) as error:
+            page_loader_engine.download(make_url_1, temp_dir)
         assert f'File \'{file_path}\' already exists. Exit.\n'\
                in str(error.value)
 
 
+# Тестирование через основную функцию download
 def test_loader_engine(requests_mock, make_url_1,
                        make_html_response, make_expected_html,
                        make_file_dir_name, make_pic_name,
@@ -86,33 +88,39 @@ def test_loader_engine(requests_mock, make_url_1,
                             assert el.read() == make_files[elem]
 
 
+# Добавил в библиотеку кастомный ответ, в случае отсутствия разрешения на
+# скачивание в директорию. Тут его проверяю.
 def test_no_permission(requests_mock, make_url_1, make_html_response):
     with open(make_html_response, 'r') as get_expected:
         requests_mock.get(make_url_1, text=get_expected.read())
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
         os.chmod(temp_dir, 0o111)
-        with pytest.raises(PermissionError):
+        with pytest.raises(PermissionError) as error:
             page_loader_engine.download(make_url_1,
                                         file_loader=fake_loader)
+        assert f'You don\'t have access to the directory \'{temp_dir}\'.' \
+               f' Exit.\n' in str(error.value)
 
 
+# Тестирование через основную функцию download
 @responses.activate
 def test_bad_status_code(make_url_1):
     responses.add(responses.GET, make_url_1, status=400)
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
         with pytest.raises(CustomConnectionError) as error:
-            downloader.download_html(make_url_1, temp_dir)
+            page_loader_engine.download(make_url_1, temp_dir)
         assert 'Request has failed with status code=400. Exit.\n' in\
                str(error.value)
 
 
+# Тестирование через основную функцию download
 def test_bad_url(make_url_1_bad):
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
         with pytest.raises(CustomConnectionError) as error:
-            downloader.download_html(make_url_1_bad, temp_dir)
+            page_loader_engine.download(make_url_1_bad, temp_dir)
         assert f'Connection to {make_url_1_bad} failed.' \
                f' Exit.\n' in str(error.value)
 
@@ -126,6 +134,7 @@ def test_download_file_with_bad_file_path(make_url_1_with_pic,
         result = downloader.download_file(make_url_1_with_pic,
                                           make_pic_name, temp_dir)
         assert result is None
+        assert len(os.listdir(temp_dir)) == 0
 
 
 def test_make_directory():
@@ -136,23 +145,30 @@ def test_make_directory():
         assert dir_for_html == temp_dir
 
 
-def test_no_such_directory():
+# Тестирование через основную функцию download
+def test_no_such_directory(make_url_1):
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
-        with pytest.raises(CustomFileExistsError) as error:
+        with pytest.raises(FileExistsError) as error:
             unexisting_dir = temp_dir + '/no_such'
-            processing.normalize_download_folder(unexisting_dir)
+            page_loader_engine.download(make_url_1, unexisting_dir)
         assert f'The folder with name \"{unexisting_dir}\"'\
                f' does not exists. Exit.\n' in str(error.value)
 
 
-def test_directory_already_exists(make_url_1, make_file_dir_name):
+# Тестирование через основную функцию download
+def test_directory_already_exists(make_url_1, make_file_dir_name,
+                                  requests_mock, make_html_response):
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
         files_dir_name = os.path.join(temp_dir, make_file_dir_name)
         os.mkdir(files_dir_name)
-        with pytest.raises(CustomFileExistsError) as error:
-            downloader.create_local_files_dir(make_url_1, temp_dir)
+        with open(make_html_response, 'r') as get_expected:
+            requests_mock.get(make_url_1, text=get_expected.read())
+        with pytest.raises(FileExistsError) as error:
+            page_loader_engine.download(make_url_1,
+                                        temp_dir,
+                                        file_loader=fake_loader)
         assert f'Directory \'{files_dir_name}\' already exists.' \
                f' Can\'t be created. Exit.\n' in str(error.value)
 

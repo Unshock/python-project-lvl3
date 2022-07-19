@@ -4,8 +4,7 @@ import os
 import pathlib
 from urllib.parse import urlparse, urljoin
 from bs4 import BeautifulSoup
-from page_loader.custom_exception import CustomFileExistsError
-from page_loader.custom_exception import CustomConnectionError
+from page_loader.exception import CustomConnectionError
 from page_loader import processing
 
 
@@ -23,11 +22,12 @@ def create_local_files_dir(page_url: str, download_folder: str) -> tuple:
     except FileExistsError:
         error_message = f'Directory \'{dir_path}\' already exists.' \
                         f' Can\'t be created. Exit.\n'
-        raise CustomFileExistsError(error_message)
+        raise FileExistsError(error_message)
+
     return dir_name, dir_path
 
 
-def download_html(page_url: str, download_folder: str) -> str:
+def download_html(page_url: str, download_folder: str) -> str:  # noqa: C901
     """
     :param page_url: the url of the original page needed to be downloaded
     :param download_folder: path where HTML file should be downloaded
@@ -58,7 +58,11 @@ def download_html(page_url: str, download_folder: str) -> str:
         file_path.touch(exist_ok=False)
     except FileExistsError:
         error_message = f'File \'{file_path}\' already exists. Exit.\n'
-        raise CustomFileExistsError(error_message)
+        raise FileExistsError(error_message)
+    except PermissionError:
+        error_message = f'You don\'t have access to the directory' \
+                        f' \'{download_folder}\'. Exit.\n'
+        raise PermissionError(error_message)
 
     with open(file_path, 'w') as new_file:
         new_file.write(beautiful_response.prettify())

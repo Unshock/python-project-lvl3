@@ -1,0 +1,2 @@
+class CustomConnectionError(Exception):
+    pass
