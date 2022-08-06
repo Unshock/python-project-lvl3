@@ -27,6 +27,54 @@ def create_local_files_dir(page_url: str, download_folder: str) -> tuple:
     return dir_name, dir_path
 
 
+def file_downloader(url: str, main_html=False):  # noqa: C901
+    """
+    :param page_url: the url of the original page needed to be downloaded
+    :param download_folder: path where HTML file should be downloaded
+    :return: downloads the HTML page of the specified page URL and saves it to
+        file with special_name.html in the specified folder. Returns the
+        absolute path to the downloaded HTML file.
+    """
+    try:
+        response = requests.get(url, timeout=20)
+        response.raise_for_status()
+    except (requests.exceptions.HTTPError,
+            requests.exceptions.ConnectionError,
+            requests.exceptions.ReadTimeout) as trouble:
+        response = trouble.response
+        status_code = response.status_code
+        if main_html is True:
+            error_message = f'Request has failed with status code={status_code}.' \
+                            f' Exit.\n'
+            raise CustomConnectionError(error_message)
+        error_message = f'File \'{url}\' can\'t be downloaded, status code: ' \
+                        f'{status_code}. Skipped.\n'
+        logging.warning(error_message)
+        return None
+    return response
+    
+
+def saver(response, file_name, folder):
+    file_path = pathlib.Path(folder, file_name)
+
+    try:
+        file_path.touch(exist_ok=False)
+    except FileExistsError:
+        error_message = f'File \'{file_path}\' already exists. Exit.\n'
+        raise FileExistsError(error_message)
+    except PermissionError:
+        error_message = f'You don\'t have access to the directory' \
+                        f' \'{folder}\'. Exit.\n'
+        raise PermissionError(error_message)
+
+    with open(file_path, 'wb') as new_file:
+        new_file.write(response.content)
+
+    logging.info(f'File \'{file_name}\' downloaded in \'{folder}\'')
+
+    return os.path.abspath(new_file.name)
+
+
 def download_html(page_url: str, download_folder: str) -> str:  # noqa: C901
     """
     :param page_url: the url of the original page needed to be downloaded
@@ -35,7 +83,7 @@ def download_html(page_url: str, download_folder: str) -> str:  # noqa: C901
         file with special_name.html in the specified folder. Returns the
         absolute path to the downloaded HTML file.
     """
-    html_file_name = processing.make_html_name(page_url)
+    html_file_name = processing.make_file_name(page_url)
 
     try:
         response = requests.get(page_url, timeout=20)
@@ -51,7 +99,9 @@ def download_html(page_url: str, download_folder: str) -> str:  # noqa: C901
                         f' Exit.\n'
         raise CustomConnectionError(error_message)
 
-    beautiful_response = BeautifulSoup(response.text, 'html.parser')
+    beautiful_response = BeautifulSoup(response.content, 'html.parser')
+    response = beautiful_response.prettify().encode()
+
     file_path = pathlib.Path(download_folder, html_file_name)
 
     try:
@@ -64,8 +114,8 @@ def download_html(page_url: str, download_folder: str) -> str:  # noqa: C901
                         f' \'{download_folder}\'. Exit.\n'
         raise PermissionError(error_message)
 
-    with open(file_path, 'w') as new_file:
-        new_file.write(beautiful_response.prettify())
+    with open(file_path, 'wb') as new_file:
+        new_file.write(response)
 
     return os.path.abspath(new_file.name)
 

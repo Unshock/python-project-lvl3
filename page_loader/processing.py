@@ -3,15 +3,15 @@ import re
 import os
 
 
-def make_html_name(page_url: str) -> str:
-    """
-    :param page_url: the url of the original page needed to be downloaded
-    :return: formatted name for HTML file
-    """
-    netloc_with_path = urlparse(page_url).netloc + urlparse(page_url).path
-    html_file_name = re.sub(r"(\.html)$|[\W_]", '-',
-                            netloc_with_path).strip('-') + '.html'
-    return html_file_name
+# def make_html_name(page_url: str) -> str:
+#     """
+#     :param page_url: the url of the original page needed to be downloaded
+#     :return: formatted name for HTML file
+#     """
+#     netloc_with_path = urlparse(page_url).netloc + urlparse(page_url).path
+#     html_file_name = re.sub(r"(\.html)$|[\W_]", '-',
+#                             netloc_with_path).strip('-') + '.html'
+#     return html_file_name
 
 
 def make_dir_name(page_url: str) -> str:
@@ -20,8 +20,8 @@ def make_dir_name(page_url: str) -> str:
     :return: formatted name for directory for local files
     """
     netloc_with_path = urlparse(page_url).netloc + urlparse(page_url).path
-    local_files_dir_name = re.sub(r"[\W_]",
-                                  '-', netloc_with_path).strip('-') + '_files'
+    local_files_dir_name = re.sub(r"[\W_]", '-',
+                                  netloc_with_path).strip('-') + '_files'
     return local_files_dir_name
 
 

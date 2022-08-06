@@ -96,7 +96,8 @@ def test_engine_undefined_path(requests_mock, make_url_1,
         requests_mock.get(make_url_1, text=get_expected.read())
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
-        result = page_loader_engine.download(make_url_1, file_loader=fake_loader)
+        result = page_loader_engine.download(make_url_1,
+                                             file_loader=fake_loader)
         result = open(result)
         with open(make_expected_html, 'r') as result_expected:
             directory_content = os.listdir(temp_dir)
@@ -208,16 +209,16 @@ def test_directory_already_exists(make_url_1, make_file_dir_name,
 
 
 def test_make_html_name_1(make_url_1, make_url_expected_1):
-    assert processing.make_html_name(make_url_1) == make_url_expected_1
+    assert processing.make_file_name(make_url_1) == make_url_expected_1
 
 
 def test_make_html_name_2(make_url_2, make_url_expected_2):
-    assert processing.make_html_name(make_url_2) == make_url_expected_2
+    assert processing.make_file_name(make_url_2) == make_url_expected_2
 
 
 def test_make_html_name_3(make_url_3, make_url_expected_3):
-    assert processing.make_html_name(make_url_3) == make_url_expected_3
+    assert processing.make_file_name(make_url_3) == make_url_expected_3
 
 
 def test_make_html_name_4(make_url_4, make_url_expected_4):
-    assert processing.make_html_name(make_url_4) == make_url_expected_4
+    assert processing.make_file_name(make_url_4) == make_url_expected_4
