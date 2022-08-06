@@ -44,7 +44,8 @@ def file_downloader(url: str, main_html=False):  # noqa: C901
         response = trouble.response
         status_code = response.status_code
         if main_html is True:
-            error_message = f'Request has failed with status code={status_code}.' \
+            error_message = f'Request has failed with status code=' \
+                            f'{status_code}.' \
                             f' Exit.\n'
             raise CustomConnectionError(error_message)
         error_message = f'File \'{url}\' can\'t be downloaded, status code: ' \
@@ -52,7 +53,7 @@ def file_downloader(url: str, main_html=False):  # noqa: C901
         logging.warning(error_message)
         return None
     return response
-    
+
 
 def saver(response, file_name, folder):
     file_path = pathlib.Path(folder, file_name)
