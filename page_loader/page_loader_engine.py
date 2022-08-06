@@ -2,11 +2,10 @@ import os
 import logging
 from progress.bar import Bar
 from page_loader import downloader
-from page_loader.processing import normalize_download_folder
 from page_loader.substitution import substitute
 
 
-def download(page_url: str, download_folder='cwd',
+def download(page_url: str, download_folder='.',
              file_loader=downloader.download_file) -> str:
     """
     :param page_url: the url of the original page needed to be downloaded
@@ -18,7 +17,12 @@ def download(page_url: str, download_folder='cwd',
         without internet connection. Function returns the absolute path to the
         downloaded HTML file.
     """
-    download_folder = normalize_download_folder(download_folder)
+    download_folder = os.path.abspath(download_folder)
+
+    if not os.path.exists(download_folder):
+        error_message = f'The folder with name \"{download_folder}\"' \
+                        f' does not exists. Exit.\n'
+        raise FileExistsError(error_message)
 
     logging.info(f'Start to download {page_url}')
 

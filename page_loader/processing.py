@@ -1,7 +1,6 @@
 from urllib.parse import urlparse
 import re
 import os
-import pathlib
 
 
 def make_html_name(page_url: str) -> str:
@@ -26,20 +25,19 @@ def make_dir_name(page_url: str) -> str:
     return local_files_dir_name
 
 
-def normalize_download_folder(download_folder: str) -> str:
-    """
-    :param download_folder: path where HTML file should be downloaded
-    :return: checks if path exists and return path where HTML file should be
-        downloaded. Returns current working directory if not specified.
-    """
-    if download_folder == 'cwd':
-        download_folder = os.getcwd()
-    path = pathlib.Path(download_folder)
-    if not path.exists():
-        error_message = f'The folder with name \"{download_folder}\"'\
-                        f' does not exists. Exit.\n'
-        raise FileExistsError(error_message)
-    return download_folder
+# def normalize_download_folder(download_folder: str) -> str:
+#     """
+#     :param download_folder: path where HTML file should be downloaded
+#     :return: checks if path exists and return path where HTML file should be
+#         downloaded. Returns current working directory if not specified.
+#     """
+#     download_folder = os.path.abspath(download_folder)
+#
+#     if not os.path.exists(download_folder):
+#         error_message = f'The folder with name \"{download_folder}\"'\
+#                         f' does not exists. Exit.\n'
+#         raise FileExistsError(error_message)
+#     return download_folder
 
 
 def get_extension(file_path: str) -> str:
