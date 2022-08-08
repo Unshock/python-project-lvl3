@@ -1,7 +1,6 @@
 import pytest
 import os
 from urllib.parse import urlparse
-import pathlib
 
 
 FIXTURES_FOLDER = 'fixtures'
@@ -10,13 +9,14 @@ EXPECTED_FOLDER_FILES = 'fixtures/expected/' \
                         'page-loader-hexlet-repl-co-page_files'
 URLS_FOLDER = 'fixtures/urls_and_results'
 PAGE_CONTENT_FOLDER = 'fixtures/page_structure'
+MAIN_HTML_FILE = 'page-loader-hexlet-repl-co-page.html'
 
 
 @pytest.fixture
 def make_html_response():
     response_path = os.path.join(os.path.dirname(__file__),
                                  FIXTURES_FOLDER,
-                                 'page-loader-hexlet-repl-co-page.html')
+                                 MAIN_HTML_FILE)
     return response_path
 
 
@@ -24,7 +24,7 @@ def make_html_response():
 def make_expected_html():
     response_path = os.path.join(os.path.dirname(__file__),
                                  EXPECTED_FOLDER,
-                                 'page-loader-hexlet-repl-co-page.html')
+                                 MAIN_HTML_FILE)
     return response_path
 
 
@@ -116,7 +116,7 @@ def make_file_dir_name():
 
 @pytest.fixture
 def make_html_name():
-    return 'page-loader-hexlet-repl-co-page.html'
+    return MAIN_HTML_FILE
 
 
 @pytest.fixture
@@ -177,17 +177,36 @@ def make_png():
     return dict_
 
 
-def fake_loader(true_file_url, file_name, dir_path):
+class FakeResponse:
+    def __init__(self, response):
+        self.response = response
+
+    @property
+    def content(self):
+        return self.response
+
+    @property
+    def text(self):
+        return str(self.response)
+
+
+def fake_loader(true_file_url, main_html=False):
     fake_page_url = os.path.join(os.path.dirname(__file__),
                                  PAGE_CONTENT_FOLDER)
     true_sub_page = urlparse(true_file_url).path
-    if true_sub_page[0] == '/':
+
+    if main_html:
+        path = os.path.join(os.path.dirname(__file__),
+                            FIXTURES_FOLDER,
+                            MAIN_HTML_FILE)
+        with open(path, 'r') as file:
+            fake_response = FakeResponse(file.read())
+            return fake_response
+    elif true_sub_page[0] == '/':
         path = fake_page_url + true_sub_page
     else:
         path = f'{fake_page_url}/{true_sub_page}'
+
     with open(path, 'rb') as file:
-        response = file.read()
-        file_path = pathlib.Path(dir_path, file_name)
-        with open(file_path, 'wb') as new_file:
-            new_file.write(response)
-        return os.path.abspath(new_file.name)
+        fake_response = FakeResponse(file.read())
+        return fake_response

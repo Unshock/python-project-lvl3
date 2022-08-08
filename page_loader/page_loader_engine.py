@@ -2,7 +2,17 @@ import os
 import logging
 from progress.bar import Bar
 from page_loader import downloader
-from page_loader.substitution import substitute
+from page_loader import resources
+from page_loader import file_system
+from page_loader.naming import make_file_name
+
+
+# Записка для проверяющего
+# По совету Маруфа изменил логику приложения. Оставил одну "универсальную"
+# функцию для скачивания главной HTML страницы или локальных файлов.
+# Сделал обработку HTML с изменением Всех найденных локальных путей, в независи
+# мости от того, был ли файл скачан или нет.
+# создал дополнительные модули и распеделил по ним функции.
 
 
 def download(page_url: str, download_folder='.',
@@ -24,26 +34,27 @@ def download(page_url: str, download_folder='.',
                         f' does not exists. Exit.\n'
         raise FileExistsError(error_message)
 
-    logging.info(f'Start to download {page_url}')
+    html_response = file_loader(page_url, main_html=True)
 
-    html_path = downloader.download_html(page_url, download_folder)
-    with open(html_path) as html:
-        files_sub_pages = downloader.make_list_of_files(page_url, html.read())
-    if files_sub_pages:
-        dir_name, dir_path = downloader.create_local_files_dir(page_url,
-                                                               download_folder)
-        with Bar('Downloading local files', max=len(files_sub_pages)) as bar:
-            for sub_page in files_sub_pages:
+    list_of_files, beautiful_html = resources.handle_html(page_url,
+                                                          html_response.text)
 
-                download_link = sub_page['link']
+    final_html_path = file_system.save_file(beautiful_html,
+                                            make_file_name(page_url),
+                                            download_folder)
+    if list_of_files:
+        dir_name, dir_path = resources.create_local_files_dir(page_url,
+                                                              download_folder)
+        with Bar('Downloading local files', max=len(list_of_files)) as bar:
+            for sub_page in list_of_files:
+
+                download_link = sub_page['url']
                 file_name = sub_page['name']
-                html_attribute_value = sub_page['attribute_value']
+                file_response = file_loader(download_link)
 
-                download_files = file_loader(download_link, file_name, dir_path)
-                if download_files:
-                    local_file_path = os.path.join(dir_name, file_name)
-                    substitute(html_path, html_attribute_value, local_file_path)
+                file_system.save_file(file_response.content,
+                                      file_name, dir_path)
+            bar.next()
 
-                bar.next()
     logging.info('Download finished\n')
-    return html_path
+    return final_html_path

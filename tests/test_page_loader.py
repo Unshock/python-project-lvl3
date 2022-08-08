@@ -6,7 +6,7 @@ import pathlib
 from page_loader.exception import CustomConnectionError
 from page_loader import downloader
 from page_loader import page_loader_engine
-from page_loader import processing
+from page_loader import naming
 from tests.conftest import fake_loader
 
 
@@ -165,8 +165,7 @@ def test_download_file_with_bad_file_path(make_url_1_with_pic,
     responses.add(responses.GET, make_url_1_with_pic, status=404)
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
-        result = downloader.download_file(make_url_1_with_pic,
-                                          make_pic_name, temp_dir)
+        result = downloader.download_file(make_url_1_with_pic)
         assert result is None
         assert len(os.listdir(temp_dir)) == 0
 
@@ -209,16 +208,16 @@ def test_directory_already_exists(make_url_1, make_file_dir_name,
 
 
 def test_make_html_name_1(make_url_1, make_url_expected_1):
-    assert processing.make_file_name(make_url_1) == make_url_expected_1
+    assert naming.make_file_name(make_url_1) == make_url_expected_1
 
 
 def test_make_html_name_2(make_url_2, make_url_expected_2):
-    assert processing.make_file_name(make_url_2) == make_url_expected_2
+    assert naming.make_file_name(make_url_2) == make_url_expected_2
 
 
 def test_make_html_name_3(make_url_3, make_url_expected_3):
-    assert processing.make_file_name(make_url_3) == make_url_expected_3
+    assert naming.make_file_name(make_url_3) == make_url_expected_3
 
 
 def test_make_html_name_4(make_url_4, make_url_expected_4):
-    assert processing.make_file_name(make_url_4) == make_url_expected_4
+    assert naming.make_file_name(make_url_4) == make_url_expected_4

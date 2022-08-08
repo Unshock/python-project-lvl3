@@ -3,17 +3,6 @@ import re
 import os
 
 
-# def make_html_name(page_url: str) -> str:
-#     """
-#     :param page_url: the url of the original page needed to be downloaded
-#     :return: formatted name for HTML file
-#     """
-#     netloc_with_path = urlparse(page_url).netloc + urlparse(page_url).path
-#     html_file_name = re.sub(r"(\.html)$|[\W_]", '-',
-#                             netloc_with_path).strip('-') + '.html'
-#     return html_file_name
-
-
 def make_dir_name(page_url: str) -> str:
     """
     :param page_url: the url of the original page needed to be downloaded
@@ -23,21 +12,6 @@ def make_dir_name(page_url: str) -> str:
     local_files_dir_name = re.sub(r"[\W_]", '-',
                                   netloc_with_path).strip('-') + '_files'
     return local_files_dir_name
-
-
-# def normalize_download_folder(download_folder: str) -> str:
-#     """
-#     :param download_folder: path where HTML file should be downloaded
-#     :return: checks if path exists and return path where HTML file should be
-#         downloaded. Returns current working directory if not specified.
-#     """
-#     download_folder = os.path.abspath(download_folder)
-#
-#     if not os.path.exists(download_folder):
-#         error_message = f'The folder with name \"{download_folder}\"'\
-#                         f' does not exists. Exit.\n'
-#         raise FileExistsError(error_message)
-#     return download_folder
 
 
 def get_extension(file_path: str) -> str:
