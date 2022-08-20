@@ -13,11 +13,12 @@ def save_file(response, file_name, folder):
     """
     file_path = pathlib.Path(folder, file_name)
 
+    if not (isinstance(response, bytes) or isinstance(response, str)):
+        error_message = 'The response data can\'t be written to the file.'
+        raise TypeError(error_message)
+
     try:
-        file_path.touch(exist_ok=False)
-    except FileExistsError:
-        error_message = f'File \'{file_path}\' already exists. Exit.\n'
-        raise FileExistsError(error_message)
+        file_path.touch()
     except PermissionError:
         error_message = f'You don\'t have access to the directory' \
                         f' \'{folder}\'. Exit.\n'
@@ -29,8 +30,6 @@ def save_file(response, file_name, folder):
     elif isinstance(response, str):
         with open(file_path, 'w') as new_file:
             new_file.write(response)
-    else:
-        raise
 
     logging.info(f'File \'{file_name}\' saved in \'{folder}\'')
 
