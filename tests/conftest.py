@@ -13,22 +13,6 @@ MAIN_HTML_FILE = 'page-loader-hexlet-repl-co-page.html'
 
 
 @pytest.fixture
-def make_html_response():
-    response_path = os.path.join(os.path.dirname(__file__),
-                                 FIXTURES_FOLDER,
-                                 MAIN_HTML_FILE)
-    return response_path
-
-
-@pytest.fixture
-def make_expected_html():
-    response_path = os.path.join(os.path.dirname(__file__),
-                                 EXPECTED_FOLDER,
-                                 MAIN_HTML_FILE)
-    return response_path
-
-
-@pytest.fixture
 def make_url_1():
     path = os.path.join(os.path.dirname(__file__), URLS_FOLDER, 'url1.txt')
     with open(path) as url_1:
@@ -102,21 +86,6 @@ def make_url_1_bad():
     path = os.path.join(os.path.dirname(__file__), URLS_FOLDER, 'url1_bad.txt')
     with open(path) as url_1:
         return url_1.read()
-
-
-@pytest.fixture
-def make_pic_name():
-    return 'page-loader-hexlet-repl-co-page-assets-professions-nodejs.png'
-
-
-@pytest.fixture
-def make_file_dir_name():
-    return 'page-loader-hexlet-repl-co-page_files'
-
-
-@pytest.fixture
-def make_html_name():
-    return MAIN_HTML_FILE
 
 
 @pytest.fixture

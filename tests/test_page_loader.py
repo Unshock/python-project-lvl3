@@ -8,13 +8,30 @@ from page_loader import page_loader_engine
 from page_loader import url
 from tests.conftest import fake_loader
 
+FIXTURES_FOLDER = 'fixtures'
+EXPECTED_FOLDER = 'fixtures/expected'
+EXPECTED_FOLDER_FILES = 'fixtures/expected/' \
+                        'page-loader-hexlet-repl-co-page_files'
+URLS_FOLDER = 'fixtures/urls_and_results'
+PAGE_CONTENT_FOLDER = 'fixtures/page_structure'
+MAIN_HTML_FILE = 'page-loader-hexlet-repl-co-page.html'
+
+ORIGINAL_HTML_PATH = os.path.join(os.path.dirname(__file__),
+                                  FIXTURES_FOLDER,
+                                  MAIN_HTML_FILE)
+
+
+EXPECTED_HTML_PATH = os.path.join(os.path.dirname(__file__),
+                                  EXPECTED_FOLDER,
+                                  MAIN_HTML_FILE)
+
+PICTURE_NAME = "page-loader-hexlet-repl-co-page-assets-professions-nodejs.png"
+DOWNLOADED_FILES_DIR_NAME = "page-loader-hexlet-repl-co-page_files"
+
 
 # Testing through the main download func
-def test_loader_engine(requests_mock, make_url_1,
-                       make_html_response, make_expected_html,
-                       make_file_dir_name, make_pic_name,
-                       make_files, make_html_name):
-    with open(make_html_response, 'r') as get_expected:
+def test_loader_engine(requests_mock, make_url_1, make_files):
+    with open(ORIGINAL_HTML_PATH, 'r') as get_expected:
         requests_mock.get(make_url_1, text=get_expected.read())
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
@@ -24,21 +41,21 @@ def test_loader_engine(requests_mock, make_url_1,
                                                  inner_temp_dir,
                                                  file_loader=fake_loader)
             result = open(result)
-            with open(make_expected_html, 'r') as result_expected:
+            with open(EXPECTED_HTML_PATH, 'r') as result_expected:
                 directory_content = os.listdir(inner_temp_dir)
                 file_directory_content = os.listdir(os.path.join(
                     inner_temp_dir,
-                    make_file_dir_name))
+                    DOWNLOADED_FILES_DIR_NAME))
 
                 assert result_expected.read() == result.read()
                 assert len(directory_content) == 2
                 assert len(file_directory_content) == 6
-                assert make_file_dir_name in directory_content
-                assert make_html_name in directory_content
-                assert make_pic_name in file_directory_content
+                assert DOWNLOADED_FILES_DIR_NAME in directory_content
+                assert MAIN_HTML_FILE in directory_content
+                assert PICTURE_NAME in file_directory_content
                 for elem in file_directory_content:
                     elem_path = os.path.join(inner_temp_dir,
-                                             make_file_dir_name,
+                                             DOWNLOADED_FILES_DIR_NAME,
                                              elem)
                     if elem_path.endswith('.png'):
                         with open(elem_path, 'rb') as el:
@@ -49,31 +66,28 @@ def test_loader_engine(requests_mock, make_url_1,
 
 
 # Testing through the main download func
-def test_engine_undefined_path(requests_mock, make_url_1,
-                               make_html_response, make_expected_html,
-                               make_file_dir_name, make_pic_name,
-                               make_files, make_html_name):
-    with open(make_html_response, 'r') as get_expected:
+def test_engine_undefined_path(requests_mock, make_url_1, make_files):
+    with open(ORIGINAL_HTML_PATH, 'r') as get_expected:
         requests_mock.get(make_url_1, text=get_expected.read())
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
         result = page_loader_engine.download(make_url_1,
                                              file_loader=fake_loader)
         result = open(result)
-        with open(make_expected_html, 'r') as result_expected:
+        with open(EXPECTED_HTML_PATH, 'r') as result_expected:
             directory_content = os.listdir(temp_dir)
             file_directory_content = os.listdir(os.path.join(
                                                 temp_dir,
-                                                make_file_dir_name))
+                                                DOWNLOADED_FILES_DIR_NAME))
             assert result_expected.read() == result.read()
             assert len(directory_content) == 2
             assert len(file_directory_content) == 6
-            assert make_file_dir_name in directory_content
-            assert make_html_name in directory_content
-            assert make_pic_name in file_directory_content
+            assert DOWNLOADED_FILES_DIR_NAME in directory_content
+            assert MAIN_HTML_FILE in directory_content
+            assert PICTURE_NAME in file_directory_content
             for elem in file_directory_content:
                 elem_path = os.path.join(temp_dir,
-                                         make_file_dir_name,
+                                         DOWNLOADED_FILES_DIR_NAME,
                                          elem)
                 if elem_path.endswith('.png'):
                     with open(elem_path, 'rb') as el:
@@ -85,8 +99,8 @@ def test_engine_undefined_path(requests_mock, make_url_1,
 
 # Добавил в библиотеку кастомный ответ, в случае отсутствия разрешения на
 # скачивание в директорию. Тут его проверяю.
-def test_no_permission(requests_mock, make_url_1, make_html_response):
-    with open(make_html_response, 'r') as get_expected:
+def test_no_permission(requests_mock, make_url_1):
+    with open(ORIGINAL_HTML_PATH, 'r') as get_expected:
         requests_mock.get(make_url_1, text=get_expected.read())
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
@@ -121,8 +135,7 @@ def test_bad_url(make_url_1_bad):
 
 
 @responses.activate
-def test_download_file_with_bad_file_path(make_url_1_with_pic,
-                                          make_pic_name):
+def test_download_file_with_bad_file_path(make_url_1_with_pic):
     responses.add(responses.GET, make_url_1_with_pic, status=404)
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
