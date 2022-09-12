@@ -3,12 +3,13 @@ import requests
 from page_loader.exception import CustomConnectionError
 
 
-def download_file(url: str, main_html=False):
+def download_file(url: str, *, exit_ability=False):
     """
     :param url: the url main page or file needed to be downloaded
-    :param main_html: flag showing if file is main HTML we need to download
+    :param exit_ability: flag showing if raise of exception would exit program
+        (for main HTML we need to download)
     :return: downloads and returns data of file. If main page, reacts to
-        connection errors more strictly and closes the program.
+        connection errors more strictly and exits the program.
     """
 
     logging.info(f'Start to download {url}')
@@ -22,7 +23,7 @@ def download_file(url: str, main_html=False):
     except (requests.exceptions.ConnectionError,
             requests.exceptions.ReadTimeout):
 
-        if main_html:
+        if exit_ability:
             error_message = f'Connection to {url} failed. Exit.\n'
             raise CustomConnectionError(error_message)
 
@@ -33,7 +34,7 @@ def download_file(url: str, main_html=False):
     except requests.exceptions.HTTPError as trouble:
         response = trouble.response
         status_code = response.status_code
-        if main_html:
+        if exit_ability:
             error_message = f'Request has failed with status code=' \
                             f'{status_code}. Exit.\n'
             raise CustomConnectionError(error_message)

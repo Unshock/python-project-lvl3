@@ -190,12 +190,12 @@ class FakeResponse:
         return str(self.response)
 
 
-def fake_loader(true_file_url, main_html=False):
+def fake_loader(true_file_url, *, exit_ability=False):
     fake_page_url = os.path.join(os.path.dirname(__file__),
                                  PAGE_CONTENT_FOLDER)
     true_sub_page = urlparse(true_file_url).path
 
-    if main_html:
+    if exit_ability:
         path = os.path.join(os.path.dirname(__file__),
                             FIXTURES_FOLDER,
                             MAIN_HTML_FILE)

@@ -26,7 +26,7 @@ def download(page_url: str, download_folder='.',
                         f' does not exists. Exit.\n'
         raise FileExistsError(error_message)
 
-    html_response = file_loader(page_url, main_html=True)
+    html_response = file_loader(page_url, exit_ability=True)
 
     beautiful_html, assets = resources.prepare_assets(page_url,
                                                       html_response.text)
@@ -47,7 +47,7 @@ def download(page_url: str, download_folder='.',
                 file_url = file['url']
                 file_name = file['name']
 
-                file_response = file_loader(file_url)
+                file_response = file_loader(file_url, exit_ability=False)
                 if file_response:
                     file_system.save_file(file_response.content,
                                           file_name, files_dir_path)
