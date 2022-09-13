@@ -28,16 +28,18 @@ EXPECTED_HTML_PATH = os.path.join(os.path.dirname(__file__),
 PICTURE_NAME = "page-loader-hexlet-repl-co-page-assets-professions-nodejs.png"
 DOWNLOADED_FILES_DIR_NAME = "page-loader-hexlet-repl-co-page_files"
 
+TEST_URL = "https://page-loader.hexlet.repl.co/page/"
+
 
 # Testing through the main download func
-def test_loader_engine(requests_mock, make_url_1, make_files):
+def test_loader_engine(requests_mock, page_files_dataset):
     with open(ORIGINAL_HTML_PATH, 'r') as get_expected:
-        requests_mock.get(make_url_1, text=get_expected.read())
+        requests_mock.get(TEST_URL, text=get_expected.read())
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
         with tempfile.TemporaryDirectory(dir=temp_dir,
                                          suffix='_inner_dir') as inner_temp_dir:
-            result = page_loader_engine.download(make_url_1,
+            result = page_loader_engine.download(TEST_URL,
                                                  inner_temp_dir,
                                                  file_loader=fake_loader)
             result = open(result)
@@ -59,19 +61,19 @@ def test_loader_engine(requests_mock, make_url_1, make_files):
                                              elem)
                     if elem_path.endswith('.png'):
                         with open(elem_path, 'rb') as el:
-                            assert el.read() == make_files[elem]
+                            assert el.read() == page_files_dataset[elem]
                     else:
                         with open(elem_path, 'r') as el:
-                            assert el.read() == make_files[elem]
+                            assert el.read() == page_files_dataset[elem]
 
 
 # Testing through the main download func
-def test_engine_undefined_path(requests_mock, make_url_1, make_files):
+def test_engine_undefined_path(requests_mock, page_files_dataset):
     with open(ORIGINAL_HTML_PATH, 'r') as get_expected:
-        requests_mock.get(make_url_1, text=get_expected.read())
+        requests_mock.get(TEST_URL, text=get_expected.read())
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
-        result = page_loader_engine.download(make_url_1,
+        result = page_loader_engine.download(TEST_URL,
                                              file_loader=fake_loader)
         result = open(result)
         with open(EXPECTED_HTML_PATH, 'r') as result_expected:
@@ -91,22 +93,22 @@ def test_engine_undefined_path(requests_mock, make_url_1, make_files):
                                          elem)
                 if elem_path.endswith('.png'):
                     with open(elem_path, 'rb') as el:
-                        assert el.read() == make_files[elem]
+                        assert el.read() == page_files_dataset[elem]
                 else:
                     with open(elem_path, 'r') as el:
-                        assert el.read() == make_files[elem]
+                        assert el.read() == page_files_dataset[elem]
 
 
 # Добавил в библиотеку кастомный ответ, в случае отсутствия разрешения на
 # скачивание в директорию. Тут его проверяю.
-def test_no_permission(requests_mock, make_url_1):
+def test_no_permission(requests_mock):
     with open(ORIGINAL_HTML_PATH, 'r') as get_expected:
-        requests_mock.get(make_url_1, text=get_expected.read())
+        requests_mock.get(TEST_URL, text=get_expected.read())
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
         os.chmod(temp_dir, 0o111)
         with pytest.raises(PermissionError) as error:
-            page_loader_engine.download(make_url_1,
+            page_loader_engine.download(TEST_URL,
                                         file_loader=fake_loader)
         assert f'You don\'t have access to the directory \'{temp_dir}\'.' \
                f' Exit.\n' in str(error.value)
@@ -114,58 +116,66 @@ def test_no_permission(requests_mock, make_url_1):
 
 # Testing through the main download func
 @responses.activate
-def test_bad_status_code(make_url_1):
-    responses.add(responses.GET, make_url_1, status=400)
+def test_bad_status_code():
+    responses.add(responses.GET, TEST_URL, status=400)
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
         with pytest.raises(CustomConnectionError) as error:
-            page_loader_engine.download(make_url_1, temp_dir)
+            page_loader_engine.download(TEST_URL, temp_dir)
         assert 'Request has failed with status code=400. Exit.\n' in\
                str(error.value)
 
 
 # Testing through the main download func
-def test_bad_url(make_url_1_bad):
+def test_bad_url():
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
+        bad_url = "https://page-loader.hexlet.re3pl.co/page/"
         with pytest.raises(CustomConnectionError) as error:
-            page_loader_engine.download(make_url_1_bad, temp_dir)
-        assert f'Connection to {make_url_1_bad} failed.' \
+            page_loader_engine.download(bad_url, temp_dir)
+        assert f'Connection to {bad_url} failed.' \
                f' Exit.\n' in str(error.value)
 
 
 @responses.activate
-def test_download_file_with_bad_file_path(make_url_1_with_pic):
-    responses.add(responses.GET, make_url_1_with_pic, status=404)
+def test_download_file_with_bad_file_path():
+    PIC_URL = "https://page-loader.hexlet.repl.co/page/assets/professions/" \
+              "nodejs.png"
+    responses.add(responses.GET, PIC_URL, status=404)
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
-        result = downloader.download_file(make_url_1_with_pic)
+        result = downloader.download_file(PIC_URL)
         assert result is None
         assert len(os.listdir(temp_dir)) == 0
 
 
 # Testing through the main download func
-def test_no_such_directory(make_url_1):
+def test_no_such_directory():
     with tempfile.TemporaryDirectory() as temp_dir:
         os.chdir(temp_dir)
         with pytest.raises(FileExistsError) as error:
             unexisting_dir = temp_dir + '/no_such'
-            page_loader_engine.download(make_url_1, unexisting_dir)
+            page_loader_engine.download(TEST_URL, unexisting_dir)
         assert f'The folder with name \"{unexisting_dir}\"'\
                f' does not exists. Exit.\n' in str(error.value)
 
 
-def test_make_html_name_1(make_url_1, make_url_expected_1):
-    assert url.make_file_name(make_url_1) == make_url_expected_1
+def test_make_html_name_1():
+    assert url.make_file_name(TEST_URL) == \
+           "page-loader-hexlet-repl-co-page.html"
 
 
-def test_make_html_name_2(make_url_2, make_url_expected_2):
-    assert url.make_file_name(make_url_2) == make_url_expected_2
+def test_make_html_name_2():
+    assert url.make_file_name("https://github.com/Unshock?tab=repositories")\
+           == "github-com-Unshock.html"
 
 
-def test_make_html_name_3(make_url_3, make_url_expected_3):
-    assert url.make_file_name(make_url_3) == make_url_expected_3
+def test_make_html_name_3():
+    assert url.make_file_name("https://www.youtube.com/watch?v=5qap5aO4i9A")\
+           == "www-youtube-com-watch.html"
 
 
-def test_make_html_name_4(make_url_4, make_url_expected_4):
-    assert url.make_file_name(make_url_4) == make_url_expected_4
+def test_make_html_name_4():
+    assert url.make_file_name("https://developer.mozilla.org/ru/docs/Learn/"
+                              "HTML/Introduction_to_HTML.html") == \
+           "developer-mozilla-org-ru-docs-Learn-HTML-Introduction-to-HTML.html"
