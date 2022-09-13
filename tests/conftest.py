@@ -10,17 +10,17 @@ PAGE_CONTENT_FOLDER = 'fixtures/page_structure'
 MAIN_HTML_FILE = 'page-loader-hexlet-repl-co-page.html'
 
 
-@pytest.fixture
+@pytest.fixture(scope="module")
 def page_files_dataset():
-    application_name = 'page-loader-hexlet-repl-co-page-assets-application.css'
-    png_name = 'page-loader-hexlet-repl-co-page-assets-professions-nodejs.png'
-    script_name1 = 'page-loader-hexlet-repl-co-page-packs-js-script1.js'
-    script_name2 = 'page-loader-hexlet-repl-co-page-packs-js-script2.js'
-    script_name3 = 'page-loader-hexlet-repl-co-script3.js'
-    courses_name = 'page-loader-hexlet-repl-co-page-courses.html'
 
-    list_of_files = [application_name, png_name, script_name1, script_name2,
-                     script_name3, courses_name]
+    list_of_files = ['page-loader-hexlet-repl-co-page-assets-application.css',
+                     'page-loader-hexlet-repl-co-page-assets-'
+                     'professions-nodejs.png',
+                     'page-loader-hexlet-repl-co-page-packs-js-script1.js',
+                     'page-loader-hexlet-repl-co-page-packs-js-script2.js',
+                     'page-loader-hexlet-repl-co-script3.js',
+                     'page-loader-hexlet-repl-co-page-courses.html'
+                     ]
 
     dataset_dict = {}
     for file_name in list_of_files:
