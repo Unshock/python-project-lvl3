@@ -7,12 +7,10 @@ from page_loader import file_system
 from page_loader.url import make_file_name, make_dir_name
 
 
-def download(page_url: str, download_folder='.',
-             file_loader=downloader.download_file) -> str:
+def download(page_url: str, download_folder: str = '.') -> str:
     """
     :param page_url: the url of the original page needed to be downloaded
     :param download_folder: path where HTML file should be downloaded
-    :param file_loader: for the availability to use mocks in tests
     :return: the function gets the url and the download folder directory path
         (optionally) and downloads HTML by the given URL and all local files in
         the tags: img, link, script. So the given page can be open locally
@@ -26,7 +24,7 @@ def download(page_url: str, download_folder='.',
                         f' does not exists. Exit.\n'
         raise FileExistsError(error_message)
 
-    html_response = file_loader(page_url, exit_ability=True)
+    html_response = downloader.download_file(page_url, exit_ability=True)
 
     beautiful_html, assets = resources.prepare_assets(page_url,
                                                       html_response.text)
@@ -47,7 +45,8 @@ def download(page_url: str, download_folder='.',
                 file_url = file['url']
                 file_name = file['name']
 
-                file_response = file_loader(file_url, exit_ability=False)
+                file_response = downloader.download_file(file_url,
+                                                         exit_ability=False)
                 if file_response:
                     file_system.save_file(file_response.content,
                                           file_name, files_dir_path)
