@@ -19,7 +19,6 @@ page-loader = "page_loader.scripts.page_loader:main"
 [tool.poetry.dependencies]
 python = "^3.8"
 requests = "^2.27.1"
-pook = "^1.0.2"
 requests-mock = "^1.9.3"
 pytest-cov = "^3.0.0"
 beautifulsoup4 = "^4.11.1"
