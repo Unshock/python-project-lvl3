@@ -24,6 +24,7 @@ pytest-cov = "^3.0.0"
 beautifulsoup4 = "^4.11.1"
 responses = "^0.21.0"
 progress = "^1.6"
+importlib-resources = "^5.9.0"
 
 [tool.poetry.dev-dependencies]
 flake8 = "^4.0.1"
